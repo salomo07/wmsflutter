@@ -12,13 +12,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
+      title: "Integrated One Solution",
       home: FutureBuilder(
-        future: Future.delayed(Duration(seconds: 5)),
+        future: Future.delayed(Duration(seconds: 2)),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return SplashScreen();
