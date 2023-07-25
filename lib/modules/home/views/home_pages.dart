@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../widgets/BottomNavBar.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var xxx = "Ganteng";
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   SizedBox(width: 20),
                   Text(
-                    "Hai, $xxx",
+                    "Hai, $xxx ",
                     style: TextStyle(
                       fontWeight: FontWeight.w200,
                       color: Colors.white,
@@ -44,18 +44,6 @@ class _HomePageState extends State<HomePage> {
                   )
                 ],
               ),
-            ),
-            Container(
-              color: Colors.amber,
-              height: 250,
-            ),
-            Container(
-              color: Colors.black87,
-              height: 250,
-            ),
-            Container(
-              color: Colors.greenAccent,
-              height: 250,
             ),
             Container(
               color: Colors.indigo,
