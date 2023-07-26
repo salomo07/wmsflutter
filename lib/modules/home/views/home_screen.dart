@@ -15,53 +15,66 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Container(
-                color: Color(0xff45BCC7),
-                height: 50,
-                child: Row(
-                  children: [
-                    SizedBox(width: 20),
-                    Text(
-                      "Hai, $xxx ",
-                      style: TextStyle(
-                        fontWeight: FontWeight.w200,
-                        color: Colors.white,
-                        fontFamily: "ABeeZee",
-                      ),
-                    ),
-                    Text(
-                      "Salomo Sitompul",
-                      style: TextStyle(
-                        overflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.w200,
-                        color: Colors.white,
-                        fontFamily: "ABeeZee",
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                    height: double.maxFinite,
-                    child: ImageSliderWidget(),
+        body: Container(
+          width: double.infinity,
+          // color: Color.fromARGB(255, 242, 242, 242),
+          child: Container(
+            height: double.infinity,
+            color: Color.fromARGB(255, 242, 242, 242),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                // Container(
+                //   color: Color(0xff45BCC7),
+                //   height: 50,
+                //   child: Row(
+                //     children: [
+                //       const SizedBox(width: 20),
+                //       Text(
+                //         "Hai, $xxx ",
+                //         style: TextStyle(
+                //           fontWeight: FontWeight.w200,
+                //           color: Colors.white,
+                //           fontFamily: "ABeeZee",
+                //         ),
+                //       ),
+                //       Text(
+                //         "Salomo Sitompul",
+                //         style: TextStyle(
+                //           overflow: TextOverflow.ellipsis,
+                //           fontWeight: FontWeight.w200,
+                //           color: Colors.white,
+                //           fontFamily: "ABeeZee",
+                //         ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                Container(
+                  width: 500,
+                  color: Colors.indigo,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                        Container(
+                          color: Colors.limeAccent,
+                          width: 50,
+                
+                        ),
+                        Container(
+                          color: Colors.lightBlueAccent,
+                          width: 50,
+                          ),
+                    ]
                   ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2,
-                  )
-                ],
-              )
-            ],
+                ),
+              ],
+            ),
           ),
         ),
-        backgroundColor: Color(0xffF1F2F6),
-        bottomNavigationBar: BottomNavBarWidget());
+        bottomNavigationBar: BottomNavBarWidget()
+      );
   }
 }

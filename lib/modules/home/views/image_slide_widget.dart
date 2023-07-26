@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wmsflutter/modules/home/models/Photos.dart';
-
 import '../../../bloc/photo/photo_bloc.dart';
 
 class ImageSliderWidget extends StatelessWidget {
@@ -12,16 +10,15 @@ class ImageSliderWidget extends StatelessWidget {
     return BlocBuilder<PhotoBloc, PhotoState>(
       builder: (context, state) {
         if (state is PhotoLoading) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (state is PhotoDone) {
-          return SizedBox(
-            height: 700,
+          return Container(
+            color: Colors.amberAccent,
+            height: 500,
             child: ListView(
               children: List.generate(state.photo.photos.length, (index) {
                 return Container(
-                    margin: EdgeInsets.only(bottom: 30),
-                    decoration:
-                        BoxDecoration(border: Border.all(color: Colors.black)),
+                    margin: const EdgeInsets.only(bottom: 30),
                     height: 70,
                     child: Row(children: [
                       Image.network(state.photo.photos[index].url),
