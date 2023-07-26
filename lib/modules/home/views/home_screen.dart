@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:wmsflutter/modules/home/views/image_slide_widget.dart';
 import '../../widgets/BottomNavBar.dart';
@@ -50,8 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width / 2,
-                    color: Colors.amberAccent,
-                    height: 450,
+                    height: double.infinity,
                     child: ImageSliderWidget(),
                   ),
                   Container(

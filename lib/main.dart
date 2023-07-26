@@ -12,14 +12,14 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  final PhotoBloc photoBloc = PhotoBloc();
+  // final PhotoBloc photoBloc = PhotoBloc();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Integrated One Solution",
+      title: "One Solution",
       home: Scaffold(
         body: BlocProvider<PhotoBloc>(
-          create: (context) => photoBloc
+          create: (context) => PhotoBloc()
             ..add(GetPhoto(
                 url: 'https://api.slingacademy.com/v1/sample-data/photos')),
           child: BlocBuilder<PhotoBloc, PhotoState>(

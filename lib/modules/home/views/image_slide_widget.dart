@@ -19,6 +19,7 @@ class ImageSliderWidget extends StatelessWidget {
             child: ListView(
               children: List.generate(state.photo.photos.length, (index) {
                 return Container(
+                    margin: EdgeInsets.only(bottom: 30),
                     decoration:
                         BoxDecoration(border: Border.all(color: Colors.black)),
                     height: 70,
