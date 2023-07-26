@@ -7,8 +7,10 @@ class PhotoInitial extends PhotoState {}
 
 class PhotoLoading extends PhotoState {}
 
-class PhotoLoaded extends PhotoState {
+class PhotoDone extends PhotoState {
   final Photo photo;
 
-  PhotoLoaded(this.photo);
+  PhotoDone(this.photo);
 }
+
+class PhotoError extends PhotoState {}

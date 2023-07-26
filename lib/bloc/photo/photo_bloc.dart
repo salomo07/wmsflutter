@@ -9,15 +9,20 @@ part 'photo_state.dart';
 class PhotoBloc extends Bloc<PhotoEvent, PhotoState> {
   PhotoBloc() : super(PhotoInitial()) {
     PhotoService photoService = PhotoService();
-    on<PhotoGet>((event, emit) async {
+    on<GetPhoto>((event, emit) async {
       emit(PhotoLoading());
-      Photo p = await photoService.fetchPhotos(event.url);
-      emit(PhotoLoaded(p));
+      try {
+        Photo p = await photoService.fetchPhotos(event.url);
+        emit(PhotoDone(p));
+      } catch (e) {
+        print('Error: $e');
+        emit(PhotoError());
+      }
     });
     on<PhotoDelete>((event, emit) async {
       emit(PhotoLoading());
       Photo p = await photoService.fetchPhotos(event.url);
-      emit(PhotoLoaded(p));
+      emit(PhotoDone(p));
     });
   }
 }

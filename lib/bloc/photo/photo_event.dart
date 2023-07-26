@@ -3,10 +3,10 @@ part of 'photo_bloc.dart';
 @immutable
 abstract class PhotoEvent {}
 
-class PhotoGet extends PhotoEvent {
+class GetPhoto extends PhotoEvent {
   final String url;
 
-  PhotoGet({required this.url});
+  GetPhoto({required this.url});
 }
 
 class PhotoDelete extends PhotoEvent {

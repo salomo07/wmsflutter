@@ -4,17 +4,7 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "wmsflutter",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "wmsflutter (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
+    
         {
             "name": "wmsflutter (release mode)",
             "request": "launch",
