@@ -15,7 +15,7 @@ class ImageSliderWidget extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         } else if (state is PhotoDone) {
           return SizedBox(
-            height: 550,
+            height: 700,
             child: ListView(
               children: List.generate(state.photo.photos.length, (index) {
                 return Container(
