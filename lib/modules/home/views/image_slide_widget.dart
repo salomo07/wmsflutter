@@ -12,9 +12,9 @@ class ImageSliderWidget extends StatelessWidget {
         if (state is PhotoLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is PhotoDone) {
+          print(state.photo.photos);
           return Container(
-            color: Colors.amberAccent,
-            height: 500,
+            color: Color(0xfffff5ec),
             child: ListView(
               children: List.generate(state.photo.photos.length, (index) {
                 return Container(
