@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wmsflutter/modules/home/views/image_slide_widget.dart';
-import '../../widgets/BottomNavBar.dart';
+import 'package:wmsflutter/modules/home/views/home_imageslide_widget.dart';
+import 'package:wmsflutter/modules/widgets/drawer_widget.dart';
+import '../../widgets/bottom_navBar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,8 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  var xxx = "Ganteng";
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -20,71 +19,79 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text("xxx"),
             backgroundColor: const Color(0xff48bccf),
           ),
-          drawer: Drawer(
-            backgroundColor: const Color(0xfffff5ec),
-            child: ListView(padding: EdgeInsets.zero, children: [
-              const DrawerHeaderWidget(),
-              ListTile(
-                title: const Text('Profile'),
-                leading: Icon(Icons.person),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('ToDo'),
-                leading: Icon(Icons.task),
-                onTap: () {},
-              ),
-            ]),
-          ),
-          body: Row(
-            children: [
-              SizedBox(
-                  width: MediaQuery.of(context).size.width / 2,
-                  child: const ImageSliderWidget()),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width / 2,
-                  child: const ImageSliderWidget()),
-            ],
-          ),
+          drawer: DrawerWidget(),
+          body: BodyHomeWidget(),
           bottomNavigationBar: const BottomNavBarWidget()),
     );
   }
 }
 
-class DrawerHeaderWidget extends StatelessWidget {
-  const DrawerHeaderWidget({
+class DuaBarisWidget extends StatelessWidget {
+  const DuaBarisWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return DrawerHeader(
-        decoration: BoxDecoration(),
-        padding: EdgeInsets.all(5),
-        child: Center(
-          child: ListTile(
-            title: Text(
-              "Hallo,",
-              style: TextStyle(fontSize: 10),
-            ),
-            subtitle: Text(
-              "Salomo Sitompul sdrfwdsrsdr",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, overflow: TextOverflow.ellipsis),
-            ),
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(
-                "https://api.slingacademy.com/public/sample-photos/1.jpeg",
-              ),
-              // leading: CircleAvatar(
-              //   backgroundColor: Colors.black,
-              //   child: CircleAvatar(
-              // backgroundImage: NetworkImage(
-              //     "https://api.slingacademy.com/public/sample-photos/1.jpeg",),
-            ),
-            // ),
+    return Row(children: [
+      Expanded(flex: 3, child: const ImageSliderWidget()),
+      Expanded(flex: 5, child: const ImageSliderWidget()),
+    ]);
+  }
+}
+
+class BodyHomeWidget extends StatelessWidget {
+  const BodyHomeWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          flex: 3,
+          child: Container(
+            color: Colors.black54,
           ),
-        ));
+        ),
+        Expanded(
+          flex: 8,
+          child: Container(
+            margin: EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.blue),
+                borderRadius: BorderRadius.all(Radius.circular(30))),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Administrator",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Wrap(
+                        spacing: 20,
+                        children: [
+                          ElevatedButton(onPressed: () {}, child: Text("PIC")),
+                          ElevatedButton(
+                              onPressed: () {}, child: Text("Group Bisnis")),
+                          ElevatedButton(onPressed: () {}, child: Text("Role")),
+                          ElevatedButton(onPressed: () {}, child: Text("Menu"))
+                        ],
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
