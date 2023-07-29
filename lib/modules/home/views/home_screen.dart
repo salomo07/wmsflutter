@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wmsflutter/modules/home/views/home_imageslide_widget.dart';
+import 'package:wmsflutter/modules/home/views/table_user_widget.dart';
 import 'package:wmsflutter/modules/widgets/drawer_widget.dart';
 import '../../widgets/bottom_navBar.dart';
 
@@ -58,8 +59,9 @@ class BodyHomeWidget extends StatelessWidget {
         Expanded(
           flex: 8,
           child: Container(
-            margin: EdgeInsets.only(left: 15, right: 15, top: 8, bottom: 8),
+            margin: EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
             decoration: BoxDecoration(
+                color: Colors.amberAccent,
                 border: Border.all(color: Colors.blue),
                 borderRadius: BorderRadius.all(Radius.circular(30))),
             child: Column(
@@ -85,6 +87,11 @@ class BodyHomeWidget extends StatelessWidget {
                       )
                     ],
                   ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: BooksTableWidget(),
+                  ),
                 )
               ],
             ),
@@ -95,37 +102,37 @@ class BodyHomeWidget extends StatelessWidget {
   }
 }
 
-class ListviewWidget extends StatelessWidget {
-  const ListviewWidget({super.key});
+// class ListviewWidget extends StatelessWidget {
+//   const ListviewWidget({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Container(
-          color: const Color(0xff45BCC7),
-          height: 50,
-          child: const Row(
-            children: [
-              SizedBox(width: 20),
-              Text(
-                "Salomo Sitompul",
-                style: TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontWeight: FontWeight.w200,
-                  color: Colors.white,
-                  fontFamily: "ABeeZee",
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          color: Colors.amberAccent,
-          height: 500,
-          width: double.infinity,
-        )
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListView(
+//       children: [
+//         Container(
+//           color: const Color(0xff45BCC7),
+//           height: 50,
+//           child: const Row(
+//             children: [
+//               SizedBox(width: 20),
+//               Text(
+//                 "Salomo Sitompul",
+//                 style: TextStyle(
+//                   overflow: TextOverflow.ellipsis,
+//                   fontWeight: FontWeight.w200,
+//                   color: Colors.white,
+//                   fontFamily: "ABeeZee",
+//                 ),
+//               )
+//             ],
+//           ),
+//         ),
+//         Container(
+//           color: Colors.amberAccent,
+//           height: 500,
+//           width: double.infinity,
+//         )
+//       ],
+//     );
+//   }
+// }
