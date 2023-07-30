@@ -6,19 +6,22 @@ import 'package:wmsflutter/modules/widgets/drawer_widget.dart';
 import 'package:wmsflutter/splashscreen.dart';
 import 'package:wmsflutter/errorscreen.dart';
 import 'modules/home/views/home_screen.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
-
+  // String? appname="Indomaret";
+  // if(dotenv.env['APP_NAME']!=null){appname=dotenv.env['APP_NAME'];}
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => NavigationProvider(),
         child: MaterialApp(
-          title: "One Solution",
+          title: dotenv.env['APP_NAME'] != null ? "ddd" : "Indomaret",
           home: Scaffold(
             body: BlocProvider<PhotoBloc>(
               create: (context) => PhotoBloc()
