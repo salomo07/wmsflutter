@@ -50,14 +50,19 @@ class BodyHomeWidget extends StatelessWidget {
   BookBloc bookBloc = BookBloc();
   @override
   Widget build(BuildContext context) {
+    double leftPanelSize=MediaQuery.of(context).size.width;
+    Widget lifeSide =Text("");
+    if(leftPanelSize>1080){
+      lifeSide=Expanded(
+        flex: 3,
+        child: Container(
+          color: Colors.black54,
+        ),
+      );
+    }
     return Row(
       children: [
-        Expanded(
-          flex: 3,
-          child: Container(
-            color: Colors.black54,
-          ),
-        ),
+        lifeSide,
         Expanded(
           flex: 8,
           child: Container(
@@ -77,15 +82,17 @@ class BodyHomeWidget extends StatelessWidget {
                         "Administrator",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                      Wrap(
-                        spacing: 20,
-                        children: [
-                          ElevatedButton(onPressed: () {}, child: Text("PIC")),
-                          ElevatedButton(
-                              onPressed: () {}, child: Text("Group Bisnis")),
-                          ElevatedButton(onPressed: () {}, child: Text("Role")),
-                          ElevatedButton(onPressed: () {}, child: Text("Menu"))
-                        ],
+                      Expanded(
+                        child: Wrap(
+                          spacing: 20,
+                          children: [
+                            ElevatedButton(onPressed: () {}, child: Text("PIC")),
+                            ElevatedButton(
+                                onPressed: () {}, child: Text("Group Bisnis")),
+                            ElevatedButton(onPressed: () {}, child: Text("Role")),
+                            ElevatedButton(onPressed: () {}, child: Text("Menu"))
+                          ],
+                        ),
                       )
                     ],
                   ),
