@@ -3,10 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:wmsflutter/views/widgets/drawer_widget.dart';
 import 'package:wmsflutter/views/screens/splash_screen.dart';
 import 'views/screens/home_screen.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() async {
-  await dotenv.load(fileName: ".env");
+void main() {
   runApp(MyApp());
 }
 
@@ -18,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ChangeNotifierProvider(
         create: (context) => NavigationProvider(),
         child: MaterialApp(
-          title: dotenv.env['APP_NAME'] != null ? "ddd" : "Indomaret",
+          title: "Ini App",
           home: Scaffold(
             body: FutureBuilder(
               future: Future.delayed(Duration(seconds: 2)),

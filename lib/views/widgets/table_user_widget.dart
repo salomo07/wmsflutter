@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pluto_grid/pluto_grid.dart';
-import '../../models/Book.dart';
+import 'package:wmsflutter/bloc/Book/book_bloc.dart';
 
 class BooksTableWidget extends StatefulWidget {
-  final List<Book> books;
-  BooksTableWidget({super.key, required this.books});
+  const BooksTableWidget({super.key});
 
   @override
   State<BooksTableWidget> createState() => _BooksTableWidgetState();
@@ -123,21 +123,30 @@ class _BooksTableWidgetState extends State<BooksTableWidget> {
   late final PlutoGridStateManager stateManager;
   @override
   Widget build(BuildContext context) {
-    print("BooksTableWidget init");
     return Container(
         padding: const EdgeInsets.all(15),
-        child: PlutoGrid(
-          columns: columns,
-          rows: rows,
-          columnGroups: columnGroups,
-          onLoaded: (PlutoGridOnLoadedEvent event) {
-            stateManager = event.stateManager;
-            stateManager.setShowColumnFilter(true);
+        child: BlocBuilder<BookBloc, BookState>(
+          builder: (context, state) {
+            if (state is BookDone) {
+              return PlutoGrid(
+                columns: columns,
+                rows: rows,
+                columnGroups: columnGroups,
+                onLoaded: (PlutoGridOnLoadedEvent event) {
+                  stateManager = event.stateManager;
+                  stateManager.setShowColumnFilter(true);
+                },
+                onChanged: (PlutoGridOnChangedEvent event) {
+                  print(event);
+                },
+                configuration: const PlutoGridConfiguration(),
+              );
+            } else if (state is BookInitial) {
+              return CircularProgressIndicator();
+            } else {
+              return Text("Error");
+            }
           },
-          onChanged: (PlutoGridOnChangedEvent event) {
-            print(event);
-          },
-          configuration: const PlutoGridConfiguration(),
         ));
   }
 }

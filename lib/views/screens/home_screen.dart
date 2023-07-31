@@ -93,23 +93,7 @@ class BodyHomeWidget extends StatelessWidget {
                 Expanded(
                   child: BlocProvider(
                     create: (context) => bookBloc..add(GetBook()),
-                    child: BlocBuilder<BookBloc, BookState>(
-                      builder: (context, state) {
-                        print(state);
-
-                        if (state is BookInitial) {
-                          return CircularProgressIndicator();
-                        }
-                        if (state is BookDone) {
-                          print("Done");
-                          return BooksTableWidget(
-                            books: state.book,
-                          );
-                        } else {
-                          return Text("Else");
-                        }
-                      },
-                    ),
+                    child: BooksTableWidget(),
                   ),
                 )
               ],

@@ -14,7 +14,6 @@ dependencies:
   http: ^1.1.0
   flutter_bloc: ^8.1.3
   pluto_grid: ^7.0.2
-  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -33,5 +32,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/logos/
-    - assets/.env
 
