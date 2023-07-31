@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pluto_grid/pluto_grid.dart';
+import '../../models/Book.dart';
 
 class BooksTableWidget extends StatefulWidget {
-  const BooksTableWidget({super.key});
+  final List<Book> books;
+  BooksTableWidget({super.key, required this.books});
 
   @override
   State<BooksTableWidget> createState() => _BooksTableWidgetState();
@@ -121,6 +123,7 @@ class _BooksTableWidgetState extends State<BooksTableWidget> {
   late final PlutoGridStateManager stateManager;
   @override
   Widget build(BuildContext context) {
+    print("BooksTableWidget init");
     return Container(
         padding: const EdgeInsets.all(15),
         child: PlutoGrid(

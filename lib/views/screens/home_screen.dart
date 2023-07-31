@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wmsflutter/modules/home/views/home_imageslide_widget.dart';
-import 'package:wmsflutter/modules/home/views/table_user_widget.dart';
-import 'package:wmsflutter/modules/widgets/drawer_widget.dart';
-import '../../widgets/bottom_navBar.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:wmsflutter/bloc/Book/book_bloc.dart';
+import 'package:wmsflutter/views/widgets/home_imageslide_widget.dart';
+import 'package:wmsflutter/views/widgets/table_user_widget.dart';
+import 'package:wmsflutter/views/widgets/drawer_widget.dart';
+import '../widgets/bottom_navbar_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -20,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text("xxx"),
             backgroundColor: const Color(0xff48bccf),
           ),
-          drawer: DrawerWidget(),
+          drawer: const DrawerWidget(),
           body: BodyHomeWidget(),
           bottomNavigationBar: const BottomNavBarWidget()),
     );
@@ -42,10 +44,10 @@ class DuaBarisWidget extends StatelessWidget {
 }
 
 class BodyHomeWidget extends StatelessWidget {
-  const BodyHomeWidget({
+  BodyHomeWidget({
     super.key,
   });
-
+  BookBloc bookBloc = BookBloc();
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -89,8 +91,25 @@ class BodyHomeWidget extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    child: BooksTableWidget(),
+                  child: BlocProvider(
+                    create: (context) => bookBloc..add(GetBook()),
+                    child: BlocBuilder<BookBloc, BookState>(
+                      builder: (context, state) {
+                        print(state);
+
+                        if (state is BookInitial) {
+                          return CircularProgressIndicator();
+                        }
+                        if (state is BookDone) {
+                          print("Done");
+                          return BooksTableWidget(
+                            books: state.book,
+                          );
+                        } else {
+                          return Text("Else");
+                        }
+                      },
+                    ),
                   ),
                 )
               ],
@@ -101,38 +120,3 @@ class BodyHomeWidget extends StatelessWidget {
     );
   }
 }
-
-// class ListviewWidget extends StatelessWidget {
-//   const ListviewWidget({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ListView(
-//       children: [
-//         Container(
-//           color: const Color(0xff45BCC7),
-//           height: 50,
-//           child: const Row(
-//             children: [
-//               SizedBox(width: 20),
-//               Text(
-//                 "Salomo Sitompul",
-//                 style: TextStyle(
-//                   overflow: TextOverflow.ellipsis,
-//                   fontWeight: FontWeight.w200,
-//                   color: Colors.white,
-//                   fontFamily: "ABeeZee",
-//                 ),
-//               )
-//             ],
-//           ),
-//         ),
-//         Container(
-//           color: Colors.amberAccent,
-//           height: 500,
-//           width: double.infinity,
-//         )
-//       ],
-//     );
-//   }
-// }

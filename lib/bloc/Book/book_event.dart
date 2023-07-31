@@ -4,5 +4,5 @@ part of 'book_bloc.dart';
 abstract class BookEvent {}
 
 class GetBook extends BookEvent {
-  GetBook()
+  GetBook();
 }

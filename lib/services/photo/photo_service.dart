@@ -1,4 +1,4 @@
-import 'package:wmsflutter/modules/home/models/Photos.dart';
+import 'package:wmsflutter/models/Photos.dart';
 import 'package:http/http.dart' as http;
 
 class PhotoService {

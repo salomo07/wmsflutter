@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:wmsflutter/modules/home/models/Photos.dart';
+import 'package:wmsflutter/models/Photos.dart';
 import 'package:wmsflutter/services/photo/photo_service.dart';
 
 part 'photo_event.dart';

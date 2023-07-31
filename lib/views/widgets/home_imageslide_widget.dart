@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../bloc/photo/photo_bloc.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import '../../bloc/photo/photo_bloc.dart';
 
 class ImageSliderWidget extends StatelessWidget {
   const ImageSliderWidget({super.key});

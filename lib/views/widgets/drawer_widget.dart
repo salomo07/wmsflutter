@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wmsflutter/modules/home/models/Menu.dart';
+import 'package:wmsflutter/models/Menu.dart';
 
 class DrawerWidget extends StatelessWidget {
   static final padding = EdgeInsets.symmetric(horizontal: 20);
