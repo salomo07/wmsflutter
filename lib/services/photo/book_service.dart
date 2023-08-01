@@ -1,6 +1,6 @@
 import 'package:wmsflutter/models/Book.dart';
 import 'package:http/http.dart' as http;
-import 'package:wmsflutter/config/ConfigApp.dart';
+import 'package:wmsflutter/config/configapp.dart';
 
 class BookService {
   ConfigApp config = ConfigApp();

@@ -13,14 +13,12 @@ String bookToJson(List<Book> data) =>
 class Book {
   String id;
   String title;
-  String read;
   String isbn;
   String author;
 
   Book({
     required this.id,
     required this.title,
-    required this.read,
     required this.isbn,
     required this.author,
   });
@@ -28,7 +26,6 @@ class Book {
   factory Book.fromJson(Map<String, dynamic> json) => Book(
         id: json["id"],
         title: json["title"],
-        read: json["read"],
         isbn: json["isbn"],
         author: json["author"],
       );
@@ -36,8 +33,15 @@ class Book {
   Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
-        "read": read,
         "isbn": isbn,
         "author": author,
       };
+  Map<String, dynamic> toMap() {
+    return {
+      "id": id,
+      "title": title,
+      "isbn": isbn,
+      "author": author,
+    };
+  }
 }

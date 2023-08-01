@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:wmsflutter/bloc/Book/book_bloc.dart';
+import 'package:shimmer/shimmer.dart';
+import 'package:wmsflutter/views/widgets/plutogridauto_widget.dart';
 
 class BooksTableWidget extends StatefulWidget {
   const BooksTableWidget({super.key});
@@ -71,6 +73,7 @@ class _BooksTableWidgetState extends State<BooksTableWidget> {
       },
     ),
   ];
+  void createColumn() {}
 
   final List<PlutoRow> rows = [
     PlutoRow(
@@ -128,21 +131,72 @@ class _BooksTableWidgetState extends State<BooksTableWidget> {
         child: BlocBuilder<BookBloc, BookState>(
           builder: (context, state) {
             if (state is BookDone) {
-              return PlutoGrid(
-                columns: columns,
-                rows: rows,
-                columnGroups: columnGroups,
-                onLoaded: (PlutoGridOnLoadedEvent event) {
-                  stateManager = event.stateManager;
-                  stateManager.setShowColumnFilter(true);
-                },
-                onChanged: (PlutoGridOnChangedEvent event) {
-                  print(event);
-                },
-                configuration: const PlutoGridConfiguration(),
-              );
+              return PlutoGridAutomize(datas: state.book);
+              // return PlutoGrid(
+              //   columns: columns,
+              //   rows: rows,
+              //   columnGroups: columnGroups,
+              //   onLoaded: (PlutoGridOnLoadedEvent event) {
+              //     stateManager = event.stateManager;
+              //     stateManager.setShowColumnFilter(true);
+              //   },
+              //   onChanged: (PlutoGridOnChangedEvent event) {
+              //     print(event);
+              //   },
+              //   configuration: const PlutoGridConfiguration(),
+              // );
             } else if (state is BookInitial) {
-              return CircularProgressIndicator();
+              return Shimmer.fromColors(
+                  highlightColor: Colors.grey.shade100,
+                  baseColor: Colors.grey.shade300,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: Color(0xff808080),
+                              borderRadius: BorderRadius.circular(30)),
+                          margin: EdgeInsets.only(bottom: 7),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: Color(0xff808080),
+                              borderRadius: BorderRadius.circular(30)),
+                          margin: EdgeInsets.only(bottom: 7),
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: Color(0xff808080),
+                              borderRadius: BorderRadius.circular(30)),
+                          margin: EdgeInsets.only(bottom: 7),
+                        ),
+                        Container(
+                          width: 500,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: Color(0xff808080),
+                              borderRadius: BorderRadius.circular(30)),
+                          margin: EdgeInsets.only(bottom: 7),
+                        ),
+                        Container(
+                          width: 500,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              color: Color(0xff808080),
+                              borderRadius: BorderRadius.circular(30)),
+                          margin: EdgeInsets.only(bottom: 7),
+                        ),
+                      ],
+                    ),
+                  ));
             } else {
               return Text("Error");
             }

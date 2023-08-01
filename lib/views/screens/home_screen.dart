@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wmsflutter/bloc/Book/book_bloc.dart';
+import 'package:wmsflutter/config/responsive.dart';
 import 'package:wmsflutter/views/widgets/home_imageslide_widget.dart';
 import 'package:wmsflutter/views/widgets/table_user_widget.dart';
 import 'package:wmsflutter/views/widgets/drawer_widget.dart';
@@ -50,57 +51,30 @@ class BodyHomeWidget extends StatelessWidget {
   BookBloc bookBloc = BookBloc();
   @override
   Widget build(BuildContext context) {
-    double leftPanelSize=MediaQuery.of(context).size.width;
-    Widget lifeSide =Text("");
-    if(leftPanelSize>1080){
-      lifeSide=Expanded(
-        flex: 3,
-        child: Container(
-          color: Colors.black54,
-        ),
-      );
-    }
     return Row(
       children: [
-        lifeSide,
+        Responsive.isDesktop(context)
+            ? Expanded(flex: 3, child: Container(color: Colors.black54))
+            : Center(),
         Expanded(
           flex: 8,
           child: Container(
             margin: EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
             decoration: BoxDecoration(
-                color: Colors.amberAccent,
+                color: Colors.blueAccent,
                 border: Border.all(color: Colors.blue),
                 borderRadius: BorderRadius.all(Radius.circular(30))),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Administrator",
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Expanded(
-                        child: Wrap(
-                          spacing: 20,
-                          children: [
-                            ElevatedButton(onPressed: () {}, child: Text("PIC")),
-                            ElevatedButton(
-                                onPressed: () {}, child: Text("Group Bisnis")),
-                            ElevatedButton(onPressed: () {}, child: Text("Role")),
-                            ElevatedButton(onPressed: () {}, child: Text("Menu"))
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
                 Expanded(
                   child: BlocProvider(
                     create: (context) => bookBloc..add(GetBook()),
-                    child: BooksTableWidget(),
+                    child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.greenAccent)),
+                        child: BooksTableWidget()),
                   ),
                 )
               ],
