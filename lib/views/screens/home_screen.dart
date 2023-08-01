@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wmsflutter/bloc/Book/book_bloc.dart';
+import 'package:wmsflutter/bloc/book/book_bloc.dart';
+import 'package:wmsflutter/bloc/photo/photo_bloc.dart';
 import 'package:wmsflutter/config/responsive.dart';
 import 'package:wmsflutter/views/widgets/home_imageslide_widget.dart';
+import 'package:wmsflutter/views/widgets/plutogridauto_widget.dart';
 import 'package:wmsflutter/views/widgets/table_user_widget.dart';
 import 'package:wmsflutter/views/widgets/drawer_widget.dart';
 import '../widgets/bottom_navbar_widget.dart';
@@ -74,7 +76,7 @@ class BodyHomeWidget extends StatelessWidget {
                         width: double.infinity,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.greenAccent)),
-                        child: BooksTableWidget()),
+                        child: PlutoGridAutomize()),
                   ),
                 )
               ],
@@ -82,6 +84,28 @@ class BodyHomeWidget extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class XxxWidget extends StatelessWidget {
+  const XxxWidget({
+    super.key,
+    required this.bookBloc,
+  });
+
+  final BookBloc bookBloc;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => bookBloc..add(GetBook()),
+      child: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.greenAccent)),
+          child: PlutoGridAutomize()),
     );
   }
 }

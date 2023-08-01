@@ -131,7 +131,7 @@ class _BooksTableWidgetState extends State<BooksTableWidget> {
         child: BlocBuilder<BookBloc, BookState>(
           builder: (context, state) {
             if (state is BookDone) {
-              return PlutoGridAutomize(datas: state.book);
+              return PlutoGridAutomize();
               // return PlutoGrid(
               //   columns: columns,
               //   rows: rows,
