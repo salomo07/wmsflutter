@@ -1,9 +1,9 @@
 import 'dart:core';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:wmsflutter/bloc/book/book_bloc.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class PlutoGridAutomize extends StatelessWidget {
   late final PlutoGridStateManager stateManager;
@@ -14,12 +14,29 @@ class PlutoGridAutomize extends StatelessWidget {
     fields = [];
     datas.first.toJson().forEach((key, value) {
       print(capitalize(key));
-      listColumns.add(PlutoColumn(
-        title: capitalize(key),
-        titleTextAlign: PlutoColumnTextAlign.center,
-        field: key,
-        type: PlutoColumnType.text(),
-      ));
+      if (key == 'isbn') {
+        listColumns.add(PlutoColumn(
+            title: capitalize(key),
+            titleTextAlign: PlutoColumnTextAlign.center,
+            field: key,
+            type: PlutoColumnType.text(),
+            renderer: (rendererContext) {
+              return Container(
+                height: 150,
+                child: QrImageView(
+                  data: value,
+                  version: QrVersions.auto,
+                  size: 200.0,
+                ),
+              );
+            }));
+      } else {
+        listColumns.add(PlutoColumn(
+            title: capitalize(key),
+            titleTextAlign: PlutoColumnTextAlign.center,
+            field: key,
+            type: PlutoColumnType.text()));
+      }
       fields.add(key);
     });
     return listColumns;
