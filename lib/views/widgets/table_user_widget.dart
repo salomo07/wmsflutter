@@ -73,7 +73,6 @@ class _BooksTableWidgetState extends State<BooksTableWidget> {
       },
     ),
   ];
-  void createColumn() {}
 
   final List<PlutoRow> rows = [
     PlutoRow(

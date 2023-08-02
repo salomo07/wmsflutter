@@ -6,11 +6,10 @@ class BookService {
   ConfigApp config = ConfigApp();
   String? urlEndPoint;
   Future<List<Book>> fetchBooks() async {
-    
-    print("sss");
     final response = await http.post(
       Uri.parse(config.baseUrl + "/book/getbook"),
     );
+    print(response.statusCode);
     List<Book> b = bookFromJson(response.body);
     return b;
   }
