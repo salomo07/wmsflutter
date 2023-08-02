@@ -76,7 +76,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                   Column(
-                    children: [TextFormField(), TextFormField()],
+                    children: [
+                      TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'SSS',
+                        ),
+                      ),
+                      TextFormField()
+                    ],
                   )
                 ],
               ),

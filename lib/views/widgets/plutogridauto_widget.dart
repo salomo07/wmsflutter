@@ -22,11 +22,11 @@ class PlutoGridAutomize extends StatelessWidget {
             type: PlutoColumnType.text(),
             renderer: (rendererContext) {
               return Container(
-                height: 150,
+                height: 450,
                 child: QrImageView(
                   data: value,
                   version: QrVersions.auto,
-                  size: 200.0,
+                  size: 800.0,
                 ),
               );
             }));
