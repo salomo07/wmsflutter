@@ -4,17 +4,19 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:wmsflutter/bloc/book/book_bloc.dart';
-import 'package:wmsflutter/models/Book.dart';
 
 class PlutoGridAutomize extends StatelessWidget {
   late final PlutoGridStateManager stateManager;
   List fields = [];
   createColumns(List<dynamic> datas) {
+    //Disini bisa custome widget lohh "render"
     List<PlutoColumn> listColumns = [];
     fields = [];
-    datas.first.toMap().forEach((key, value) {
+    datas.first.toJson().forEach((key, value) {
+      print(capitalize(key));
       listColumns.add(PlutoColumn(
         title: capitalize(key),
+        titleTextAlign: PlutoColumnTextAlign.center,
         field: key,
         type: PlutoColumnType.text(),
       ));
@@ -24,18 +26,16 @@ class PlutoGridAutomize extends StatelessWidget {
   }
 
   capitalize(String word) {
-    word[0].toUpperCase();
-    if (word.length > 1) {
-      word.substring(1).toLowerCase();
-    }
-    return word;
+    return "${word[0].toUpperCase()}${word.substring(1)}";
   }
 
   createCell(var data) {
     // print(data);
     Map<String, PlutoCell> cells = {};
     fields.forEach((element) {
-      cells[element] = PlutoCell(value: data.toMap()[element]);
+      cells[element] = PlutoCell(
+        value: data.toJson()[element],
+      );
     });
     return cells;
   }
@@ -46,7 +46,6 @@ class PlutoGridAutomize extends StatelessWidget {
       listRows.add(PlutoRow(
         cells: createCell(element),
       ));
-      print(element.author);
     });
     return listRows;
   }
@@ -58,22 +57,26 @@ class PlutoGridAutomize extends StatelessWidget {
         if (state is BookLoading) {
           return Text("Harusnya Shimmer");
         } else if (state is BookDone) {
-          return PlutoGrid(
-            columns: createColumns(state.book),
-            rows: createRows(state.book),
-            onLoaded: (PlutoGridOnLoadedEvent event) {
-              stateManager = event.stateManager;
-              stateManager.setShowColumnFilter(true);
-            },
-            onChanged: (PlutoGridOnChangedEvent event) {
-              print(event);
-            },
-            configuration: const PlutoGridConfiguration(),
-          );
+          return PlutoGridDinamis(state);
         } else {
-          return Text("Errorxxx");
+          return Text("Error");
         }
       },
+    );
+  }
+
+  PlutoGrid PlutoGridDinamis(BookDone state) {
+    return PlutoGrid(
+      columns: createColumns(state.book),
+      rows: createRows(state.book),
+      onLoaded: (PlutoGridOnLoadedEvent event) {
+        stateManager = event.stateManager;
+        stateManager.setShowColumnFilter(true);
+      },
+      onChanged: (PlutoGridOnChangedEvent event) {
+        print(event);
+      },
+      configuration: const PlutoGridConfiguration(),
     );
   }
 }
