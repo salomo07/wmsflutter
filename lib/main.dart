@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wmsflutter/views/screens/login_screen.dart';
 import 'package:wmsflutter/views/widgets/drawer_widget.dart';
 import 'package:wmsflutter/views/screens/splash_screen.dart';
 import 'views/screens/home_screen.dart';
@@ -18,13 +19,14 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: "Ini App",
           home: Scaffold(
+            backgroundColor: Colors.white,
             body: FutureBuilder(
               future: Future.delayed(Duration(seconds: 2)),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const SplashScreen();
                 } else {
-                  return HomeScreen();
+                  return LoginScreen();
                 }
               },
             ),
