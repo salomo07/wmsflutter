@@ -71,12 +71,7 @@ class BodyHomeWidget extends StatelessWidget {
                 Expanded(
                   child: BlocProvider(
                     create: (context) => bookBloc..add(GetBook()),
-                    child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.greenAccent)),
-                        child: PlutoGridAutomize()),
+                    child: PlutoGridAutomize(),
                   ),
                 )
               ],
@@ -103,8 +98,8 @@ class XxxWidget extends StatelessWidget {
       child: Container(
           height: double.infinity,
           width: double.infinity,
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.greenAccent)),
+          decoration:
+              BoxDecoration(border: Border.all(color: Colors.greenAccent)),
           child: PlutoGridAutomize()),
     );
   }

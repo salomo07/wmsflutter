@@ -21,13 +21,9 @@ class PlutoGridAutomize extends StatelessWidget {
             field: key,
             type: PlutoColumnType.text(),
             renderer: (rendererContext) {
-              return Container(
-                height: 450,
-                child: QrImageView(
-                  data: value,
-                  version: QrVersions.auto,
-                  size: 800.0,
-                ),
+              return QrImageView(
+                data: value,
+                version: QrVersions.auto,
               );
             }));
       } else {
@@ -47,7 +43,6 @@ class PlutoGridAutomize extends StatelessWidget {
   }
 
   createCell(var data) {
-    // print(data);
     Map<String, PlutoCell> cells = {};
     fields.forEach((element) {
       cells[element] = PlutoCell(
@@ -74,9 +69,12 @@ class PlutoGridAutomize extends StatelessWidget {
         if (state is BookLoading) {
           return Text("Harusnya Shimmer");
         } else if (state is BookDone) {
-          return PlutoGridDinamis(state);
+          return Padding(
+              padding: EdgeInsets.all(20), child: PlutoGridDinamis(state));
+        } else if (state is BookError) {
+          return Text("Errorx");
         } else {
-          return Text("Error");
+          return Center();
         }
       },
     );
