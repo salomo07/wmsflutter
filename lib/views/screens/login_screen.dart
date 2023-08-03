@@ -32,22 +32,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           border: Border.all(color: Colors.black),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(24))),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                              top: 37,
-                              left: 115,
-                              child: Image.asset('assets/images/drawkit.png')),
-                          Positioned(
-                              top: 63,
-                              // right: 145,
-                              left: 0,
-                              // bottom: 0,
-                              child: SvgPicture.asset(
-                                'assets/images/background_v2.svg',
-                                fit: BoxFit.contain,
-                              )),
-                        ],
+                      child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        color: Colors.blueGrey,
                       ),
                     ),
                   ),
@@ -62,6 +50,26 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  Stack StackXXX() {
+    return Stack(
+                      children: [
+                        Positioned(
+                            top: 37,
+                            left: 115,
+                            child: Image.asset('assets/images/drawkit.png')),
+                        Positioned(
+                            top: 63,
+                            // right: 145,
+                            left: 0,
+                            bottom: 10,
+                            child: SvgPicture.asset(
+                              'assets/images/background_v2.svg',
+                              fit: BoxFit.contain,
+                            )),
+                      ],
+                    );
   }
 
   Container leftBar() {
@@ -211,8 +219,3 @@ class FormWidget extends StatelessWidget {
     );
   }
 }
-//decoration
-// InputDecoration(
-//   enabledBorder: OutlineInputBorder(
-//       borderSide:
-//           BorderSide(width: 1, color: Colors.black45)))
