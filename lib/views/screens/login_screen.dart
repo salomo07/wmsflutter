@@ -36,8 +36,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         children: [
                           Positioned(
                             left: 0,
-                            top: 15,
-                            bottom: -20,
+                            top: 25,
+                            // bottom: 0,
+                            // bottom: -20,
                             child: Container(
                               height: 700,
                               width: 786,
@@ -55,6 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ],
                                           ),
                                         ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
                                         Text(
                                           "Ad1Soul - Aplikasi Manajemen Karyawan IT Directorate",
                                           style: GoogleFonts.inter(
@@ -65,10 +69,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(height: 25),
-                                  Expanded(
+                                  SizedBox(height: 20),
+                                  Center(
                                     child: Container(
-                                      height: 519,
+                                      height: 458,
                                       width: 786,
                                       child: SvgPicture.asset(
                                           'assets/images/background_v2.svg',
@@ -238,12 +242,14 @@ class FormWidget extends StatelessWidget {
               height: 79,
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [Text("dsdasdasd")],
+              children: [
+                Container(
+                  child: Text("Lupa Kata Sandi?",
+                      style: GoogleFonts.inter(
+                          fontWeight: FontWeight.w400, fontSize: 14)),
+                )
+              ],
             ),
-            Container(
-              child: Text("Lupa Kata Sandi?"),
-            )
           ],
         ),
       ),
