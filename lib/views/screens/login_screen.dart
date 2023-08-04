@@ -138,7 +138,7 @@ class _FormWidgetState extends State<FormWidget> {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Wrap(
-          runSpacing: 30,
+          runSpacing: 15,
           children: [
             Column(
               children: [
@@ -206,8 +206,8 @@ class _FormWidgetState extends State<FormWidget> {
                             },
                           ),
                           errorSuff2 == ""
-                              ? Text("")
-                              : Padding(
+                              ? const Text("")
+                              : const Padding(
                                   padding: EdgeInsets.only(right: 8),
                                   child: Icon(Icons.error_outline_rounded,
                                       color: Colors.redAccent),
@@ -229,7 +229,8 @@ class _FormWidgetState extends State<FormWidget> {
                           setState(() {
                             errorSuff1 = "Data tidak boleh ada yang kosong";
                           });
-                        } else if (ted2.text == "") {
+                        }
+                        if (ted2.text == "") {
                           setState(() {
                             errorSuff2 = "Data tidak boleh ada yang kosong";
                           });
@@ -256,7 +257,7 @@ class _FormWidgetState extends State<FormWidget> {
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100),
-                            side: BorderSide(color: const Color(0xFF53B1FD))),
+                            side: const BorderSide(color: Color(0xFF53B1FD))),
                         backgroundColor: const Color(0xFFFCFCFD),
                       ),
                       child: Text(
