@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           home: Scaffold(
             backgroundColor: Colors.white,
             body: FutureBuilder(
-              future: Future.delayed(Duration(seconds: 2)),
+              future: Future.delayed(Duration(seconds: 0)),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const SplashScreen();

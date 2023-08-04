@@ -32,10 +32,54 @@ class _LoginScreenState extends State<LoginScreen> {
                           border: Border.all(color: Colors.black),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(24))),
-                      child: Container(
-                        height: double.infinity,
-                        width: double.infinity,
-                        color: Colors.blueGrey,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 0,
+                            top: 15,
+                            bottom: -20,
+                            child: Container(
+                              height: 700,
+                              width: 786,
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 125),
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                  'assets/images/drawkit.png')
+                                            ],
+                                          ),
+                                        ),
+                                        Text(
+                                          "Ad1Soul - Aplikasi Manajemen Karyawan IT Directorate",
+                                          style: GoogleFonts.inter(
+                                              color: Color(0xFF344054),
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(height: 25),
+                                  Expanded(
+                                    child: Container(
+                                      height: 519,
+                                      width: 786,
+                                      child: SvgPicture.asset(
+                                          'assets/images/background_v2.svg',
+                                          fit: BoxFit.fill),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
@@ -54,43 +98,21 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Stack StackXXX() {
     return Stack(
-                      children: [
-                        Positioned(
-                            top: 37,
-                            left: 115,
-                            child: Image.asset('assets/images/drawkit.png')),
-                        Positioned(
-                            top: 63,
-                            // right: 145,
-                            left: 0,
-                            bottom: 10,
-                            child: SvgPicture.asset(
-                              'assets/images/background_v2.svg',
-                              fit: BoxFit.contain,
-                            )),
-                      ],
-                    );
-  }
-
-  Container leftBar() {
-    return Container(
-      width: 786,
-      child: Column(
-        children: [
-          Container(
-            height: 88,
-            width: 531,
-            color: Colors.redAccent,
-          ),
-          Expanded(
-            child: Container(
-              height: 519,
-              width: 786,
-              color: Colors.blue,
-            ),
-          )
-        ],
-      ),
+      children: [
+        Positioned(
+            top: 37,
+            left: 115,
+            child: Image.asset('assets/images/drawkit.png')),
+        Positioned(
+            top: 63,
+            // right: 145,
+            left: 0,
+            bottom: 10,
+            child: SvgPicture.asset(
+              'assets/images/background_v2.svg',
+              fit: BoxFit.contain,
+            )),
+      ],
     );
   }
 }
@@ -105,7 +127,7 @@ class FormWidget extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(32),
       width: 470,
-      height: 564,
+      height: 664,
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -118,7 +140,6 @@ class FormWidget extends StatelessWidget {
             ),
           ]),
       child: SizedBox(
-        // color: Color(0xFF98A2B3),
         width: MediaQuery.of(context).size.width,
         child: Wrap(
           runSpacing: 30,
@@ -212,6 +233,16 @@ class FormWidget extends StatelessWidget {
                       )),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 79,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [Text("dsdasdasd")],
+            ),
+            Container(
+              child: Text("Lupa Kata Sandi?"),
             )
           ],
         ),
