@@ -57,9 +57,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ],
                                         ),
                                       ),
-                                      const SizedBox(
-                                        height: 5,
-                                      ),
                                       Text(
                                         "Ad1Soul - Aplikasi Manajemen Karyawan IT Directorate",
                                         style: GoogleFonts.inter(
@@ -89,11 +86,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 )
               : const Center(),
-          const Positioned(
+          Positioned(
             top: 60,
+            left: Responsive.isDesktop(context) ? null : 40,
             right: 40,
             bottom: 60,
-            child: FormWidget(),
+            child: const FormWidget(),
           )
         ],
       ),
