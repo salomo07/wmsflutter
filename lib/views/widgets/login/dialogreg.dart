@@ -56,6 +56,9 @@ class _DialogWidgetState extends State<DialogWidget> {
                         height: 72,
                         child: titleDialog(),
                       ),
+                      SizedBox(
+                        height: 30,
+                      ),
                       Container(
                         width: 792,
                         height: 406,
@@ -73,106 +76,96 @@ class _DialogWidgetState extends State<DialogWidget> {
                                     color: Colors.amberAccent,
                                     child: Column(
                                       children: [
-                                        Text(
-                                          "NIK",
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12),
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            hintText: "NIK",
-                                            border: const OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Color(0xFF98A2B3)),
-                                                borderRadius:
-                                                    BorderRadius.horizontal(
-                                                        left:
-                                                            Radius.circular(9),
-                                                        right: Radius.circular(
-                                                            9))),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 20),
+                                          child: Wrap(
+                                            runSpacing: 5,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "NIK",
+                                                    style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 12),
+                                                  ),
+                                                  Text(
+                                                    "*",
+                                                    style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            Color(0xFFF04438),
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                              TextFormField(
+                                                decoration: InputDecoration(
+                                                  hintText: "NIK",
+                                                  border: const OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Color(
+                                                              0xFF98A2B3)),
+                                                      borderRadius: BorderRadius
+                                                          .horizontal(
+                                                              left: Radius
+                                                                  .circular(9),
+                                                              right: Radius
+                                                                  .circular(
+                                                                      9))),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Text(
-                                          "NIK",
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12),
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            hintText: "NIK",
-                                            border: const OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Color(0xFF98A2B3)),
-                                                borderRadius:
-                                                    BorderRadius.horizontal(
-                                                        left:
-                                                            Radius.circular(9),
-                                                        right: Radius.circular(
-                                                            9))),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 20),
+                                          child: Wrap(
+                                            runSpacing: 5,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    "Nama",
+                                                    style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 12),
+                                                  ),
+                                                  Text(
+                                                    "*",
+                                                    style: GoogleFonts.inter(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color:
+                                                            Color(0xFFF04438),
+                                                        fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                              TextFormField(
+                                                decoration: InputDecoration(
+                                                  hintText: "Nama",
+                                                  border: const OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                          color: Color(
+                                                              0xFF98A2B3)),
+                                                      borderRadius: BorderRadius
+                                                          .horizontal(
+                                                              left: Radius
+                                                                  .circular(9),
+                                                              right: Radius
+                                                                  .circular(
+                                                                      9))),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        Text(
-                                          "NIK",
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12),
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            hintText: "NIK",
-                                            border: const OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Color(0xFF98A2B3)),
-                                                borderRadius:
-                                                    BorderRadius.horizontal(
-                                                        left:
-                                                            Radius.circular(9),
-                                                        right: Radius.circular(
-                                                            9))),
-                                          ),
-                                        ),
-                                        Text(
-                                          "NIK",
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12),
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            hintText: "NIK",
-                                            border: const OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Color(0xFF98A2B3)),
-                                                borderRadius:
-                                                    BorderRadius.horizontal(
-                                                        left:
-                                                            Radius.circular(9),
-                                                        right: Radius.circular(
-                                                            9))),
-                                          ),
-                                        ),
-                                        Text(
-                                          "NIK",
-                                          style: GoogleFonts.inter(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 12),
-                                        ),
-                                        TextFormField(
-                                          decoration: InputDecoration(
-                                            hintText: "NIK",
-                                            border: const OutlineInputBorder(
-                                                borderSide: BorderSide(
-                                                    color: Color(0xFF98A2B3)),
-                                                borderRadius:
-                                                    BorderRadius.horizontal(
-                                                        left:
-                                                            Radius.circular(9),
-                                                        right: Radius.circular(
-                                                            9))),
-                                          ),
-                                        )
                                       ],
                                     ),
                                   ),
