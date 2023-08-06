@@ -53,136 +53,19 @@ class _DialogWidgetState extends State<DialogWidget> {
                     children: [
                       SizedBox(
                         width: double.infinity,
-                        height: 72,
+                        height: 62,
                         child: titleDialog(),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                       Container(
                         width: 792,
-                        height: 406,
+                        height: 416,
                         color: Colors.green[300],
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Wrap(
-                            alignment: WrapAlignment.spaceEvenly,
-                            children: [
-                              Column(
-                                children: [
-                                  Container(
-                                    width: 396,
-                                    height: 406,
-                                    color: Colors.amberAccent,
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 20),
-                                          child: Wrap(
-                                            runSpacing: 5,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "NIK",
-                                                    style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 12),
-                                                  ),
-                                                  Text(
-                                                    "*",
-                                                    style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color:
-                                                            Color(0xFFF04438),
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
-                                              ),
-                                              TextFormField(
-                                                decoration: InputDecoration(
-                                                  hintText: "NIK",
-                                                  border: const OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Color(
-                                                              0xFF98A2B3)),
-                                                      borderRadius: BorderRadius
-                                                          .horizontal(
-                                                              left: Radius
-                                                                  .circular(9),
-                                                              right: Radius
-                                                                  .circular(
-                                                                      9))),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 20),
-                                          child: Wrap(
-                                            runSpacing: 5,
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                    "Nama",
-                                                    style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        fontSize: 12),
-                                                  ),
-                                                  Text(
-                                                    "*",
-                                                    style: GoogleFonts.inter(
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color:
-                                                            Color(0xFFF04438),
-                                                        fontSize: 12),
-                                                  ),
-                                                ],
-                                              ),
-                                              TextFormField(
-                                                decoration: InputDecoration(
-                                                  hintText: "Nama",
-                                                  border: const OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                          color: Color(
-                                                              0xFF98A2B3)),
-                                                      borderRadius: BorderRadius
-                                                          .horizontal(
-                                                              left: Radius
-                                                                  .circular(9),
-                                                              right: Radius
-                                                                  .circular(
-                                                                      9))),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Column(
-                                children: [
-                                  Container(
-                                    width: 396,
-                                    height: 406,
-                                    color: Colors.white30,
-                                    child: const Text("ssss"),
-                                  )
-                                ],
-                              )
-                            ],
-                          ),
+                          child: formregistrasiWidget(),
                         ),
                       ),
                     ],
@@ -207,6 +90,316 @@ class _DialogWidgetState extends State<DialogWidget> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class formregistrasiWidget extends StatelessWidget {
+  const formregistrasiWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Column(
+            children: [
+              Container(
+                width: 386,
+                height: 416,
+                color: Colors.amberAccent,
+                child: Column(
+                  children: [
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "NIK",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "NIK",
+                            border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF98A2B3)),
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(9),
+                                    right: Radius.circular(9))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Nama",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Nama",
+                            border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF98A2B3)),
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(9),
+                                    right: Radius.circular(9))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Email",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Email",
+                            border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF98A2B3)),
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(9),
+                                    right: Radius.circular(9))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Jabatan",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        // DropdownButtonFormField(items: items, onChanged: onChanged),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Jabatan",
+                            border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF98A2B3)),
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(9),
+                                    right: Radius.circular(9))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Department",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Department",
+                            border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF98A2B3)),
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(9),
+                                    right: Radius.circular(9))),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 10),
+          child: Column(
+            children: [
+              Container(
+                width: 386,
+                height: 416,
+                color: Colors.white30,
+                child: Column(
+                  children: [
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Tanggal Masuk",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Tanggal Masuk",
+                            border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF98A2B3)),
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(9),
+                                    right: Radius.circular(9))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Status (Permanent / Outsource)",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Nama",
+                            border: const OutlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Color(0xFF98A2B3)),
+                                borderRadius: BorderRadius.horizontal(
+                                    left: Radius.circular(9),
+                                    right: Radius.circular(9))),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Wrap(
+                      runSpacing: 5,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Tanda Tangan",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            ),
+                            Text(
+                              "*",
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color(0xFFF04438),
+                                  fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 }
