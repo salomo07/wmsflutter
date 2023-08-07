@@ -237,16 +237,25 @@ class formregistrasiWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        // DropdownButtonFormField(items: items, onChanged: onChanged),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Jabatan",
-                            border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF98A2B3)),
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(9),
-                                    right: Radius.circular(9))),
+                        SizedBox(
+                          height: 48,
+                          child: DropdownButtonFormField(
+                            isExpanded: true,
+                            hint: Text('Jabatan'),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(9),
+                                      right: Radius.circular(9))),
+                            ),
+                            items: ["Kurir", "Sales", "Sekuriti"]
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (value) {},
                           ),
                         ),
                       ],
@@ -273,15 +282,25 @@ class formregistrasiWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Department",
-                            border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF98A2B3)),
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(9),
-                                    right: Radius.circular(9))),
+                        SizedBox(
+                          height: 48,
+                          child: DropdownButtonFormField(
+                            isExpanded: true,
+                            hint: Text('Department'),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(9),
+                                      right: Radius.circular(9))),
+                            ),
+                            items: ["Kurir", "Sales", "Sekuriti"]
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (value) {},
                           ),
                         ),
                       ],
@@ -324,6 +343,7 @@ class formregistrasiWidget extends StatelessWidget {
                         TextFormField(
                           decoration: InputDecoration(
                             hintText: "Tanggal Masuk",
+                            suffixIcon: Icon(Icons.calendar_today_outlined),
                             border: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Color(0xFF98A2B3)),
@@ -356,15 +376,25 @@ class formregistrasiWidget extends StatelessWidget {
                             ),
                           ],
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Nama",
-                            border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF98A2B3)),
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(9),
-                                    right: Radius.circular(9))),
+                        SizedBox(
+                          height: 48,
+                          child: DropdownButtonFormField(
+                            isExpanded: true,
+                            hint: Text('Status (Permanent / Outsource)'),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.horizontal(
+                                      left: Radius.circular(9),
+                                      right: Radius.circular(9))),
+                            ),
+                            items: ["Permanent", "Outsource", "Magang"]
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            onChanged: (value) {},
                           ),
                         ),
                       ],
