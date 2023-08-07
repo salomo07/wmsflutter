@@ -1,16 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:signature/signature.dart';
 
-class DialogWidget extends StatefulWidget {
-  const DialogWidget({
+final SignatureController _controller = SignatureController(
+  penStrokeWidth: 5,
+  penColor: Colors.red,
+  exportBackgroundColor: Colors.blue,
+);
+
+// INITIALIZE. RESULT IS A WIDGET, SO IT CAN BE DIRECTLY USED IN BUILD METHOD
+var _signatureCanvas = Signature(
+  controller: SignatureController(
+    penStrokeWidth: 5,
+    penColor: Colors.red,
+    exportBackgroundColor: Colors.blue,
+  ),
+  width: 380,
+  height: 216,
+  backgroundColor: Colors.lightBlueAccent,
+);
+
+class DialogRegWidget extends StatefulWidget {
+  const DialogRegWidget({
     super.key,
   });
 
   @override
-  State<DialogWidget> createState() => _DialogWidgetState();
+  State<DialogRegWidget> createState() => _DialogRegWidgetState();
 }
 
-class _DialogWidgetState extends State<DialogWidget> {
+class _DialogRegWidgetState extends State<DialogRegWidget> {
   Wrap titleDialog() {
     return Wrap(
       alignment: WrapAlignment.spaceBetween,
@@ -47,29 +67,25 @@ class _DialogWidgetState extends State<DialogWidget> {
             Padding(
               padding: const EdgeInsets.all(32),
               child: InteractiveViewer(
-                child: Container(
-                  // color: Colors.deepOrange,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: double.infinity,
-                        height: 62,
-                        child: titleDialog(),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Container(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 65,
+                      child: titleDialog(),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const formregistrasiWidget(),
+                    Expanded(
+                      child: Container(
+                        height: 40,
                         width: 792,
-                        height: 416,
-                        color: Colors.green[300],
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: formregistrasiWidget(),
-                        ),
+                        color: Colors.amberAccent,
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
             ),
@@ -94,6 +110,7 @@ class _DialogWidgetState extends State<DialogWidget> {
   }
 }
 
+// _selectDate()
 class formregistrasiWidget extends StatelessWidget {
   const formregistrasiWidget({
     super.key,
@@ -101,335 +118,392 @@ class formregistrasiWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 10),
-          child: Column(
-            children: [
-              Container(
-                width: 386,
-                height: 416,
-                color: Colors.amberAccent,
-                child: Column(
-                  children: [
-                    Wrap(
-                      runSpacing: 5,
+    return SizedBox(
+      width: 792,
+      height: 416,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Wrap(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 386,
+                    height: 416,
+                    child: Column(
                       children: [
-                        Row(
+                        Wrap(
+                          runSpacing: 5,
                           children: [
-                            Text(
-                              "NIK",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            SizedBox(
+                              height: 18,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "NIK",
+                                    style: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12),
+                                  ),
+                                  Text(
+                                    "*",
+                                    style: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color(0xFFF04438),
+                                        fontSize: 12),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFF04438),
-                                  fontSize: 12),
+                            SizedBox(
+                              height: 44,
+                              child: TextFormField(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                decoration: const InputDecoration(
+                                  hintText: "NIK",
+                                  border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xFF98A2B3)),
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(9),
+                                          right: Radius.circular(9))),
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "NIK",
-                            border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF98A2B3)),
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(9),
-                                    right: Radius.circular(9))),
-                          ),
+                        const SizedBox(
+                          height: 25,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Wrap(
-                      runSpacing: 5,
-                      children: [
-                        Row(
+                        Wrap(
+                          runSpacing: 5,
                           children: [
-                            Text(
-                              "Nama",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            Row(
+                              children: [
+                                Text(
+                                  "Nama",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                ),
+                                Text(
+                                  "*",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFFF04438),
+                                      fontSize: 12),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFF04438),
-                                  fontSize: 12),
+                            SizedBox(
+                              height: 44,
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: "Nama",
+                                  border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xFF98A2B3)),
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(9),
+                                          right: Radius.circular(9))),
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Nama",
-                            border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF98A2B3)),
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(9),
-                                    right: Radius.circular(9))),
-                          ),
+                        const SizedBox(
+                          height: 25,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Wrap(
-                      runSpacing: 5,
-                      children: [
-                        Row(
+                        Wrap(
+                          runSpacing: 5,
                           children: [
-                            Text(
-                              "Email",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            Row(
+                              children: [
+                                Text(
+                                  "Email",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                ),
+                                Text(
+                                  "*",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFFF04438),
+                                      fontSize: 12),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFF04438),
-                                  fontSize: 12),
+                            SizedBox(
+                              height: 44,
+                              child: TextFormField(
+                                decoration: const InputDecoration(
+                                  hintText: "Email",
+                                  border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xFF98A2B3)),
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(9),
+                                          right: Radius.circular(9))),
+                                ),
+                              ),
                             ),
                           ],
                         ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Email",
-                            border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF98A2B3)),
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(9),
-                                    right: Radius.circular(9))),
-                          ),
+                        const SizedBox(
+                          height: 0,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Wrap(
-                      runSpacing: 5,
-                      children: [
-                        Row(
+                        Wrap(
+                          runSpacing: 5,
                           children: [
-                            Text(
-                              "Jabatan",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            Row(
+                              children: [
+                                Text(
+                                  "Jabatan",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                ),
+                                Text(
+                                  "*",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFFF04438),
+                                      fontSize: 12),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFF04438),
-                                  fontSize: 12),
+                            SizedBox(
+                              height: 54,
+                              child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: Text(
+                                  'Jabatan',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                                decoration: const InputDecoration(
+                                  suffixIcon:
+                                      Icon(Icons.keyboard_arrow_down_outlined),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(9),
+                                          right: Radius.circular(9))),
+                                ),
+                                items: [
+                                  "Kurir",
+                                  "Sales",
+                                  "Sekuriti"
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {},
+                              ),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 48,
-                          child: DropdownButtonFormField(
-                            isExpanded: true,
-                            hint: Text('Jabatan'),
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.horizontal(
-                                      left: Radius.circular(9),
-                                      right: Radius.circular(9))),
-                            ),
-                            items: ["Kurir", "Sales", "Sekuriti"]
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (value) {},
-                          ),
+                        const SizedBox(
+                          height: 15,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Wrap(
-                      runSpacing: 5,
-                      children: [
-                        Row(
+                        Wrap(
+                          runSpacing: 5,
                           children: [
-                            Text(
-                              "Department",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            Row(
+                              children: [
+                                Text(
+                                  "Department",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                ),
+                                Text(
+                                  "*",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFFF04438),
+                                      fontSize: 12),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFF04438),
-                                  fontSize: 12),
+                            SizedBox(
+                              height: 44,
+                              child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: const Text('Department'),
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(9),
+                                          right: Radius.circular(9))),
+                                ),
+                                items: [
+                                  "Kurir",
+                                  "Sales",
+                                  "Sekuriti"
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {},
+                              ),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 48,
-                          child: DropdownButtonFormField(
-                            isExpanded: true,
-                            hint: Text('Department'),
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.horizontal(
-                                      left: Radius.circular(9),
-                                      right: Radius.circular(9))),
-                            ),
-                            items: ["Kurir", "Sales", "Sekuriti"]
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (value) {},
-                          ),
-                        ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 10),
-          child: Column(
-            children: [
-              Container(
-                width: 386,
-                height: 416,
-                color: Colors.white30,
-                child: Column(
-                  children: [
-                    Wrap(
-                      runSpacing: 5,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Column(
+                children: [
+                  Container(
+                    width: 386,
+                    height: 416,
+                    color: Colors.white30,
+                    child: Column(
                       children: [
-                        Row(
+                        Wrap(
+                          runSpacing: 5,
                           children: [
-                            Text(
-                              "Tanggal Masuk",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            SizedBox(
+                              height: 18,
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Tanggal Masuk",
+                                    style: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12),
+                                  ),
+                                  Text(
+                                    "*",
+                                    style: GoogleFonts.inter(
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color(0xFFF04438),
+                                        fontSize: 12),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFF04438),
-                                  fontSize: 12),
-                            ),
-                          ],
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            hintText: "Tanggal Masuk",
-                            suffixIcon: Icon(Icons.calendar_today_outlined),
-                            border: const OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF98A2B3)),
-                                borderRadius: BorderRadius.horizontal(
-                                    left: Radius.circular(9),
-                                    right: Radius.circular(9))),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Wrap(
-                      runSpacing: 5,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              "Status (Permanent / Outsource)",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
-                            ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: Color(0xFFF04438),
-                                  fontSize: 12),
+                            SizedBox(
+                              height: 44,
+                              child: TextFormField(
+                                onTap: () {},
+                                decoration: const InputDecoration(
+                                  suffixIcon:
+                                      Icon(Icons.calendar_today_outlined),
+                                  hintText: "Tanggal Masuk",
+                                  border: OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Color(0xFF98A2B3)),
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(9),
+                                          right: Radius.circular(9))),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: 48,
-                          child: DropdownButtonFormField(
-                            isExpanded: true,
-                            hint: Text('Status (Permanent / Outsource)'),
-                            decoration: const InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.horizontal(
-                                      left: Radius.circular(9),
-                                      right: Radius.circular(9))),
-                            ),
-                            items: ["Permanent", "Outsource", "Magang"]
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (value) {},
-                          ),
+                          height: 25,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Wrap(
-                      runSpacing: 5,
-                      children: [
-                        Row(
+                        Wrap(
+                          runSpacing: 5,
                           children: [
-                            Text(
-                              "Tanda Tangan",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600, fontSize: 12),
+                            Row(
+                              children: [
+                                Text(
+                                  "Status (Permanent / Outsource)",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                ),
+                                Text(
+                                  "*",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFFF04438),
+                                      fontSize: 12),
+                                ),
+                              ],
                             ),
-                            Text(
-                              "*",
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color(0xFFF04438),
-                                  fontSize: 12),
+                            SizedBox(
+                              height: 44,
+                              child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: const Text(
+                                    'Status (Permanent / Outsource)'),
+                                decoration: const InputDecoration(
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.horizontal(
+                                          left: Radius.circular(9),
+                                          right: Radius.circular(9))),
+                                ),
+                                items: [
+                                  "Permanent",
+                                  "Outsource",
+                                  "Magang"
+                                ].map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {},
+                              ),
                             ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 25,
+                        ),
+                        Wrap(
+                          runSpacing: 5,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  "Tanda Tangan",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 12),
+                                ),
+                                Text(
+                                  "*",
+                                  style: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xFFF04438),
+                                      fontSize: 12),
+                                ),
+                              ],
+                            ),
+                            // TabBar(
+                            //   tabs: [Text("uiii"), Text("uiiixxx")],
+                            // ),
+                            _signatureCanvas
                           ],
                         ),
                       ],
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        )
-      ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

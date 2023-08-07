@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/views/widgets/login/dialogreg.dart';
 
@@ -23,7 +24,7 @@ class _FormWidgetState extends State<FormWidget> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return const DialogWidget();
+        return const DialogRegWidget();
       },
     );
   }
@@ -79,6 +80,8 @@ class _FormWidgetState extends State<FormWidget> {
                     ),
                   ),
                   TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     controller: ted1,
                     decoration: InputDecoration(
                       suffixIcon: errorSuff1 == ""
@@ -203,7 +206,9 @@ class _FormWidgetState extends State<FormWidget> {
                                 fontSize: 14,
                                 color: const Color(0xFF344054))),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            // DialogRegWidget();
+                          },
                           child: Text(
                             " Atur ulang",
                             style: GoogleFonts.inter(
