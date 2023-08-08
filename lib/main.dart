@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wmsflutter/views/screens/login_screen.dart';
-import 'package:wmsflutter/views/widgets/drawer_widget.dart';
+import 'package:wmsflutter/widgets/drawer.dart';
 import 'package:wmsflutter/views/screens/splash_screen.dart';
 import 'views/screens/home_screen.dart';
 

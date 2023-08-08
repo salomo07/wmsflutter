@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wmsflutter/views/widgets/login/dialogreg.dart';
+import 'package:wmsflutter/widgets/customDialog.dart';
+import 'package:wmsflutter/widgets/login/dialogreg.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -19,12 +20,12 @@ class _FormWidgetState extends State<FormWidget> {
   String errorSuff1 = "";
   String errorSuff2 = "";
 
-  Future<void> _showMyDialog(context) async {
+  Future<void> _showMyDialog(context, Widget widget) async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return const DialogRegWidget();
+        return widget;
       },
     );
   }
@@ -151,7 +152,14 @@ class _FormWidgetState extends State<FormWidget> {
                             setState(() {
                               errorSuff2 = "Data tidak boleh ada yang kosong";
                             });
-                          } else {}
+                          } else {
+                            setState(() {
+                              errorSuff1 =
+                                  "Kombinasi NIK dan Kata Sandi tidak sesuai";
+                              errorSuff2 =
+                                  "Kombinasi NIK dan Kata Sandi tidak sesuai";
+                            });
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -171,7 +179,16 @@ class _FormWidgetState extends State<FormWidget> {
                     height: 40,
                     child: ElevatedButton(
                         onPressed: () {
-                          _showMyDialog(context);
+                          _showMyDialog(
+                              context,
+                              CustomDialogWidget(
+                                title: "Kata Sandi Kadaluarsa",
+                                desc:
+                                    "Lakukan pembaruan kata sandi untuk dapat melanjutkan",
+                                isUrl: false,
+                                txtButton: "Perbarui Sekarang",
+                                url: 'assets/images/dialogexpired.svg',
+                              ));
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

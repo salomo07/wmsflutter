@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../bloc/photo/photo_bloc.dart';
+import '../bloc/photo/photo_bloc.dart';
 
 class ImageSliderWidget extends StatelessWidget {
   const ImageSliderWidget({super.key});
@@ -13,7 +13,7 @@ class ImageSliderWidget extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         } else if (state is PhotoDone) {
           return Container(
-            color: Color(0xfffff5ec),
+            color: const Color(0xfffff5ec),
             child: ListView(
               children: List.generate(state.photo.photos.length, (index) {
                 return Card(

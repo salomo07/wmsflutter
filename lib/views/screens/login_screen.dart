@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/config/responsive.dart';
-import 'package:wmsflutter/views/widgets/login/formloginwidget.dart';
+import 'package:wmsflutter/widgets/login/formloginwidget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -38,8 +38,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           Positioned(
                             left: 0,
                             top: 25,
-                            // bottom: 0,
-                            // bottom: -20,
                             child: SizedBox(
                               height: 700,
                               width: 786,

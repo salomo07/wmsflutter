@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wmsflutter/bloc/book/book_bloc.dart';
-import 'package:wmsflutter/bloc/photo/photo_bloc.dart';
 import 'package:wmsflutter/config/responsive.dart';
-import 'package:wmsflutter/views/widgets/home_imageslide_widget.dart';
-import 'package:wmsflutter/views/widgets/plutogridauto_widget.dart';
-import 'package:wmsflutter/views/widgets/table_user_widget.dart';
-import 'package:wmsflutter/views/widgets/drawer_widget.dart';
-import '../widgets/bottom_navbar_widget.dart';
+import 'package:wmsflutter/widgets/home_imageslide.dart';
+import 'package:wmsflutter/widgets/plutogridauto_widget.dart';
+import 'package:wmsflutter/widgets/drawer.dart';
+import '../../widgets/bottom_navbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
