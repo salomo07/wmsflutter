@@ -45,7 +45,7 @@ class CustomDialogWidget extends StatelessWidget {
                     Container(
                       height: (height - (margin * 2)) / 2,
                       width: width - margin,
-                      color: Colors.blueAccent,
+                      // color: Colors.blueAccent,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -59,15 +59,10 @@ class CustomDialogWidget extends StatelessWidget {
                               style: GoogleFonts.inter(
                                   fontWeight: FontWeight.w400, fontSize: 14)),
                           CustomButtonWidget(
-                            color: const Color(0xFFFFDD00),
-                            child: Text(txtButton),
+                            text: "Perbaharui Sekarang",
+                            color: 0xFFFFDD00,
+                            onPressedFunc: () => {print("pressed")},
                           ),
-                          // ),
-                          // ElevatedButton(
-                          //     style: ElevatedButton.styleFrom(
-                          //         backgroundColor: Color(0xFFFFDD00)),
-                          //     onPressed: () {},
-                          //     child: Text(txtButton))
                         ],
                       ),
                     )
