@@ -30,19 +30,19 @@ class CustomDialogWidget extends StatelessWidget {
         child: Stack(
           children: [
             Padding(
-              padding: EdgeInsets.all(margin!),
+              padding: EdgeInsets.all(margin),
               child: InteractiveViewer(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Container(
+                    SizedBox(
                       height: (height - (margin * 2)) / 2,
                       width: width - margin,
                       child: isUrl
                           ? SvgPicture.network(url, fit: BoxFit.fill)
-                          : SvgPicture.asset(url, fit: BoxFit.fill),
+                          : SvgPicture.asset(url),
                     ),
-                    Container(
+                    SizedBox(
                       height: (height - (margin * 2)) / 2,
                       width: width - margin,
                       // color: Colors.blueAccent,

@@ -30,6 +30,20 @@ class _FormWidgetState extends State<FormWidget> {
     );
   }
 
+  Widget notifpassexpired = CustomDialogWidget(
+    title: "Kata Sandi Kadaluarsa",
+    desc: "Lakukan pembaruan kata sandi untuk dapat melanjutkan",
+    isUrl: false,
+    txtButton: "Perbarui Sekarang",
+    url: 'assets/images/dialogexpired.svg',
+  );
+  Widget notifsuccessreg = CustomDialogWidget(
+    title: "Data Berhasil Terkirim!",
+    desc: "Selanjutnya data kamu akan diverifikasi oleh admin",
+    isUrl: false,
+    txtButton: "Oke",
+    url: 'assets/images/dialogsuccessreg.svg',
+  );
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -179,16 +193,9 @@ class _FormWidgetState extends State<FormWidget> {
                     height: 40,
                     child: ElevatedButton(
                         onPressed: () {
-                          _showMyDialog(
-                              context,
-                              CustomDialogWidget(
-                                title: "Kata Sandi Kadaluarsa",
-                                desc:
-                                    "Lakukan pembaruan kata sandi untuk dapat melanjutkan",
-                                isUrl: false,
-                                txtButton: "Perbarui Sekarang",
-                                url: 'assets/images/dialogexpired.svg',
-                              ));
+                          _showMyDialog(context, DialogRegWidget());
+
+                          // _showMyDialog(context, notifpassexpired);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

@@ -2,24 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:signature/signature.dart';
-
-final SignatureController _controller = SignatureController(
-  penStrokeWidth: 5,
-  penColor: Colors.red,
-  exportBackgroundColor: Colors.blue,
-);
-
-// INITIALIZE. RESULT IS A WIDGET, SO IT CAN BE DIRECTLY USED IN BUILD METHOD
-var _signatureCanvas = Signature(
-  controller: SignatureController(
-    penStrokeWidth: 5,
-    penColor: Colors.red,
-    exportBackgroundColor: Colors.blue,
-  ),
-  width: 380,
-  height: 216,
-  backgroundColor: Colors.lightBlueAccent,
-);
+import 'package:wmsflutter/widgets/customDropdown.dart';
+import 'package:wmsflutter/widgets/customLabel.dart';
+import 'package:wmsflutter/widgets/customTextFormField.dart';
+import 'package:wmsflutter/widgets/tabsignature.dart';
 
 class DialogRegWidget extends StatefulWidget {
   const DialogRegWidget({
@@ -66,27 +52,25 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
           children: [
             Padding(
               padding: const EdgeInsets.all(32),
-              child: InteractiveViewer(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      width: double.infinity,
-                      height: 65,
-                      child: titleDialog(),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 65,
+                    child: titleDialog(),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const formregistrasiWidget(),
+                  Expanded(
+                    child: Container(
+                      height: 40,
+                      width: 792,
+                      color: Colors.amberAccent,
                     ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    const formregistrasiWidget(),
-                    Expanded(
-                      child: Container(
-                        height: 40,
-                        width: 792,
-                        color: Colors.amberAccent,
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
             Positioned(
@@ -121,17 +105,16 @@ class formregistrasiWidget extends StatelessWidget {
     return SizedBox(
       width: 792,
       height: 416,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Wrap(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 386,
-                    height: 416,
+      child: Wrap(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 386,
+                  height: 416,
+                  child: SingleChildScrollView(
                     child: Column(
                       children: [
                         Wrap(
@@ -139,41 +122,17 @@ class formregistrasiWidget extends StatelessWidget {
                           children: [
                             SizedBox(
                               height: 18,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "NIK",
-                                    style: GoogleFonts.inter(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    "*",
-                                    style: GoogleFonts.inter(
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color(0xFFF04438),
-                                        fontSize: 12),
-                                  ),
-                                ],
+                              child: CustomLabelWidget(
+                                isMandatory: true,
+                                fontSize: 12,
+                                text: "NIK",
                               ),
                             ),
-                            SizedBox(
-                              height: 44,
-                              child: TextFormField(
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly
-                                ],
-                                decoration: const InputDecoration(
-                                  hintText: "NIK",
-                                  border: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Color(0xFF98A2B3)),
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(9),
-                                          right: Radius.circular(9))),
-                                ),
-                              ),
+                            CustomTextFormFieldWidget(
+                              // heightField: 44,
+                              inputType: TextInputType.number,
+                              hint: "NIK",
+                              fontSize: 14,
                             ),
                           ],
                         ),
@@ -183,36 +142,16 @@ class formregistrasiWidget extends StatelessWidget {
                         Wrap(
                           runSpacing: 5,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Nama",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  "*",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFFF04438),
-                                      fontSize: 12),
-                                ),
-                              ],
+                            CustomLabelWidget(
+                              isMandatory: true,
+                              fontSize: 12,
+                              text: "Nama",
                             ),
-                            SizedBox(
-                              height: 44,
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  hintText: "Nama",
-                                  border: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Color(0xFF98A2B3)),
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(9),
-                                          right: Radius.circular(9))),
-                                ),
-                              ),
+                            CustomTextFormFieldWidget(
+                              heightField: 44,
+                              // inputType: TextInputType.number,
+                              hint: "Nama",
+                              fontSize: 14,
                             ),
                           ],
                         ),
@@ -239,73 +178,26 @@ class formregistrasiWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 44,
-                              child: TextFormField(
-                                decoration: const InputDecoration(
-                                  hintText: "Email",
-                                  border: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Color(0xFF98A2B3)),
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(9),
-                                          right: Radius.circular(9))),
-                                ),
-                              ),
+                            CustomTextFormFieldWidget(
+                              hint: "Email",
+                              inputType: TextInputType.emailAddress,
                             ),
                           ],
                         ),
                         const SizedBox(
-                          height: 0,
+                          height: 25,
                         ),
                         Wrap(
                           runSpacing: 5,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Jabatan",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  "*",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFFF04438),
-                                      fontSize: 12),
-                                ),
-                              ],
+                            CustomLabelWidget(
+                              text: "Jabatan",
+                              isMandatory: true,
+                              fontSize: 12,
                             ),
-                            SizedBox(
-                              height: 54,
-                              child: DropdownButtonFormField(
-                                isExpanded: true,
-                                hint: Text(
-                                  'Jabatan',
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                                decoration: const InputDecoration(
-                                  suffixIcon:
-                                      Icon(Icons.keyboard_arrow_down_outlined),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(9),
-                                          right: Radius.circular(9))),
-                                ),
-                                items: [
-                                  "Kurir",
-                                  "Sales",
-                                  "Sekuriti"
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {},
-                              ),
+                            CustomDropdownWidget(
+                              datas: ["Kurir", "Sales", "Sekuriti"],
+                              hint: "Jabatan",
                             ),
                           ],
                         ),
@@ -315,167 +207,41 @@ class formregistrasiWidget extends StatelessWidget {
                         Wrap(
                           runSpacing: 5,
                           children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Department",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  "*",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFFF04438),
-                                      fontSize: 12),
-                                ),
-                              ],
+                            CustomLabelWidget(
+                              text: "Department",
+                              isMandatory: true,
                             ),
-                            SizedBox(
-                              height: 44,
-                              child: DropdownButtonFormField(
-                                isExpanded: true,
-                                hint: const Text('Department'),
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(9),
-                                          right: Radius.circular(9))),
-                                ),
-                                items: [
-                                  "Kurir",
-                                  "Sales",
-                                  "Sekuriti"
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {},
-                              ),
-                            ),
+                            CustomDropdownWidget(
+                                datas: ["Kurir", "Sales", "Sekuriti"],
+                                hint: "Department"),
                           ],
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Column(
-                children: [
-                  Container(
-                    width: 386,
-                    height: 416,
-                    color: Colors.white30,
-                    child: Column(
-                      children: [
-                        Wrap(
-                          runSpacing: 5,
-                          children: [
-                            SizedBox(
-                              height: 18,
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Tanggal Masuk",
-                                    style: GoogleFonts.inter(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12),
-                                  ),
-                                  Text(
-                                    "*",
-                                    style: GoogleFonts.inter(
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color(0xFFF04438),
-                                        fontSize: 12),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 44,
-                              child: TextFormField(
-                                onTap: () {},
-                                decoration: const InputDecoration(
-                                  suffixIcon:
-                                      Icon(Icons.calendar_today_outlined),
-                                  hintText: "Tanggal Masuk",
-                                  border: OutlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Color(0xFF98A2B3)),
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(9),
-                                          right: Radius.circular(9))),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Wrap(
-                          runSpacing: 5,
-                          children: [
-                            Row(
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: Column(
+              children: [
+                Container(
+                  width: 386,
+                  height: 416,
+                  color: Colors.white30,
+                  child: Column(
+                    children: [
+                      Wrap(
+                        runSpacing: 5,
+                        children: [
+                          SizedBox(
+                            height: 18,
+                            child: Row(
                               children: [
                                 Text(
-                                  "Status (Permanent / Outsource)",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 12),
-                                ),
-                                Text(
-                                  "*",
-                                  style: GoogleFonts.inter(
-                                      fontWeight: FontWeight.w600,
-                                      color: Color(0xFFF04438),
-                                      fontSize: 12),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 44,
-                              child: DropdownButtonFormField(
-                                isExpanded: true,
-                                hint: const Text(
-                                    'Status (Permanent / Outsource)'),
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.horizontal(
-                                          left: Radius.circular(9),
-                                          right: Radius.circular(9))),
-                                ),
-                                items: [
-                                  "Permanent",
-                                  "Outsource",
-                                  "Magang"
-                                ].map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                }).toList(),
-                                onChanged: (value) {},
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Wrap(
-                          runSpacing: 5,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Tanda Tangan",
+                                  "Tanggal Masuk",
                                   style: GoogleFonts.inter(
                                       fontWeight: FontWeight.w600,
                                       fontSize: 12),
@@ -489,20 +255,109 @@ class formregistrasiWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            // TabBar(
-                            //   tabs: [Text("uiii"), Text("uiiixxx")],
-                            // ),
-                            _signatureCanvas
-                          ],
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+                          ),
+                          SizedBox(
+                            height: 44,
+                            child: TextFormField(
+                              onTap: () {},
+                              decoration: const InputDecoration(
+                                suffixIcon: Icon(Icons.calendar_today_outlined),
+                                hintText: "Tanggal Masuk",
+                                border: OutlineInputBorder(
+                                    borderSide:
+                                        BorderSide(color: Color(0xFF98A2B3)),
+                                    borderRadius: BorderRadius.horizontal(
+                                        left: Radius.circular(9),
+                                        right: Radius.circular(9))),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Wrap(
+                        runSpacing: 5,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Status (Permanent / Outsource)",
+                                style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600, fontSize: 12),
+                              ),
+                              Text(
+                                "*",
+                                style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600,
+                                    color: Color(0xFFF04438),
+                                    fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 44,
+                            child: DropdownButtonFormField(
+                              isExpanded: true,
+                              hint:
+                                  const Text('Status (Permanent / Outsource)'),
+                              decoration: const InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.horizontal(
+                                        left: Radius.circular(9),
+                                        right: Radius.circular(9))),
+                              ),
+                              items: [
+                                "Permanent",
+                                "Outsource",
+                                "Magang"
+                              ].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (value) {},
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Wrap(
+                        runSpacing: 5,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                "Tanda Tangan",
+                                style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600, fontSize: 12),
+                              ),
+                              Text(
+                                "*",
+                                style: GoogleFonts.inter(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xFFF04438),
+                                    fontSize: 12),
+                              ),
+                            ],
+                          ),
+                          // TabBar(
+                          //   tabs: [Text("uiii"), Text("uiiixxx")],
+                          // ),
+                          TabSignatureWidget(),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
