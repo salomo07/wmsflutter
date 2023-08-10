@@ -60,8 +60,8 @@ class CustomDialogWidget extends StatelessWidget {
                                   fontWeight: FontWeight.w400, fontSize: 14)),
                           CustomButtonWidget(
                             text: "Perbaharui Sekarang",
-                            color: 0xFFFFDD00,
-                            onPressedFunc: () => {print("pressed")},
+                            colorButton: 0xFFFFDD00,
+                            onPressed: () => {print("pressed")},
                           ),
                         ],
                       ),
