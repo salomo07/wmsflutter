@@ -209,6 +209,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                               ),
                             ),
                             CustomTextFormFieldWidget(
+                              controller: TextEditingController(),
                               inputType: TextInputType.number,
                               hint: "NIK",
                               fontSize: 14,
@@ -227,6 +228,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                               text: "Nama",
                             ),
                             CustomTextFormFieldWidget(
+                              controller: TextEditingController(),
                               heightField: 44,
                               // inputType: TextInputType.number,
                               hint: "Nama",
@@ -245,6 +247,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                               isMandatory: true,
                             ),
                             CustomTextFormFieldWidget(
+                              controller: TextEditingController(),
                               hint: "Email",
                               inputType: TextInputType.emailAddress,
                             ),

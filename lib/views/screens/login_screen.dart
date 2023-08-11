@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/config/responsive.dart';
-import 'package:wmsflutter/widgets/login/formloginwidget.dart';
 
+import '../../utils/routes.gr.dart';
+
+@RoutePage()
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
@@ -89,7 +92,18 @@ class _LoginScreenState extends State<LoginScreen> {
             left: Responsive.isDesktop(context) ? null : 40,
             right: 40,
             bottom: 60,
-            child: const FormWidget(),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: 500,
+              child: AutoTabsRouter(
+                routes: [FormWidget(), FormResetPasswordWidget()],
+                builder: (context, child) {
+                  // print(child);
+                  return child;
+                },
+              ),
+            ),
+            // child: FormResetPasswordWidget(),
           )
         ],
       ),

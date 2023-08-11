@@ -7,23 +7,36 @@ class CustomLabelWidget extends StatelessWidget {
       {super.key,
       this.isMandatory = false,
       this.text = "Label",
-      this.fontSize = 12});
+      this.fontSize = 12,
+      this.fontWeight = FontWeight.w400,
+      this.align = TextAlign.center,
+      this.color = 0xFF344054});
+
   bool isMandatory;
   String text;
   double fontSize;
+  FontWeight fontWeight;
+  TextAlign align;
+  int color;
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          text,
-          style: GoogleFonts.inter(
-              fontWeight: FontWeight.w600, fontSize: fontSize),
+        Flexible(
+          child: Text(
+            textAlign: align,
+            text,
+            style: GoogleFonts.inter(
+                fontWeight: fontWeight,
+                fontSize: fontSize,
+                color: Color(color)),
+          ),
         ),
         Text(
           isMandatory ? "*" : "",
           style: GoogleFonts.inter(
-              fontWeight: FontWeight.w600,
+              fontWeight: fontWeight,
               color: const Color(0xFFF04438),
               fontSize: 12),
         ),

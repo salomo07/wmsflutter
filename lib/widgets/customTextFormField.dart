@@ -11,14 +11,19 @@ class CustomTextFormFieldWidget extends StatelessWidget {
       this.inputType = TextInputType.text,
       this.controller,
       this.suffixIcon,
-      this.onTap});
+      this.onTap,
+      this.suffixOnTap,
+      this.hide = false,
+      this.errorText});
 
+  bool? hide;
   double fontSize, heightField;
-  String hint;
+  String? hint, errorText;
   TextInputType inputType;
   TextEditingController? controller;
   IconData? suffixIcon;
   Function()? onTap;
+  Function()? suffixOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -35,14 +40,16 @@ class CustomTextFormFieldWidget extends StatelessWidget {
         },
         onTap: onTap,
         controller: controller,
+        obscureText: hide!,
         keyboardType: inputType,
         inputFormatters: inputType == TextInputType.number
             ? [FilteringTextInputFormatter.digitsOnly]
             : null,
         style: TextStyle(fontSize: fontSize),
         decoration: InputDecoration(
+          errorText: errorText ?? null,
           hintText: hint,
-          suffixIcon: Icon(suffixIcon),
+          suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
           border: const OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xFF98A2B3)),
               borderRadius: BorderRadius.horizontal(

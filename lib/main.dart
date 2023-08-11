@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wmsflutter/utils/routes.dart';
 import 'package:wmsflutter/views/screens/login_screen.dart';
 import 'package:wmsflutter/widgets/drawer.dart';
 import 'package:wmsflutter/views/screens/splash_screen.dart';
@@ -13,24 +14,28 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
   // String? appname="Indomaret";
   // if(dotenv.env['APP_NAME']!=null){appname=dotenv.env['APP_NAME'];}
+  final _appRouter = AppRouter();
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-        create: (context) => NavigationProvider(),
-        child: MaterialApp(
-          title: "Ini App",
-          home: Scaffold(
-            backgroundColor: Colors.white,
-            body: FutureBuilder(
-              future: Future.delayed(Duration(seconds: 0)),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SplashScreen();
-                } else {
-                  return const LoginScreen();
-                }
-              },
-            ),
-          ),
-        ),
+      create: (context) => NavigationProvider(),
+      child: MaterialApp.router(
+        routerConfig: _appRouter.config(),
+      )
+      // MaterialApp(
+      //   title: "Ini App",
+      //   home: Scaffold(
+      //     backgroundColor: Colors.white,
+      //     body: FutureBuilder(
+      //       future: Future.delayed(Duration(seconds: 0)),
+      //       builder: (context, snapshot) {
+      //         if (snapshot.connectionState == ConnectionState.waiting) {
+      //           return const SplashScreen();
+      //         } else {
+      //           return const LoginScreen();
+      //         }
+      //       },
+      //     ),
+      //   ),
+      // ),
       );
 }
