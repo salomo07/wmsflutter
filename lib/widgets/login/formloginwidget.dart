@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/widgets/customDialog.dart';
 import 'package:wmsflutter/widgets/login/dialogreg.dart';
+import 'package:wmsflutter/widgets/login/resetpassword.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({
@@ -193,7 +194,8 @@ class _FormWidgetState extends State<FormWidget> {
                     height: 40,
                     child: ElevatedButton(
                         onPressed: () {
-                          _showMyDialog(context, DialogRegWidget());
+                          // _showMyDialog(context, DialogRegWidget());
+                          _showMyDialog(context, ResetPasswordWidget());
 
                           // _showMyDialog(context, notifpassexpired);
                         },

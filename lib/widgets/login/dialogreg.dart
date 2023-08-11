@@ -51,7 +51,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
     exportBackgroundColor: Color(0xFFededed),
   );
 
-  bool isValid = false;
+  bool isValid = true;
   TextEditingController _dateController = TextEditingController();
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
