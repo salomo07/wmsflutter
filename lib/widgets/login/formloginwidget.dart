@@ -62,6 +62,7 @@ class _FormLoginState extends State<FormLogin> {
     txtButton: "Oke",
     url: 'images/dialog/successreg.svg',
   );
+
   @override
   Widget build(BuildContext context) {
     final tabsRouter = AutoTabsRouter.of(context);
