@@ -21,12 +21,13 @@ dependencies:
   carousel_slider: ^4.2.1
   signature: ^5.4.0
   auto_route: ^7.8.0
-  auto_route_generator: ^7.3.0
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  auto_route_generator: ^7.3.0
   flutter_lints: ^2.0.0
   build_runner: ^2.4.6
 
@@ -42,4 +43,5 @@ flutter:
   assets:
     - assets/logos/
     - assets/images/
+    - assets/images/background/
 

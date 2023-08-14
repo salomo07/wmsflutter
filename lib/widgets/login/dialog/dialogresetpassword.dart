@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wmsflutter/widgets/customButton.dart';
-import 'package:wmsflutter/widgets/customLabel.dart';
-import 'package:wmsflutter/widgets/customTextFormField.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseLabel.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseTextFormField.dart';
 
 class ResetPasswordWidget extends StatefulWidget {
   const ResetPasswordWidget({super.key});
@@ -38,7 +38,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                         children: [
                           Align(
                               alignment: Alignment.topLeft,
-                              child: CustomLabelWidget(
+                              child: ReuseLabelWidget(
                                   text: "Kata Sandi Baru",
                                   fontSize: 30,
                                   fontWeight: FontWeight.w600)),
@@ -47,7 +47,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           ),
                           Align(
                             alignment: Alignment.centerLeft,
-                            child: CustomLabelWidget(
+                            child: ReuseLabelWidget(
                                 text:
                                     "Silahkan atur ulang kata sandi baru anda",
                                 fontSize: 16,
@@ -60,7 +60,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                       ),
                       Column(
                         children: [
-                          CustomLabelWidget(
+                          ReuseLabelWidget(
                             isMandatory: false,
                             text: "Kata Sandi Baru",
                             fontWeight: FontWeight.w600,
@@ -69,7 +69,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           SizedBox(
                             height: 5,
                           ),
-                          CustomTextFormFieldWidget(
+                          ReuseTextFormFieldWidget(
                             hint: "Kata Sandi",
                             hide: hide,
                             controller: edController1,
@@ -86,7 +86,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           SizedBox(
                             height: 20,
                           ),
-                          CustomLabelWidget(
+                          ReuseLabelWidget(
                             isMandatory: false,
                             text: "Konfirmasi Kata Sandi Baru",
                             fontWeight: FontWeight.w600,
@@ -95,7 +95,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           SizedBox(
                             height: 5,
                           ),
-                          CustomTextFormFieldWidget(
+                          ReuseTextFormFieldWidget(
                             hint: "Kata Sandi",
                             hide: hide2,
                             controller: edController1,
@@ -112,7 +112,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           SizedBox(
                             height: 15,
                           ),
-                          CustomLabelWidget(
+                          ReuseLabelWidget(
                               text:
                                   "*Kata sandi yang dimasukan minimal harus 8 karakter dan kombinasi huruf kapital, Angka dan Spesial karakter",
                               fontWeight: FontWeight.w400,
@@ -121,7 +121,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           SizedBox(
                             height: 25,
                           ),
-                          CustomButtonWidget(
+                          ReuseButtonWidget(
                             text: "Simpan",
                             colorButton: 0xFFFFDD00,
                             onPressed: () {},

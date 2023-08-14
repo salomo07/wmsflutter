@@ -2,21 +2,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wmsflutter/widgets/customDialog.dart';
 import 'package:wmsflutter/widgets/login/dialog/dialogreg.dart';
-import 'package:wmsflutter/widgets/login/dialog/dialogresetpassword.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseDialog.dart';
 
 @RoutePage()
-class FormWidget extends StatefulWidget {
-  const FormWidget({
+class FormLogin extends StatefulWidget {
+  const FormLogin({
     super.key,
   });
 
   @override
-  State<FormWidget> createState() => _FormWidgetState();
+  State<FormLogin> createState() => _FormLoginState();
 }
 
-class _FormWidgetState extends State<FormWidget> {
+class _FormLoginState extends State<FormLogin> {
   bool hide = true;
   TextEditingController ted1 = TextEditingController();
   TextEditingController ted2 = TextEditingController();
@@ -33,19 +32,35 @@ class _FormWidgetState extends State<FormWidget> {
     );
   }
 
-  Widget notifpassexpired = CustomDialogWidget(
+  Widget notifpassexpired = ReuseDialogWidget(
     title: "Kata Sandi Kadaluarsa",
     desc: "Lakukan pembaruan kata sandi untuk dapat melanjutkan",
     isUrl: false,
     txtButton: "Perbarui Sekarang",
     url: 'assets/images/dialogexpired.svg',
   );
-  Widget notifsuccessreg = CustomDialogWidget(
+  Widget notifsuccessreg = ReuseDialogWidget(
     title: "Data Berhasil Terkirim!",
     desc: "Selanjutnya data kamu akan diverifikasi oleh admin",
     isUrl: false,
     txtButton: "Oke",
-    url: 'assets/images/dialogsuccessreg.svg',
+    url: 'images/dialog/successreg.svg',
+  );
+  Widget notiffailsreg = ReuseDialogWidget(
+    title: "Maaf, Terjadi Kesalahan",
+    desc:
+        "Request yang kamu lakukan gagal, mohon untuk mencoba beberapa saat lagi",
+    isUrl: false,
+    txtButton: "Oke",
+    url: 'images/dialog/notifgagal.svg',
+  );
+  Widget successsendlink = ReuseDialogWidget(
+    title: "Tautan pemulihan berhasil terkirim",
+    desc:
+        "Kami telah mengirim tautan pemulihan kata sandi ke email moro.pangestu@adira.co.id",
+    isUrl: false,
+    txtButton: "Oke",
+    url: 'images/dialog/successreg.svg',
   );
   @override
   Widget build(BuildContext context) {
@@ -199,7 +214,7 @@ class _FormWidgetState extends State<FormWidget> {
                       child: ElevatedButton(
                           onPressed: () {
                             // _showMyDialog(context, DialogRegWidget());
-                            _showMyDialog(context, DialogRegWidget());
+                            _showMyDialog(context, notiffailsreg);
 
                             // _showMyDialog(context, notifpassexpired);
                           },

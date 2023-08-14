@@ -87,24 +87,41 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 )
               : const Center(),
-          Positioned(
-            top: 60,
-            left: Responsive.isDesktop(context) ? null : 40,
-            right: 40,
-            bottom: 60,
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: 500,
-              child: AutoTabsRouter(
-                routes: [FormWidget(), FormResetPasswordWidget()],
-                builder: (context, child) {
-                  // print(child);
-                  return child;
-                },
-              ),
-            ),
-            // child: FormResetPasswordWidget(),
-          )
+          !Responsive.isDesktop(context)
+              ? Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      width: 470,
+                      child: AutoTabsRouter(
+                        routes: [FormLogin(), FormResetPasswordWidget()],
+                        builder: (context, child) {
+                          // print(child);
+                          return child;
+                        },
+                      ),
+                    ),
+                  ),
+                )
+              : Positioned(
+                  top: 60,
+                  left: null,
+                  right: 40,
+                  bottom: 60,
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    width: 470,
+                    child: AutoTabsRouter(
+                      routes: [FormLogin(), FormResetPasswordWidget()],
+                      builder: (context, child) {
+                        // print(child);
+                        return child;
+                      },
+                    ),
+                  ),
+                  // child: FormResetPasswordWidget(),
+                )
         ],
       ),
     );

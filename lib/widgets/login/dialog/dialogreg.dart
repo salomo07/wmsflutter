@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:signature/signature.dart';
-import 'package:wmsflutter/widgets/customButton.dart';
-import 'package:wmsflutter/widgets/customDropdown.dart';
-import 'package:wmsflutter/widgets/customLabel.dart';
-import 'package:wmsflutter/widgets/customTextFormField.dart';
 import 'package:wmsflutter/widgets/login/tabsignature.dart';
 import 'package:intl/intl.dart';
+
+import '../../reuseable/ReuseButton.dart';
+import '../../reuseable/ReuseDropdown.dart';
+import '../../reuseable/ReuseLabel.dart';
+import '../../reuseable/ReuseTextFormField.dart';
 
 class DialogRegWidget extends StatefulWidget {
   const DialogRegWidget({
@@ -122,7 +123,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                             children: [
                               Expanded(
                                 flex: 5,
-                                child: CustomButtonWidget(
+                                child: ReuseButtonWidget(
                                   colorButton: 0xFFFFFFFF,
                                   onPressed: () {
                                     print("Batal");
@@ -139,14 +140,14 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                               Expanded(
                                 flex: 5,
                                 child: !isValid
-                                    ? CustomButtonWidget(
+                                    ? ReuseButtonWidget(
                                         onPressed: () {},
                                         colorTxt: 0xFF98A2B3,
                                         colorButton: 0xFFF2F4F7,
                                         colorBorder: 0xFF98A2B3,
                                         text: "Daftar Sekarang",
                                       )
-                                    : CustomButtonWidget(
+                                    : ReuseButtonWidget(
                                         onPressed: () {},
                                         colorTxt: 0xFF344054,
                                         colorButton: 0xFFFFDD00,
@@ -202,13 +203,13 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                           children: [
                             SizedBox(
                               height: 18,
-                              child: CustomLabelWidget(
+                              child: ReuseLabelWidget(
                                 isMandatory: true,
                                 fontSize: 12,
                                 text: "NIK",
                               ),
                             ),
-                            CustomTextFormFieldWidget(
+                            ReuseTextFormFieldWidget(
                               controller: TextEditingController(),
                               inputType: TextInputType.number,
                               hint: "NIK",
@@ -222,12 +223,12 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                         Wrap(
                           runSpacing: 5,
                           children: [
-                            CustomLabelWidget(
+                            ReuseLabelWidget(
                               isMandatory: true,
                               fontSize: 12,
                               text: "Nama",
                             ),
-                            CustomTextFormFieldWidget(
+                            ReuseTextFormFieldWidget(
                               controller: TextEditingController(),
                               heightField: 44,
                               // inputType: TextInputType.number,
@@ -242,11 +243,11 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                         Wrap(
                           runSpacing: 5,
                           children: [
-                            CustomLabelWidget(
+                            ReuseLabelWidget(
                               text: "Email",
                               isMandatory: true,
                             ),
-                            CustomTextFormFieldWidget(
+                            ReuseTextFormFieldWidget(
                               controller: TextEditingController(),
                               hint: "Email",
                               inputType: TextInputType.emailAddress,
@@ -259,12 +260,12 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                         Wrap(
                           runSpacing: 5,
                           children: [
-                            CustomLabelWidget(
+                            ReuseLabelWidget(
                               text: "Jabatan",
                               isMandatory: true,
                               fontSize: 12,
                             ),
-                            CustomDropdownWidget(
+                            ReuseDropdownWidget(
                               datas: ["Kurir", "Sales", "Sekuriti"],
                               hint: "Jabatan",
                             ),
@@ -276,11 +277,11 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                         Wrap(
                           runSpacing: 5,
                           children: [
-                            CustomLabelWidget(
+                            ReuseLabelWidget(
                               text: "Department",
                               isMandatory: true,
                             ),
-                            CustomDropdownWidget(
+                            ReuseDropdownWidget(
                                 datas: ["Kurir", "Sales", "Sekuriti"],
                                 hint: "Department"),
                           ],
@@ -307,12 +308,12 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                         children: [
                           SizedBox(
                             height: 18,
-                            child: CustomLabelWidget(
+                            child: ReuseLabelWidget(
                               text: "Tanggal Masuk",
                               isMandatory: true,
                             ),
                           ),
-                          CustomTextFormFieldWidget(
+                          ReuseTextFormFieldWidget(
                             controller: _dateController,
                             onTap: () => _selectDate(context),
                             hint: "Tanggal Masuk",
@@ -326,9 +327,9 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                       Wrap(
                         runSpacing: 5,
                         children: [
-                          CustomLabelWidget(
+                          ReuseLabelWidget(
                               text: "Status (Permanent / Outsource)"),
-                          CustomDropdownWidget(
+                          ReuseDropdownWidget(
                               datas: const ["Permanent", "Outsource", "Magang"],
                               hint: 'Status (Permanent / Outsource)'),
                         ],
@@ -339,7 +340,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                       Wrap(
                         runSpacing: 5,
                         children: [
-                          CustomLabelWidget(
+                          ReuseLabelWidget(
                             isMandatory: true,
                             text: "Tanda Tangan",
                           ),

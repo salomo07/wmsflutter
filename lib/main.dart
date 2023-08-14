@@ -4,7 +4,7 @@ import 'package:wmsflutter/utils/routes.dart';
 import 'package:wmsflutter/views/screens/login_screen.dart';
 import 'package:wmsflutter/widgets/drawer.dart';
 import 'package:wmsflutter/views/screens/splash_screen.dart';
-import 'views/screens/home_screen.dart';
+import 'views/screens/home_screenold.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (context) => NavigationProvider(),
       child: MaterialApp.router(
+        color: Colors.amberAccent,
         routerConfig: _appRouter.config(),
       )
       // MaterialApp(

@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:wmsflutter/config/configapp.dart';
 
 class BookService {
-  ConfigApp config = ConfigApp();
+  Config config = Config();
   String? urlEndPoint;
   Future<List<Book>> fetchBooks() async {
     final response = await http.post(

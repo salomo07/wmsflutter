@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wmsflutter/widgets/customButton.dart';
-import 'package:wmsflutter/widgets/customLabel.dart';
-import 'package:wmsflutter/widgets/customTextFormField.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseLabel.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseTextFormField.dart';
 import 'package:wmsflutter/widgets/login/formloginwidget.dart';
 
 @RoutePage()
@@ -16,7 +16,7 @@ class FormResetPasswordWidget extends StatefulWidget {
 }
 
 class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
-  bool emailIsExist = true;
+  bool emailIsExist = false;
   Widget? formSelected;
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
                 SizedBox(
                   height: 40,
                 ),
-                CustomLabelWidget(
+                ReuseLabelWidget(
                   fontWeight: FontWeight.w600,
                   fontSize: 12,
                   color: 0xFF344054,
@@ -70,7 +70,7 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
                 SizedBox(
                   height: 5,
                 ),
-                CustomTextFormFieldWidget(
+                ReuseTextFormFieldWidget(
                   controller: TextEditingController(),
                   hint: "Email",
                   inputType: TextInputType.emailAddress,
@@ -81,7 +81,7 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
                 SizedBox(
                   height: 40,
                 ),
-                CustomButtonWidget(
+                ReuseButtonWidget(
                   text: "Atur Ulang Kata Sandi",
                   colorButton: 0xFFFFDD00,
                   colorTxt: 0xFF344054,
