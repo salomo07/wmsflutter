@@ -60,8 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                       Text(
                                         "Ad1Soul - Aplikasi Manajemen Karyawan IT Directorate",
-                                        style: GoogleFonts.inter(
-                                            color: const Color(0xFF344054),
+                                        style: TextStyle(
+                                            color: Color(0xFF344054),
                                             fontSize: 20,
                                             fontWeight: FontWeight.w600),
                                       )

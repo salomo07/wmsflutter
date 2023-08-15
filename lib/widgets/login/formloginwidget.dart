@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/widgets/login/dialog/dialogreg.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseDialog.dart';
 
+import 'dialog/dialogresetpassword.dart';
+
 @RoutePage()
 class FormLogin extends StatefulWidget {
   const FormLogin({
@@ -215,9 +217,10 @@ class _FormLoginState extends State<FormLogin> {
                       child: ElevatedButton(
                           onPressed: () {
                             // _showMyDialog(context, DialogRegWidget());
-                            _showMyDialog(context, notiffailsreg);
-
+                            // _showMyDialog(context, notifsuccessreg);
                             // _showMyDialog(context, notifpassexpired);
+                            // _showMyDialog(context, notiffailsreg);
+                            _showMyDialog(context, ResetPasswordWidget());
                           },
                           style: ElevatedButton.styleFrom(
                             shape: RoundedRectangleBorder(
@@ -256,6 +259,7 @@ class _FormLoginState extends State<FormLogin> {
                             onTap: () {
                               print('Atur Ulang');
                               // DialogRegWidget();
+
                               tabsRouter.setActiveIndex(1);
                             },
                             child: Text(
