@@ -8,7 +8,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DrawerWidget();
+    return Scaffold(
+      appBar: AppBar(title: Text("Test"),),
+      drawer: Drawer(
+        child: DrawerWidget(),
+      ),
+    );
   }
 }
 
@@ -57,11 +62,13 @@ class DrawerWidget extends StatelessWidget {
                                   top: 3,
                                   child: Text(
                                     'Sign Inx',
-                                    style:GoogleFonts.dmSans(color: Color(0xFFA3AED0),
+                                    style: GoogleFonts.dmSans(
+                                      color: Color(0xFFA3AED0),
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500,
                                       height: 1.88,
-                                      letterSpacing: -0.32,) ,
+                                      letterSpacing: -0.32,
+                                    ),
                                   ),
                                 ),
                                 Positioned(
@@ -80,9 +87,7 @@ class DrawerWidget extends StatelessWidget {
                                           child: Container(
                                             width: 24,
                                             height: 24,
-                                            child: Stack(children: [
-                                            
-                                            ]),
+                                            child: Stack(children: []),
                                           ),
                                         ),
                                       ],
@@ -137,8 +142,7 @@ class DrawerWidget extends StatelessWidget {
                                     height: 24,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(),
-                                    child: Stack(children: [
-                                    ]),
+                                    child: Stack(children: []),
                                   ),
                                 ),
                                 Positioned(
@@ -189,8 +193,7 @@ class DrawerWidget extends StatelessWidget {
                                     height: 24,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(),
-                                    child: Stack(children: [
-                                    ]),
+                                    child: Stack(children: []),
                                   ),
                                 ),
                                 Positioned(
@@ -241,8 +244,7 @@ class DrawerWidget extends StatelessWidget {
                                     height: 28,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(),
-                                    child: Stack(children: [
-                                    ]),
+                                    child: Stack(children: []),
                                   ),
                                 ),
                                 Positioned(
@@ -293,8 +295,7 @@ class DrawerWidget extends StatelessWidget {
                                     height: 24,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(),
-                                    child: Stack(children: [
-                                    ]),
+                                    child: Stack(children: []),
                                   ),
                                 ),
                                 Positioned(
@@ -345,8 +346,7 @@ class DrawerWidget extends StatelessWidget {
                                     height: 24,
                                     clipBehavior: Clip.antiAlias,
                                     decoration: BoxDecoration(),
-                                    child: Stack(children: [
-                                    ]),
+                                    child: Stack(children: []),
                                   ),
                                 ),
                                 Positioned(
@@ -448,7 +448,8 @@ class DrawerWidget extends StatelessWidget {
                               colors: [Color(0xFF858CFF), Color(0xFF4318FF)],
                             ),
                             shape: OvalBorder(
-                              side: BorderSide(width: 2.50, color: Colors.white),
+                              side:
+                                  BorderSide(width: 2.50, color: Colors.white),
                             ),
                             shadows: [
                               BoxShadow(
