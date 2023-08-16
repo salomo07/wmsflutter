@@ -98,7 +98,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           ReuseTextFormFieldWidget(
                             hint: "Kata Sandi",
                             hide: hide2,
-                            controller: edController1,
+                            controller: edController2,
                             suffixIcon: hide2
                                 ? Icons.visibility_off_rounded
                                 : Icons.visibility,

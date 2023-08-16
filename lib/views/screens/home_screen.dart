@@ -1,22 +1,95 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wmsflutter/config/app_theme.dart';
 
 @RoutePage()
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  double sideBarWidth = 90;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Test"),),
+      appBar: AppBar(
+        title: Text("Test"),
+      ),
       drawer: Drawer(
         child: DrawerWidget(),
+      ),
+      body: Container(
+        color: AppThemeDark.background_all,
+        child: Row(
+          children: [
+            GestureDetector(
+              onHorizontalDragUpdate: (details) {
+                if (details.localPosition.dx > 89 &&
+                    details.localPosition.dx < 209) {
+                  setState(() {
+                    sideBarWidth = details.localPosition.dx;
+                  });
+                }
+              },
+              child: Container(
+                height: 774,
+                // width: 208,
+                width: sideBarWidth,
+                color: AppThemeDark.background_all,
+              ),
+            ),
+            Expanded(
+              child: Container(
+                color: AppThemeDark.background_expanded,
+              ),
+            ),
+            Container(
+              height: 774,
+              width: 317,
+              color: AppThemeDark.background_all,
+              child: Container(
+                // color: AppThemeDark.background_expanded,
+                child: Container(
+                  height: 32,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Color(0xFFFAFBFC),
+                  ),
+                  // child:
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
+// Row(
+//                     mainAxisAlignment: MainAxisAlignment.center,
+//                     children: [
+//                       Padding(
+//                         padding: EdgeInsets.only(left: 10, right: 10),
+//                         child: Icon(
+//                           Icons.dashboard_outlined,
+//                           color: AppThemeDark.menu_actived,
+//                           size: 24,
+//                         ),
+//                       ),
+//                       Text(
+//                         "Dashboard",
+//                         style: GoogleFonts.sora(
+//                           fontSize: 17,
+//                           color: AppThemeDark.menu_actived,
+//                         ),
+//                       )
+//                     ],
+//                   ),
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({
     super.key,

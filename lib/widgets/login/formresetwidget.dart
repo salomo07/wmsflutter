@@ -17,7 +17,7 @@ class FormResetPasswordWidget extends StatefulWidget {
 
 class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
   bool emailIsExist = false;
-  Widget? formSelected;
+
   @override
   Widget build(BuildContext context) {
     final tabsRouter = AutoTabsRouter.of(context);
