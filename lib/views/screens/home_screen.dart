@@ -12,35 +12,31 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  double sideBarWidth = 90;
+  double sideBarWidth = 50, widthStandart = 208;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Test"),
-      ),
-      drawer: Drawer(
-        child: DrawerWidget(),
-      ),
+      // appBar: AppBar(
+      //   title: Text("Test"),
+      // ),
+      // drawer: Drawer(
+      //   child: DrawerWidget(),
+      // ),
       body: Container(
         color: AppThemeDark.background_all,
         child: Row(
           children: [
             GestureDetector(
               onHorizontalDragUpdate: (details) {
-                if (details.localPosition.dx > 89 &&
+                if (details.localPosition.dx > 49 &&
                     details.localPosition.dx < 209) {
                   setState(() {
                     sideBarWidth = details.localPosition.dx;
+                    print(sideBarWidth);
                   });
                 }
               },
-              child: Container(
-                height: 774,
-                // width: 208,
-                width: sideBarWidth,
-                color: AppThemeDark.background_all,
-              ),
+              child: leftBar(),
             ),
             Expanded(
               child: Container(
@@ -65,6 +61,62 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  Container leftBar() {
+    return Container(
+      height: 774,
+      // width: 208,
+      width: sideBarWidth,
+      color: AppThemeDark.background_all,
+      child: Wrap(
+        children: [
+          Container(
+            height: 50,
+            width: double.infinity,
+            color: Colors.amberAccent,
+            child: Center(
+              child: Icon(Icons.ad_units, size: 50),
+            ),
+          ),
+          Container(
+            color: Colors.cyan,
+            height: 500,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Center(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.dashboard_outlined,
+                          color: AppThemeDark.menu_actived,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        sideBarWidth <= 200
+                            ? Text("")
+                            : Text(
+                                "Home",
+                                style: GoogleFonts.sora(
+                                  fontSize: 15,
+                                  color: AppThemeDark.menu_actived,
+                                ),
+                              ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
