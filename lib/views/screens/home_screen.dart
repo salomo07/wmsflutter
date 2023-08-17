@@ -16,12 +16,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text("Test"),
-      // ),
-      // drawer: Drawer(
-      //   child: DrawerWidget(),
-      // ),
+      drawerScrimColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text("Test"),
+      ),
+      drawer: Drawer(
+        child: DrawerWidget(),
+      ),
       body: Container(
         color: AppThemeDark.background_all,
         child: Row(
@@ -90,25 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(
                           Icons.dashboard_outlined,
                           color: AppThemeDark.menu_actived,
                           size: 30,
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        sideBarWidth <= 200
-                            ? Text("")
-                            : Text(
-                                "Home",
-                                style: GoogleFonts.sora(
-                                  fontSize: 15,
-                                  color: AppThemeDark.menu_actived,
-                                ),
-                              ),
                       ],
                     ),
                   ],
