@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wmsflutter/bloc/book/book_bloc.dart';
-import 'package:wmsflutter/config/responsive.dart';
+import 'package:wmsflutter/config/Responsive.dart';
 import 'package:wmsflutter/widgets/home_imageslide.dart';
 import 'package:wmsflutter/widgets/plutogridauto_widget.dart';
 import 'package:wmsflutter/widgets/drawer.dart';

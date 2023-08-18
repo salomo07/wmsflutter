@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:wmsflutter/config/app_theme.dart';
+import 'package:wmsflutter/config/AppsTheme.dart';
 
 @RoutePage()
 class LandingScreen extends StatelessWidget {
@@ -10,7 +10,7 @@ class LandingScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: AppThemeDark.background_all,
+      color: AppThemeDark.background2,
       // child: Wrap(
       //   children: [
       //     Expanded(
