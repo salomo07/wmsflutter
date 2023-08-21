@@ -21,6 +21,7 @@ dependencies:
   carousel_slider: ^4.2.1
   signature: ^5.4.0
   auto_route: ^7.8.0
+  shared_preferences: ^2.2.0
   
 
 dev_dependencies:

@@ -10,5 +10,8 @@ class AppRouter extends $AppRouter {
           AutoRoute(page: LandingRoute.page, path: 'landing'),
           AutoRoute(page: FormResetPasswordWidget.page, path: 'frm-reset')
         ]),
+        AutoRoute(page: HomeRoute.page, path: '/home', children: [
+          AutoRoute(page: HomeRoute.page, path: 'home'),
+        ]),
       ];
 }

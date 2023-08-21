@@ -36,7 +36,7 @@ class ReuseTextFormFieldWidget extends StatelessWidget {
           return null;
         },
         onTapOutside: (event) {
-          print("onTapOutside");
+          // print("onTapOutside");
         },
         onTap: onTap,
         controller: controller,

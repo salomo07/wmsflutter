@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:wmsflutter/utils/routes.dart';
 import 'package:wmsflutter/views/screens/login_screen.dart';
-import 'package:wmsflutter/widgets/drawer.dart';
 import 'package:wmsflutter/views/screens/splash_screen.dart';
-import 'views/screens/home_screenold.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,27 +15,8 @@ class MyApp extends StatelessWidget {
   // if(dotenv.env['APP_NAME']!=null){appname=dotenv.env['APP_NAME'];}
   final _appRouter = AppRouter();
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (context) => NavigationProvider(),
-      child: MaterialApp.router(
+  Widget build(BuildContext context) => MaterialApp.router(
         color: Colors.amberAccent,
         routerConfig: _appRouter.config(),
-      )
-      // MaterialApp(
-      //   title: "Ini App",
-      //   home: Scaffold(
-      //     backgroundColor: Colors.white,
-      //     body: FutureBuilder(
-      //       future: Future.delayed(Duration(seconds: 0)),
-      //       builder: (context, snapshot) {
-      //         if (snapshot.connectionState == ConnectionState.waiting) {
-      //           return const SplashScreen();
-      //         } else {
-      //           return const LoginScreen();
-      //         }
-      //       },
-      //     ),
-      //   ),
-      // ),
       );
 }
