@@ -79,13 +79,15 @@ class _FormLoginState extends State<FormLogin> {
         if (state is LoginSuccess) {
           if (state.r.status == 200) {
             print("Ini menuju Home");
-            // context.router.push(const HomeRoute());
             context.router.pushNamed('/home');
           }
         }
         if (state is LoginError) {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text(state.message)));
+          if (ted1.text != "" && ted2.text != "") {
+            setState(() {
+              errorSuff2 = "Kombinasi NIK dan Kata Sandi tidak sesuai";
+            });
+          }
         }
       },
       child: Scaffold(

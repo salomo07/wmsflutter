@@ -7,29 +7,51 @@ String loginResToJson(LoginRes data) => json.encode(data.toJson());
 class LoginRes {
   int status;
   String message;
-  Data data;
-  String additionalInfo;
+  Data? data; // Use nullable type here for success case
+  String? additionalInfo; // Use nullable type here for failure case
 
   LoginRes({
     required this.status,
     required this.message,
-    required this.data,
-    required this.additionalInfo,
+    this.data,
+    this.additionalInfo,
   });
 
-  factory LoginRes.fromJson(Map<String, dynamic> json) => LoginRes(
+  factory LoginRes.fromJson(Map<String, dynamic> json) {
+    if (json["status"] == 200) {
+      // Successful response
+      return LoginRes(
         status: json["status"],
         message: json["message"],
         data: Data.fromJson(json["data"]),
+      );
+    } else {
+      // Failed response
+      return LoginRes(
+        status: json["status"],
+        message: json["message"],
         additionalInfo: json["additionalInfo"],
       );
+    }
+  }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() {
+    if (status == 200) {
+      // Successful response
+      return {
         "status": status,
         "message": message,
-        "data": data.toJson(),
+        "data": data!.toJson(),
+      };
+    } else {
+      // Failed response
+      return {
+        "status": status,
+        "message": message,
         "additionalInfo": additionalInfo,
       };
+    }
+  }
 }
 
 class Data {

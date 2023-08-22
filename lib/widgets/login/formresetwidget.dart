@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseLabel.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseTextFormField.dart';
-import 'package:wmsflutter/widgets/login/formloginwidget.dart';
 
 @RoutePage()
 class FormResetPasswordWidget extends StatefulWidget {
@@ -74,7 +73,7 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
                   controller: TextEditingController(),
                   hint: "Email",
                   inputType: TextInputType.emailAddress,
-                  errorText: emailIsExist == true
+                  errorText: emailIsExist == false
                       ? null
                       : "Email yang kamu masukan tidak terdaftar pada sistem",
                 ),

@@ -1,33 +1,28 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import '../services/GlobalService.dart';
 import '../models/Login/LoginRes.dart';
+import '../config/ConfigApp.dart';
 
 class UserService {
-  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+  static String loginURL = "http://10.61.38.24:8080/api/v1/auth/login";
+  // static String loginURL = "http://localhost:7771/interlinear/trylogin";
 
-  Future<void> saveToken(str) async {
-    final SharedPreferences prefs = await _prefs;
-    prefs.setString('token', str);
-  }
-
-  Future<String> readToken() async {
-    final SharedPreferences prefs = await _prefs;
-    return prefs.getString('token')!;
-  }
-
-  // static String loginURL = "http://10.61.38.24:8080/api/v1/auth/login";
-  static String loginURL = "http://localhost:7771/interlinear/trylogin";
-  Uri u = Uri.parse('http://localhost:7771/interlinear/trylogin');
   Future<LoginRes> login(String body) async {
-    var uri = Uri.http('localhost:7771', 'interlinear/trylogin');
-    // print(readToken());
-    final response = await http.post(u, body: body, headers: <String, String>{
-      'token': "sss",
-    });
-    LoginRes r = loginResFromJson(response.body);
-    saveToken(r.data.token);
-    return r;
+    Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/login');
+    try {
+      final response = await http.post(u, body: body, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+      LoginRes r = loginResFromJson(response.body);
+      if (r.data != null) {
+        GlobalService().saveHive('credlogin', r.data!.token);
+      }
+      return r;
+    } catch (e) {
+      // print("Throw :" + e.toString());
+      throw (e);
+    }
   }
 }
