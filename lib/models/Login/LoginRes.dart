@@ -19,7 +19,7 @@ class LoginRes {
 
   factory LoginRes.fromJson(Map<String, dynamic> json) {
     if (json["status"] == 200) {
-      // Successful response
+      // Successful responses
       return LoginRes(
         status: json["status"],
         message: json["message"],
@@ -69,3 +69,48 @@ class Data {
         "token": token,
       };
 }
+
+ReqReset reqResetFromJson(String str) => ReqReset.fromJson(json.decode(str));
+
+String reqResetToJson(ReqReset data) => json.encode(data.toJson());
+
+class ReqReset {
+    int status;
+    String message;
+    DataReqReset data;
+
+    ReqReset({
+        required this.status,
+        required this.message,
+        required this.data,
+    });
+
+    factory ReqReset.fromJson(Map<String, dynamic> json) => ReqReset(
+        status: json["status"],
+        message: json["message"],
+        data: DataReqReset.fromJson(json["data"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+        "data": data.toJson(),
+    };
+}
+
+class DataReqReset {
+    String link;
+
+    DataReqReset({
+        required this.link,
+    });
+
+    factory DataReqReset.fromJson(Map<String, dynamic> json) => DataReqReset(
+        link: json["link"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "link": link,
+    };
+}
+

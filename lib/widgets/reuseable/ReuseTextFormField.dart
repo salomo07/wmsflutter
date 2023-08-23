@@ -12,6 +12,7 @@ class ReuseTextFormFieldWidget extends StatelessWidget {
       this.controller,
       this.suffixIcon,
       this.onTap,
+      this.onChanged,
       this.suffixOnTap,
       this.hide = false,
       this.errorText});
@@ -22,6 +23,7 @@ class ReuseTextFormFieldWidget extends StatelessWidget {
   TextInputType inputType;
   TextEditingController? controller;
   IconData? suffixIcon;
+  Function(String)? onChanged;
   Function()? onTap;
   Function()? suffixOnTap;
 
@@ -38,6 +40,7 @@ class ReuseTextFormFieldWidget extends StatelessWidget {
         onTapOutside: (event) {
           // print("onTapOutside");
         },
+        onChanged: onChanged,
         onTap: onTap,
         controller: controller,
         obscureText: hide!,

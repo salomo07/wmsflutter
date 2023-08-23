@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is GetTokenSuccess) {
-            if (state == "") {
+            if (state.r == "") {
               setState(() {
                 print("Menuju login");
                 context.router.pushNamed('/login');

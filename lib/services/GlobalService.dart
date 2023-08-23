@@ -7,13 +7,14 @@ class GlobalService {
     await Hive.initFlutter();
     var box = await Hive.openBox(ConfigApp().databaseName);
     box.put(field, data);
-    String xxx = await box.get(field);
-    print(xxx);
+    // String xxx = await box.get(field);
+    print("Data : ${field} saved");
+    Future.delayed(Duration(seconds: 1));
   }
 
   Future<String> readToken() async {
     await Hive.initFlutter();
     var box = await Hive.openBox(ConfigApp().databaseName);
-    return await box.get('credlogin') ?? "";
+    return await box.get('credlogin');
   }
 }

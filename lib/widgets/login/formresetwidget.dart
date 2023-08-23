@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:wmsflutter/bloc/Login/login_bloc.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseLabel.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseTextFormField.dart';
@@ -13,12 +17,13 @@ class FormResetPasswordWidget extends StatefulWidget {
   State<FormResetPasswordWidget> createState() =>
       _FormResetPasswordWidgetState();
 }
+  String emailIsExist = "";
 
 class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
-  bool emailIsExist = false;
-
+  TextEditingController ted =TextEditingController();
   @override
   Widget build(BuildContext context) {
+    
     final tabsRouter = AutoTabsRouter.of(context);
     return Scaffold(
       body: Container(
@@ -70,12 +75,17 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
                   height: 5,
                 ),
                 ReuseTextFormFieldWidget(
-                  controller: TextEditingController(),
+                  onChanged: (p0) {
+                    setState(() {
+                        emailIsExist="";
+                      });
+                  },
+                  controller: ted,
                   hint: "Email",
                   inputType: TextInputType.emailAddress,
-                  errorText: emailIsExist == false
+                  errorText: emailIsExist == ""
                       ? null
-                      : "Email yang kamu masukan tidak terdaftar pada sistem",
+                      : emailIsExist,
                 ),
                 SizedBox(
                   height: 40,
@@ -85,8 +95,21 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
                   colorButton: 0xFFFFDD00,
                   colorTxt: 0xFF344054,
                   colorBorder: 0xFFFFDD00,
-                  onPressed: () {
-                    if (!emailIsExist) {}
+                  onPressed:() {
+                    if(ted.text=="")
+                    {
+                      setState(() {
+                        emailIsExist="Silahkan lengkapi email anda terlebih dahulu";
+                      });
+                    }
+                    else{
+                      // setState(() {emailIsExist="";});
+                      context.read<LoginBloc>()
+                                    .add(ReqResetPass(jsonEncode(<String, String>{
+                                      'email': ted.text
+                                    })));
+                    }
+                    
                   },
                 ),
                 SizedBox(

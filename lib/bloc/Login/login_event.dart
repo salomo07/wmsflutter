@@ -11,3 +11,7 @@ class TryLogin extends LoginEvent {
 class GetToken extends LoginEvent {
   GetToken();
 }
+class ReqResetPass extends LoginEvent {
+  String email;
+  ReqResetPass(this.email);
+}
