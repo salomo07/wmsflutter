@@ -48,9 +48,19 @@ abstract class $AppRouter extends _i6.RootStackRouter {
       );
     },
     LoginRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<LoginRouteArgs>(
+          orElse: () => LoginRouteArgs(
+                user: pathParams.optString('user'),
+                pass: pathParams.optString('pass'),
+              ));
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.LoginScreen(),
+        child: _i5.LoginScreen(
+          key: args.key,
+          user: args.user,
+          pass: args.pass,
+        ),
       );
     },
   };
@@ -130,14 +140,47 @@ class LandingRoute extends _i6.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.LoginScreen]
-class LoginRoute extends _i6.PageRouteInfo<void> {
-  const LoginRoute({List<_i6.PageRouteInfo>? children})
-      : super(
+class LoginRoute extends _i6.PageRouteInfo<LoginRouteArgs> {
+  LoginRoute({
+    _i7.Key? key,
+    String? user,
+    String? pass,
+    List<_i6.PageRouteInfo>? children,
+  }) : super(
           LoginRoute.name,
+          args: LoginRouteArgs(
+            key: key,
+            user: user,
+            pass: pass,
+          ),
+          rawPathParams: {
+            'user': user,
+            'pass': pass,
+          },
           initialChildren: children,
         );
 
   static const String name = 'LoginRoute';
 
-  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+  static const _i6.PageInfo<LoginRouteArgs> page =
+      _i6.PageInfo<LoginRouteArgs>(name);
+}
+
+class LoginRouteArgs {
+  const LoginRouteArgs({
+    this.key,
+    this.user,
+    this.pass,
+  });
+
+  final _i7.Key? key;
+
+  final String? user;
+
+  final String? pass;
+
+  @override
+  String toString() {
+    return 'LoginRouteArgs{key: $key, user: $user, pass: $pass}';
+  }
 }

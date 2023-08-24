@@ -4,21 +4,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
 
 class ReuseDialogWidget extends StatelessWidget {
-  ReuseDialogWidget({
-    super.key,
-    this.height = 393,
-    this.width = 323,
-    required this.title,
-    required this.desc,
-    required this.txtButton,
-    required this.isUrl,
-    required this.url,
-  });
+  ReuseDialogWidget(
+      {super.key,
+      this.height = 393,
+      this.width = 323,
+      required this.title,
+      required this.desc,
+      required this.txtButton,
+      required this.isUrl,
+      required this.url,
+      this.onPressed});
+
   double height;
   double width;
   double margin = 32;
   bool isUrl;
   String title, desc, txtButton, url;
+  Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -45,7 +48,6 @@ class ReuseDialogWidget extends StatelessWidget {
                     SizedBox(
                       height: (height - (margin * 2)) / 2,
                       width: width - margin,
-                      // color: Colors.blueAccent,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -61,7 +63,7 @@ class ReuseDialogWidget extends StatelessWidget {
                           ReuseButtonWidget(
                             text: txtButton,
                             colorButton: 0xFFFFDD00,
-                            onPressed: () => {print("pressed")},
+                            onPressed: onPressed,
                           ),
                         ],
                       ),

@@ -75,42 +75,56 @@ ReqReset reqResetFromJson(String str) => ReqReset.fromJson(json.decode(str));
 String reqResetToJson(ReqReset data) => json.encode(data.toJson());
 
 class ReqReset {
-    int status;
-    String message;
-    DataReqReset data;
+  int status;
+  String message;
+  DataReqReset? data;
+  String? additionalInfo;
 
-    ReqReset({
-        required this.status,
-        required this.message,
-        required this.data,
-    });
+  ReqReset({
+    required this.status,
+    required this.message,
+    this.data,
+    this.additionalInfo,
+  });
 
-    factory ReqReset.fromJson(Map<String, dynamic> json) => ReqReset(
-        status: json["status"],
-        message: json["message"],
-        data: DataReqReset.fromJson(json["data"]),
-    );
-
-    Map<String, dynamic> toJson() => {
+  factory ReqReset.fromJson(Map<String, dynamic> json) {
+    if (json["status"] == 200) {
+      return ReqReset(
+          status: json["status"],
+          message: json["message"],
+          data: DataReqReset.fromJson(json["data"]));
+    } else {
+      return ReqReset(
+          status: json["status"],
+          message: json["message"],
+          additionalInfo: json["additionalInfo"]);
+    }
+  }
+  Map<String, dynamic> toJson() {
+    if (status == 200) {
+      return {"status": status, "message": message, "data": data!.toJson()};
+    } else {
+      return {
         "status": status,
         "message": message,
-        "data": data.toJson(),
-    };
+        "additionalInfo": additionalInfo,
+      };
+    }
+  }
 }
 
 class DataReqReset {
-    String link;
+  String link;
 
-    DataReqReset({
-        required this.link,
-    });
+  DataReqReset({
+    required this.link,
+  });
 
-    factory DataReqReset.fromJson(Map<String, dynamic> json) => DataReqReset(
+  factory DataReqReset.fromJson(Map<String, dynamic> json) => DataReqReset(
         link: json["link"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "link": link,
-    };
+      };
 }
-

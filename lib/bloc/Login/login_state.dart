@@ -11,6 +11,7 @@ final class LoginSuccess extends LoginState {
   LoginRes r;
   LoginSuccess(this.r);
 }
+
 final class LoginError extends LoginState {
   final String message;
   LoginError(this.message);
@@ -28,12 +29,15 @@ final class GetTokenError extends LoginState {
   GetTokenError(this.r);
 }
 
-
 final class ReqResLoading extends LoginState {}
+
 final class ReqResSuccess extends LoginState {
   ReqReset reqReset;
   ReqResSuccess(this.reqReset);
 }
+
+final class ReqResNotFound extends LoginState {}
+
 final class ReqResError extends LoginState {
   String r;
   ReqResError(this.r);

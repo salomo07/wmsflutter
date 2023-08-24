@@ -7,34 +7,36 @@ import 'package:wmsflutter/config/AppsTheme.dart';
 class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: AppThemeDark.background2,
-      // child: Wrap(
-      //   children: [
-      //     Expanded(
-      //         child: Container(
-      //       height: 200,
-      //       width: 200,
-      //       color: Colors.amberAccent,
-      //     )),
-      //     Expanded(
-      //       child: Container(
-      //         height: 200,
-      //         width: 200,
-      //         color: Colors.blueAccent,
-      //       ),
-      //     ),
-      //     Expanded(
-      //       child: Container(
-      //         height: 200,
-      //         width: 200,
-      //         color: Colors.greenAccent,
-      //       ),
-      //     )
-      //   ],
-      // ),
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: AppThemeDark.background2,
+        // child: Wrap(
+        //   children: [
+        //     Expanded(
+        //         child: Container(
+        //       height: 200,
+        //       width: 200,
+        //       color: Colors.amberAccent,
+        //     )),
+        //     Expanded(
+        //       child: Container(
+        //         height: 200,
+        //         width: 200,
+        //         color: Colors.blueAccent,
+        //       ),
+        //     ),
+        //     Expanded(
+        //       child: Container(
+        //         height: 200,
+        //         width: 200,
+        //         color: Colors.greenAccent,
+        //       ),
+        //     )
+        //   ],
+        // ),
+      ),
     );
   }
 }

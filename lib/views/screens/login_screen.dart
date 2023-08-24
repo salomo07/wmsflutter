@@ -2,15 +2,15 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/bloc/Login/login_bloc.dart';
-import 'package:wmsflutter/config/Responsive.dart';
 
 import '../../utils/routes.gr.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({Key? key, @pathParam this.user, @pathParam this.pass})
+      : super(key: key);
+  final String? user, pass;
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -22,7 +22,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    loginBloc.add(GetToken());
+    if (widget.user != null || widget.pass != null) {
+      loginBloc.add(GetToken());
+    }
     super.initState();
   }
 
@@ -39,7 +41,6 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         body: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) async {
-            print(state);
             if (state is GetTokenSuccess) {
               if (state.r != "") {
                 context.router.pushNamed('/home');
@@ -141,7 +142,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: AutoTabsRouter(
                             routes: [FormLogin(), FormResetPasswordWidget()],
                             builder: (context, child) {
-                              // print(child);
                               return child;
                             },
                           ),

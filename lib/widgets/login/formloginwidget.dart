@@ -14,10 +14,8 @@ import 'dialog/dialogresetpassword.dart';
 
 @RoutePage()
 class FormLogin extends StatefulWidget {
-  const FormLogin({
-    super.key,
-  });
-
+  const FormLogin({super.key, this.userAuto, this.passAuto});
+  final String? userAuto, passAuto;
   @override
   State<FormLogin> createState() => _FormLoginState();
 }
@@ -61,19 +59,17 @@ class _FormLoginState extends State<FormLogin> {
     txtButton: "Oke",
     url: 'images/dialog/notifgagal.svg',
   );
-  Widget successsendlink = ReuseDialogWidget(
-    title: "Tautan pemulihan berhasil terkirim",
-    desc:
-        "Kami telah mengirim tautan pemulihan kata sandi ke email moro.pangestu@adira.co.id",
-    isUrl: false,
-    txtButton: "Oke",
-    url: 'images/dialog/successreg.svg',
-  );
 
   @override
   Widget build(BuildContext context) {
     final tabsRouter = AutoTabsRouter.of(context);
-
+    if (widget.userAuto != null && widget.passAuto != null) {
+      setState(() {
+        print("xxxxxxxxxxxxxxx " + widget.userAuto! + widget.passAuto!);
+        ted1.text = widget.userAuto!;
+        ted2.text = widget.passAuto!;
+      });
+    }
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {

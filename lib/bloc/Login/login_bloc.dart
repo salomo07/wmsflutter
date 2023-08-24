@@ -46,10 +46,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         emit(ReqResLoading());
         ReqReset r = await service.requestResetPass(event.email);
-        print("Token : ${r}");
-        emit(ReqResSuccess(r));
+        print("Dapat hasil " + r.status.toString());
+        if (r.status == 200) {
+          emit(ReqResSuccess(r));
+        } else if (r.status == 404) {
+          emit(ReqResNotFound());
+        }
       } catch (e) {
-        print('Error get token: $e');
+        print('Error ReqResetPass : $e');
         emit(ReqResError(e.toString()));
       }
     });
