@@ -39,8 +39,8 @@ final class ReqResSuccess extends LoginState {
 final class ReqResNotFound extends LoginState {}
 
 final class ReqResError extends LoginState {
-  String r;
-  ReqResError(this.r);
+  String errorObject;
+  ReqResError(this.errorObject);
 }
 
 // final class LoginUnprocessable extends LoginState {}

@@ -8,14 +8,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/bloc/Login/login_bloc.dart';
 import 'package:wmsflutter/utils/routes.gr.dart';
 import 'package:wmsflutter/widgets/login/dialog/dialogreg.dart';
+import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseDialog.dart';
 
 import 'dialog/dialogresetpassword.dart';
 
 @RoutePage()
 class FormLogin extends StatefulWidget {
-  const FormLogin({super.key, this.userAuto, this.passAuto});
-  final String? userAuto, passAuto;
+  const FormLogin({super.key, @pathParam this.user, @pathParam this.pass});
+  final String? user, pass;
   @override
   State<FormLogin> createState() => _FormLoginState();
 }
@@ -37,13 +38,17 @@ class _FormLoginState extends State<FormLogin> {
     );
   }
 
-  Widget notifpassexpired = ReuseDialogWidget(
-    title: "Kata Sandi Kadaluarsa",
-    desc: "Lakukan pembaruan kata sandi untuk dapat melanjutkan",
-    isUrl: false,
-    txtButton: "Perbarui Sekarang",
-    url: 'assets/images/dialogexpired.svg',
-  );
+  @override
+  void initState() {
+    setState(() {
+      if (widget.user! != null && widget.pass! != null) {
+        ted1.text = widget.user!;
+        ted2.text = widget.pass!;
+      }
+    });
+    super.initState();
+  }
+
   Widget notifsuccessreg = ReuseDialogWidget(
     title: "Data Berhasil Terkirim!",
     desc: "Selanjutnya data kamu akan diverifikasi oleh admin",
@@ -63,13 +68,16 @@ class _FormLoginState extends State<FormLogin> {
   @override
   Widget build(BuildContext context) {
     final tabsRouter = AutoTabsRouter.of(context);
-    if (widget.userAuto != null && widget.passAuto != null) {
-      setState(() {
-        print("xxxxxxxxxxxxxxx " + widget.userAuto! + widget.passAuto!);
-        ted1.text = widget.userAuto!;
-        ted2.text = widget.passAuto!;
-      });
-    }
+    Widget notifpassexpired = ReuseDialogWidget(
+      onPressed: () {
+        _showMyDialog(context, ResetPasswordWidget());
+      },
+      title: "Kata Sandi Kadaluarsa",
+      desc: "Lakukan pembaruan kata sandi untuk dapat melanjutkan",
+      isUrl: false,
+      txtButton: "Perbarui Sekarang",
+      url: 'images/dialog/dialogexpired.svg',
+    );
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
@@ -233,32 +241,39 @@ class _FormLoginState extends State<FormLogin> {
                             )),
                       ),
                       const SizedBox(height: 16),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 40,
-                        child: ElevatedButton(
-                            onPressed: () {
-                              // _showMyDialog(context, DialogRegWidget());
-                              // _showMyDialog(context, notifsuccessreg);
-                              // _showMyDialog(context, notifpassexpired);
-                              // _showMyDialog(context, notiffailsreg);
-                              _showMyDialog(context, ResetPasswordWidget());
-                            },
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100),
-                                  side: const BorderSide(
-                                      color: Color(0xFF53B1FD))),
-                              backgroundColor: const Color(0xFFFCFCFD),
-                            ),
-                            child: Text(
-                              "Daftar Karyawan Baru",
-                              style: GoogleFonts.inter(
-                                  color: const Color(0xFF53B1FD),
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14),
-                            )),
+                      ReuseButtonWidget(
+                        colorTxt: 0xFF53B1FD,
+                        text: "Daftar Karyawan Baru",
+                        colorBorder: 0xFF53B1FD,
+                        colorButton: 0xFFFCFCFD,
+                        onPressed: () {
+                          _showMyDialog(context, DialogRegWidget());
+                          // _showMyDialog(context, notifsuccessreg);
+                          // _showMyDialog(context, notifpassexpired);
+                          // _showMyDialog(context, notiffailsreg);
+                        },
                       ),
+                      ReuseButtonWidget(
+                        colorTxt: 0xFF53B1FD,
+                        text: "Contoh reset pass",
+                        colorBorder: 0xFF53B1FD,
+                        colorButton: 0xFFFCFCFD,
+                        onPressed: () {
+                          // _showMyDialog(context, DialogRegWidget());
+                          // _showMyDialog(context, notifsuccessreg);
+                          // _showMyDialog(context, notifpassexpired);
+                          // _showMyDialog(context, notiffailsreg);
+                          print("xxx");
+
+                          _showMyDialog(context, notifpassexpired);
+                          // _showMyDialog(context, DialogRegWidget());
+                        },
+                      ),
+                      // SizedBox(
+                      //   width: double.infinity,
+                      //   height: 40,
+                      //   child: ,
+                      // ),
                     ],
                   ),
                   const SizedBox(

@@ -10,17 +10,13 @@ class AppRouter extends $AppRouter {
             initial: true,
             path: '/login',
             children: [
-              AutoRoute(page: FormLogin.page, path: 'frm-login'),
+              AutoRoute(page: FormLogin.page, path: 'frm-login', initial: true),
+              AutoRoute(page: FormLogin.page, path: 'frm-login/:user/:pass'),
+              // AutoRoute(page: FormLogin.page, path: 'confirm'),
+              // AutoRoute(page: FormLogin.page, path: 'frm-login/:user/:pass'),
               AutoRoute(page: LandingRoute.page, path: 'landing'),
               AutoRoute(page: FormResetPasswordWidget.page, path: 'frm-reset')
             ]),
         AutoRoute(page: HomeRoute.page, path: '/home'),
-        AutoRoute(
-            path: '/login/:user/p/:pass',
-            page: LoginRoute.page,
-            children: [
-              AutoRoute(page: FormLogin.page, path: 'frm-login'),
-              AutoRoute(page: FormResetPasswordWidget.page, path: 'frm-reset')
-            ]),
       ];
 }

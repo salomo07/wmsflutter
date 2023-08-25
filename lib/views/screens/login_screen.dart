@@ -8,9 +8,7 @@ import '../../utils/routes.gr.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key, @pathParam this.user, @pathParam this.pass})
-      : super(key: key);
-  final String? user, pass;
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -22,9 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
-    if (widget.user != null || widget.pass != null) {
-      loginBloc.add(GetToken());
-    }
+    loginBloc.add(GetToken());
+    setState(() {});
     super.initState();
   }
 
@@ -140,7 +137,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: MediaQuery.of(context).size.height,
                           width: 470,
                           child: AutoTabsRouter(
-                            routes: [FormLogin(), FormResetPasswordWidget()],
+                            routes: [
+                              FormLogin(user: "", pass: ""),
+                              FormResetPasswordWidget()
+                            ],
                             builder: (context, child) {
                               return child;
                             },

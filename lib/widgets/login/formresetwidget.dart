@@ -20,6 +20,7 @@ class FormResetPasswordWidget extends StatefulWidget {
       _FormResetPasswordWidgetState();
 }
 
+String token = "";
 String emailIsExist = "";
 
 Future<void> _showMyDialog(context, Widget widget) async {
@@ -60,6 +61,10 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
             });
           } else if (state is ReqResSuccess) {
             _showMyDialog(context, successsendlink);
+          } else if (state is ReqResError) {
+            SnackBar snackBar = SnackBar(
+                content: Text("Error happened : " + state.errorObject));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
         builder: (context, state) {
