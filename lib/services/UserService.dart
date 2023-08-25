@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:wmsflutter/bloc/Login/login_bloc.dart';
 import '../services/GlobalService.dart';
 import '../models/Login/LoginRes.dart';
 import '../config/ConfigApp.dart';
@@ -37,8 +36,6 @@ class UserService {
       ReqReset r = reqResetFromJson(response.body);
       return r;
     } catch (e) {
-      // print("Throw :" + e.toString());
-
       throw (e);
     }
   }

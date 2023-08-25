@@ -32,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
           if (state is GetTokenSuccess) {
             if (state.r == "") {
               setState(() {
-                print("Menuju login");
                 context.router.pushNamed('/login');
               });
             } else {
