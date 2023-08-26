@@ -6,8 +6,8 @@ import '../models/Login/LoginRes.dart';
 import '../config/ConfigApp.dart';
 
 class UserService {
-  Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/login');
-  // Uri u = Uri.parse('http://localhost:7771/interlinear/trylogin');
+  // Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/login');
+  Uri u = Uri.parse('http://localhost:7771/interlinear/trylogin');
 
   Future<LoginRes> login(String body) async {
     try {

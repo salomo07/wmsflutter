@@ -60,46 +60,46 @@ class _HomeScreenState extends State<HomeScreen> {
                   drawer: Drawer(
                     child: DrawerWidget(),
                   ),
-                  body: Container(
-                    color: AppThemeDark.background1,
-                    child: Row(
-                      children: [
-                        GestureDetector(
-                          onHorizontalDragUpdate: (details) {
-                            if (details.localPosition.dx > 49 &&
-                                details.localPosition.dx < 209) {
-                              setState(() {
-                                sideBarWidth = details.localPosition.dx;
-                              });
-                            }
-                          },
-                          child: leftBar(),
-                        ),
-                        Expanded(
-                          child: Container(
-                            color: AppThemeDark.background2,
-                          ),
-                        ),
-                        Container(
-                          height: 774,
-                          width: 317,
-                          color: AppThemeDark.background3,
-                          child: Container(
-                            // color: AppThemeDark.background_expanded,
-                            child: Container(
-                              height: 32,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10)),
-                                color: Color(0xFFFAFBFC),
-                              ),
-                              // child:
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  // body: Container(
+                  //   color: AppThemeDark.background1,
+                  //   child: Row(
+                  //     children: [
+                  //       GestureDetector(
+                  //         onHorizontalDragUpdate: (details) {
+                  //           if (details.localPosition.dx > 49 &&
+                  //               details.localPosition.dx < 209) {
+                  //             setState(() {
+                  //               sideBarWidth = details.localPosition.dx;
+                  //             });
+                  //           }
+                  //         },
+                  //         // child: leftBar(),
+                  //       ),
+                  //       Expanded(
+                  //         child: Container(
+                  //           color: AppThemeDark.background2,
+                  //         ),
+                  //       ),
+                  //       Container(
+                  //         height: 774,
+                  //         width: 317,
+                  //         color: AppThemeDark.background3,
+                  //         child: Container(
+                  //           // color: AppThemeDark.background_expanded,
+                  //           child: Container(
+                  //             height: 32,
+                  //             decoration: BoxDecoration(
+                  //               borderRadius:
+                  //                   BorderRadius.all(Radius.circular(10)),
+                  //               color: Color(0xFFFAFBFC),
+                  //             ),
+                  //             // child:
+                  //           ),
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
                 );
         },
       ),
@@ -280,6 +280,45 @@ class DrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: Color(0xFF4D44B5),
+      height: 1016,
+      width: 155,
+      child: Wrap(children: [
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 22),
+              child: Center(
+                child: Container(
+                  color: Colors.amberAccent,
+                  height: 100,
+                  width: 264,
+                  child: Text("Ini logo harusnya"),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 16, left:46),
+              child: Container(
+                color: Colors.blueAccent,
+                height: 704,
+                width: 299,
+                child: Column(children: [
+                  Container(
+                    height:64,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: const Color(0xFFF3F4FF),
+                      borderRadius: BorderRadius.only(topLeft:Radius.circular(40) ,
+                      bottomLeft: Radius.circular(40))),
+                  )
+                ]),
+              ),
+            ),
+        ],)
+      ],),
+    );
   }
 }
