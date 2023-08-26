@@ -289,12 +289,12 @@ class DrawerWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 22),
+              padding: const EdgeInsets.symmetric(horizontal: 46),
               child: Center(
                 child: Container(
                   color: Colors.amberAccent,
-                  height: 100,
-                  width: 264,
+                  height: 70,
+                  width: 200,
                   child: Text("Ini logo harusnya"),
                 ),
               ),
@@ -310,10 +310,43 @@ class DrawerWidget extends StatelessWidget {
                     height:64,
                     width: double.infinity,
                     decoration: const BoxDecoration(
-                      color: const Color(0xFFF3F4FF),
+                      color: Color(0xFFF3F4FF),
                       borderRadius: BorderRadius.only(topLeft:Radius.circular(40) ,
-                      bottomLeft: Radius.circular(40))),
-                  )
+                      bottomLeft: Radius.circular(40))
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child:Icon(Icons.home,size: 40,color: Color(0xFF4D44B5),),
+                        ),
+                        SizedBox(width: 10,),
+                        Text("Dashboard",style: GoogleFonts.poppins(fontSize: 18,color: Color(0xFF4D44B5)),)
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 8,),
+                  Container(
+                    height:64,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFF3F4FF),
+                      borderRadius: BorderRadius.only(topLeft:Radius.circular(40) ,
+                      bottomLeft: Radius.circular(40))
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 20),
+                          child:Icon(Icons.home,size: 40,color: Color(0xFF4D44B5),),
+                        ),
+                        SizedBox(width: 10,),
+                        Text("Master",style: GoogleFonts.poppins(fontSize: 18,color: Color(0xFF4D44B5)),)
+                      ],
+                    ),
+                  ),
                 ]),
               ),
             ),
