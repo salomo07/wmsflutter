@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  
   double sideBarWidth = 50, widthStandart = 208;
   final LoginBloc loginBloc = LoginBloc();
   bool isLoadingToken = true;
@@ -60,46 +61,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   drawer: Drawer(
                     child: DrawerWidget(),
                   ),
-                  // body: Container(
-                  //   color: AppThemeDark.background1,
-                  //   child: Row(
-                  //     children: [
-                  //       GestureDetector(
-                  //         onHorizontalDragUpdate: (details) {
-                  //           if (details.localPosition.dx > 49 &&
-                  //               details.localPosition.dx < 209) {
-                  //             setState(() {
-                  //               sideBarWidth = details.localPosition.dx;
-                  //             });
-                  //           }
-                  //         },
-                  //         // child: leftBar(),
-                  //       ),
-                  //       Expanded(
-                  //         child: Container(
-                  //           color: AppThemeDark.background2,
-                  //         ),
-                  //       ),
-                  //       Container(
-                  //         height: 774,
-                  //         width: 317,
-                  //         color: AppThemeDark.background3,
-                  //         child: Container(
-                  //           // color: AppThemeDark.background_expanded,
-                  //           child: Container(
-                  //             height: 32,
-                  //             decoration: BoxDecoration(
-                  //               borderRadius:
-                  //                   BorderRadius.all(Radius.circular(10)),
-                  //               color: Color(0xFFFAFBFC),
-                  //             ),
-                  //             // child:
-                  //           ),
-                  //         ),
-                  //       )
-                  //     ],
-                  //   ),
-                  // ),
                 );
         },
       ),
@@ -253,31 +214,14 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-// Row(
-//                     mainAxisAlignment: MainAxisAlignment.center,
-//                     children: [
-//                       Padding(
-//                         padding: EdgeInsets.only(left: 10, right: 10),
-//                         child: Icon(
-//                           Icons.dashboard_outlined,
-//                           color: AppThemeDark.menu_actived,
-//                           size: 24,
-//                         ),
-//                       ),
-//                       Text(
-//                         "Dashboard",
-//                         style: GoogleFonts.sora(
-//                           fontSize: 17,
-//                           color: AppThemeDark.menu_actived,
-//                         ),
-//                       )
-//                     ],
-//                   ),
 class DrawerWidget extends StatelessWidget {
   const DrawerWidget({
     super.key,
   });
-
+  final int colorPurple = 0xFF4D44B5;
+  final int colorGray2=0xFFC1BBEB;
+  final double iconSize = 35;
+  final double fontSize = 18;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -302,7 +246,7 @@ class DrawerWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 16, left:46),
               child: Container(
-                color: Colors.blueAccent,
+                // color: Colors.blueAccent,
                 height: 704,
                 width: 299,
                 child: Column(children: [
@@ -319,10 +263,10 @@ class DrawerWidget extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 20),
-                          child:Icon(Icons.home,size: 40,color: Color(0xFF4D44B5),),
+                          child:Icon(Icons.home,size: iconSize,color: Color(this.colorPurple),),
                         ),
-                        SizedBox(width: 10,),
-                        Text("Dashboard",style: GoogleFonts.poppins(fontSize: 18,color: Color(0xFF4D44B5)),)
+                        SizedBox(width: 15,),
+                        Text("Dashboard",style: GoogleFonts.poppins(fontSize: fontSize,color: Color(this.colorPurple)),)
                       ],
                     ),
                   ),
@@ -330,20 +274,15 @@ class DrawerWidget extends StatelessWidget {
                   Container(
                     height:64,
                     width: double.infinity,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFF3F4FF),
-                      borderRadius: BorderRadius.only(topLeft:Radius.circular(40) ,
-                      bottomLeft: Radius.circular(40))
-                    ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 20),
-                          child:Icon(Icons.home,size: 40,color: Color(0xFF4D44B5),),
+                          child:Icon(Icons.dns_outlined,size: iconSize,color: Color(colorGray2),),
                         ),
-                        SizedBox(width: 10,),
-                        Text("Master",style: GoogleFonts.poppins(fontSize: 18,color: Color(0xFF4D44B5)),)
+                        const SizedBox(width: 15,),
+                        Text("Master",style: GoogleFonts.poppins(fontSize: fontSize,color: Color(colorGray2)),)
                       ],
                     ),
                   ),
