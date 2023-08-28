@@ -70,8 +70,8 @@ class Data {
       };
 }
 
+//Untuk Reset Password
 ReqReset reqResetFromJson(String str) => ReqReset.fromJson(json.decode(str));
-
 String reqResetToJson(ReqReset data) => json.encode(data.toJson());
 
 class ReqReset {
@@ -127,4 +127,38 @@ class DataReqReset {
   Map<String, dynamic> toJson() => {
         "link": link,
       };
+}
+
+
+//Untuk Register Success
+RegRes regResFromJson(String str) => RegRes.fromJson(json.decode(str));
+String regResToJson(RegRes data) => json.encode(data.toJson());
+class RegRes {
+    int status;
+    String message;
+    String? additionalInfo;
+
+    RegRes({
+        required this.status,
+        required this.message,
+        this.additionalInfo,
+    });
+
+    factory RegRes.fromJson(Map<String, dynamic> json) => RegRes(
+        status: json["status"],
+        message: json["message"],
+        additionalInfo: json["additionalInfo"],
+    );
+
+    Map<String, dynamic> toJson() {
+      if(status==200){return {"status": status,
+        "message": message};}
+      else{
+        return {
+          "status": status,
+          "message": message,
+        " additionalInfo": additionalInfo    
+        };
+      }
+    }
 }

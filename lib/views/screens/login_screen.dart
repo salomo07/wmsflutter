@@ -41,11 +41,11 @@ class _LoginScreenState extends State<LoginScreen> {
           listener: (context, state) async {
             if (state is GetTokenSuccess) {
               if (state.r != "") {
-                print("Base64 : " + base64.encode("contoh ya cuk".codeUnits));
-                List<int> decodedint1 =
-                    base64Url.decode(base64.encode("contoh ya cuk".codeUnits));
-                String decodedstring1 = utf8.decode(decodedint1);
-                print(decodedstring1);
+                // print("Base64 : " + base64.encode("contoh ya cuk".codeUnits));
+                // List<int> decodedint1 =
+                //     base64Url.decode(base64.encode("contoh ya cuk".codeUnits));
+                // String decodedstring1 = utf8.decode(decodedint1);
+                // print(decodedstring1);
                 GlobalService().saveHive(
                     'toket', base64.encode("contoh ya cuk".codeUnits));
                 context.router.pushNamed('/home');

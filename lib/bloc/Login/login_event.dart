@@ -7,7 +7,10 @@ class TryLogin extends LoginEvent {
   final String body;
   TryLogin(this.body);
 }
-
+class TryRegister extends LoginEvent {
+  final String body;
+  TryRegister(this.body);
+}
 class GetToken extends LoginEvent {
   GetToken();
 }

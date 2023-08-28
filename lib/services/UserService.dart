@@ -26,14 +26,27 @@ class UserService {
   }
 
   Future<ReqReset> requestResetPass(String body) async {
-    Uri u =
-        Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/reset-password/request');
+    Uri u =Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/reset-password/request');
     // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqrestpass');
     try {
       final response = await http.post(u, body: body, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       });
       ReqReset r = reqResetFromJson(response.body);
+      return r;
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  Future<RegRes> requestRegister(String body) async {
+    Uri u =Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/reset-password/request');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqrestpass');
+    try {
+      final response = await http.post(u, body: body, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+      RegRes r = regResFromJson(response.body);
       return r;
     } catch (e) {
       throw (e);

@@ -17,4 +17,9 @@ class GlobalService {
     var box = await Hive.openBox(ConfigApp().databaseName);
     return await box.get('credlogin');
   }
+  Future<String> getHive(field) async {
+    await Hive.initFlutter();
+    var box = await Hive.openBox(ConfigApp().databaseName);
+    return await box.get(field);
+  }
 }

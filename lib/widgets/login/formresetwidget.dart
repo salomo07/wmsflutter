@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/bloc/Login/login_bloc.dart';
-import 'package:wmsflutter/models/Login/LoginRes.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseLabel.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseTextFormField.dart';

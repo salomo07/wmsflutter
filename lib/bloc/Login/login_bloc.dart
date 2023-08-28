@@ -18,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginLoading());
         LoginRes r = await service.login(event.body);
 
-        print(r.status.toString());
+        // print(r.status.toString());
         if (r.status == 200) {
           emit(LoginSuccess(r));
         } else {
@@ -55,6 +55,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } catch (e) {
         print('Error ReqResetPass : $e');
         emit(ReqResError(e.toString()));
+      }
+    });
+    on<TryRegister>((event, emit) async {
+      UserService service = UserService();
+      try {
+        //Loading
+        emit(RegisterLoading());
+        RegRes r = await service.requestRegister(event.body);
+
+        // print(r.status.toString());
+        if (r.status == 200) {
+          emit(RegisterSuccess(r));
+        } else {
+          emit(RegisterError(r.additionalInfo.toString()));
+        }
+      } catch (e) {
+        print('Error: $e');
+        emit(LoginError(e.toString()));
       }
     });
   }

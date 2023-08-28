@@ -43,6 +43,19 @@ final class ReqResError extends LoginState {
   ReqResError(this.errorObject);
 }
 
+final class RegisterInitial extends LoginState {}
+
+final class RegisterLoading extends LoginState {}
+
+final class RegisterSuccess extends LoginState {
+  RegRes r;
+  RegisterSuccess(this.r);
+}
+
+final class RegisterError extends LoginState {
+  final String message;
+  RegisterError(this.message);
+}
 // final class LoginUnprocessable extends LoginState {}
 
 // final class LoginBadRequest extends LoginState {}
