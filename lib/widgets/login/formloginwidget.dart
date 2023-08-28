@@ -6,8 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wmsflutter/bloc/Login/login_bloc.dart';
-import 'package:wmsflutter/utils/routes.gr.dart';
 import 'package:wmsflutter/widgets/login/dialog/dialogreg.dart';
+import 'package:wmsflutter/widgets/login/dialog/dialogresetpassword.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseButton.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseDialog.dart';
 
@@ -15,12 +15,20 @@ import 'dialog/dialogresetpassword.dart';
 
 @RoutePage()
 class FormLogin extends StatefulWidget {
-  const FormLogin({super.key, @pathParam this.user, @pathParam this.pass});
-  final String? user, pass;
+  const FormLogin({super.key, @pathParam this.token});
+  final String? token;
   @override
   State<FormLogin> createState() => _FormLoginState();
 }
-
+Future<void> _showMyDialog(context, Widget widget) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return widget;
+    },
+  );
+}
 class _FormLoginState extends State<FormLogin> {
   bool hide = true;
   TextEditingController ted1 = TextEditingController();
@@ -28,25 +36,22 @@ class _FormLoginState extends State<FormLogin> {
   String errorSuff1 = "";
   String errorSuff2 = "";
 
-  Future<void> _showMyDialog(context, Widget widget) async {
-    return showDialog<void>(
-      context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return widget;
-      },
-    );
-  }
+  
 
   @override
-  void initState() {
-    setState(() {
-      if (widget.user! != null && widget.pass! != null) {
-        ted1.text = widget.user!;
-        ted2.text = widget.pass!;
+  void initState() {   
+    super.initState(); 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (widget.token! != "") {
+        // print("Ini token : "+widget.token!);
+        // setState(() {
+          _showMyDialog(context, DialogResetPasswordWidget(token:widget.token));
+        // });
+        
       }
     });
-    super.initState();
+    
+    
   }
 
   Widget notifsuccessreg = ReuseDialogWidget(
@@ -70,7 +75,7 @@ class _FormLoginState extends State<FormLogin> {
     final tabsRouter = AutoTabsRouter.of(context);
     Widget notifpassexpired = ReuseDialogWidget(
       onPressed: () {
-        _showMyDialog(context, ResetPasswordWidget());
+        _showMyDialog(context, DialogResetPasswordWidget());
       },
       title: "Kata Sandi Kadaluarsa",
       desc: "Lakukan pembaruan kata sandi untuk dapat melanjutkan",

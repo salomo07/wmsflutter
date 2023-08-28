@@ -56,7 +56,8 @@ class ReuseTextFormFieldWidget extends StatelessWidget {
           border: const OutlineInputBorder(
               borderSide: BorderSide(color: Color(0xFF98A2B3)),
               borderRadius: BorderRadius.horizontal(
-                  left: Radius.circular(9), right: Radius.circular(9))),
+                  left: Radius.circular(9), right: Radius.circular(9)),
+          ),
         ),
       ),
     );

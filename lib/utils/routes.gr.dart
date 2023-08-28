@@ -24,16 +24,12 @@ abstract class $AppRouter extends _i6.RootStackRouter {
     FormLogin.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<FormLoginArgs>(
-          orElse: () => FormLoginArgs(
-                user: pathParams.optString('user'),
-                pass: pathParams.optString('pass'),
-              ));
+          orElse: () => FormLoginArgs(token: pathParams.optString('token')));
       return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.FormLogin(
           key: args.key,
-          user: args.user,
-          pass: args.pass,
+          token: args.token,
         ),
       );
     },
@@ -71,20 +67,15 @@ abstract class $AppRouter extends _i6.RootStackRouter {
 class FormLogin extends _i6.PageRouteInfo<FormLoginArgs> {
   FormLogin({
     _i7.Key? key,
-    String? user,
-    String? pass,
+    String? token,
     List<_i6.PageRouteInfo>? children,
   }) : super(
           FormLogin.name,
           args: FormLoginArgs(
             key: key,
-            user: user,
-            pass: pass,
+            token: token,
           ),
-          rawPathParams: {
-            'user': user,
-            'pass': pass,
-          },
+          rawPathParams: {'token': token},
           initialChildren: children,
         );
 
@@ -97,19 +88,16 @@ class FormLogin extends _i6.PageRouteInfo<FormLoginArgs> {
 class FormLoginArgs {
   const FormLoginArgs({
     this.key,
-    this.user,
-    this.pass,
+    this.token,
   });
 
   final _i7.Key? key;
 
-  final String? user;
-
-  final String? pass;
+  final String? token;
 
   @override
   String toString() {
-    return 'FormLoginArgs{key: $key, user: $user, pass: $pass}';
+    return 'FormLoginArgs{key: $key, token: $token}';
   }
 }
 

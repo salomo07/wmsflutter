@@ -11,7 +11,7 @@ class AppRouter extends $AppRouter {
             path: '/login',
             children: [
               AutoRoute(page: FormLogin.page, path: 'frm-login', initial: true),
-              AutoRoute(page: FormLogin.page, path: 'frm-login/:user/:pass'),
+              AutoRoute(page: FormLogin.page, path: 'frm-login/:token'),
               // AutoRoute(page: FormLogin.page, path: 'confirm'),
               // AutoRoute(page: FormLogin.page, path: 'frm-login/:user/:pass'),
               AutoRoute(page: LandingRoute.page, path: 'landing'),

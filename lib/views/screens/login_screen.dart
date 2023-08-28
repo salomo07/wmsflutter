@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           width: 470,
                           child: AutoTabsRouter(
                             routes: [
-                              FormLogin(user: "", pass: ""),
+                              FormLogin(token: ""),
                               FormResetPasswordWidget()
                             ],
                             builder: (context, child) {

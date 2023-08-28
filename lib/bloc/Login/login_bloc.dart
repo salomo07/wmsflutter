@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -45,7 +44,23 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       UserService service = UserService();
       try {
         emit(ReqResLoading());
-        ReqReset r = await service.requestResetPass(event.email);
+        ReqReset r = await service.requestResetPass(event.body);
+        print("Dapat hasil " + r.status.toString());
+        if (r.status == 200) {
+          emit(ReqResSuccess(r));
+        } else if (r.status == 404) {
+          emit(ReqResNotFound());
+        }
+      } catch (e) {
+        print('Error ReqResetPass : $e');
+        emit(ReqResError(e.toString()));
+      }
+    });
+    on<ResetPass>((event, emit) async {
+      UserService service = UserService();
+      try {
+        emit(ReqResLoading());
+        ReqReset r = await service.resetPass(event.body);
         print("Dapat hasil " + r.status.toString());
         if (r.status == 200) {
           emit(ReqResSuccess(r));
