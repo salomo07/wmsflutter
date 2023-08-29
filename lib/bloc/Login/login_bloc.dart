@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:wmsflutter/models/Login/LoginRes.dart';
@@ -28,6 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(LoginError(e.toString()));
       }
     });
+
     on<GetToken>((event, emit) async {
       GlobalService service = GlobalService();
       try {
@@ -40,6 +40,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(GetTokenError(e.toString()));
       }
     });
+
     on<ReqResetPass>((event, emit) async {
       UserService service = UserService();
       try {
@@ -56,22 +57,24 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(ReqResError(e.toString()));
       }
     });
+
     on<ResetPass>((event, emit) async {
       UserService service = UserService();
       try {
-        emit(ReqResLoading());
-        ReqReset r = await service.resetPass(event.body);
+        emit(ResetPassLoading());
+        ResetModel r = await service.resetPass(event.body);
         print("Dapat hasil " + r.status.toString());
         if (r.status == 200) {
-          emit(ReqResSuccess(r));
-        } else if (r.status == 404) {
-          emit(ReqResNotFound());
+          emit(ResetPassSuccess(r));
+        } else if (r.status == 400) {
+          emit(ResetPassExpired());
         }
       } catch (e) {
         print('Error ReqResetPass : $e');
-        emit(ReqResError(e.toString()));
+        emit(ResetPassError(e.toString()));
       }
     });
+
     on<TryRegister>((event, emit) async {
       UserService service = UserService();
       try {
@@ -82,6 +85,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         // print(r.status.toString());
         if (r.status == 200) {
           emit(RegisterSuccess(r));
+        } else if (r.status == 400) {
+          emit(RegisterInvalid(r.additionalInfo));
+        } else if (r.status == 404) {
+          emit(RegisterInvalid(r.additionalInfo));
         } else {
           emit(RegisterError(r.additionalInfo.toString()));
         }

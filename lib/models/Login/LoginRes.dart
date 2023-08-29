@@ -89,10 +89,7 @@ class ReqReset {
 
   factory ReqReset.fromJson(Map<String, dynamic> json) {
     if (json["status"] == 200) {
-      return ReqReset(
-          status: json["status"],
-          message: json["message"],
-          data: DataReqReset.fromJson(json["data"]));
+      return ReqReset(status: json["status"], message: json["message"]);
     } else {
       return ReqReset(
           status: json["status"],
@@ -102,7 +99,7 @@ class ReqReset {
   }
   Map<String, dynamic> toJson() {
     if (status == 200) {
-      return {"status": status, "message": message, "data": data!.toJson()};
+      return {"status": status, "message": message};
     } else {
       return {
         "status": status,
@@ -129,36 +126,77 @@ class DataReqReset {
       };
 }
 
+ResetModel resetModelFromJson(String str) =>
+    ResetModel.fromJson(json.decode(str));
+
+String resetModelToJson(ResetModel data) => json.encode(data.toJson());
+
+class ResetModel {
+  int status;
+  String message;
+  String? additionalInfo;
+
+  ResetModel({
+    required this.status,
+    required this.message,
+    this.additionalInfo,
+  });
+
+  factory ResetModel.fromJson(Map<String, dynamic> json) {
+    if (json["status"] == 200) {
+      return ResetModel(status: json["status"], message: json["message"]);
+    } else {
+      return ResetModel(
+        status: json["status"],
+        message: json["message"],
+        additionalInfo: json["additionalInfo"],
+      );
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    if (status == 200) {
+      return {"status": status, "message": message};
+    } else {
+      return {
+        "status": status,
+        "message": message,
+        "additionalInfo": additionalInfo,
+      };
+    }
+  }
+}
 
 //Untuk Register Success
 RegRes regResFromJson(String str) => RegRes.fromJson(json.decode(str));
 String regResToJson(RegRes data) => json.encode(data.toJson());
+
 class RegRes {
-    int status;
-    String message;
-    String? additionalInfo;
+  int status;
+  String message;
+  String? additionalInfo;
 
-    RegRes({
-        required this.status,
-        required this.message,
-        this.additionalInfo,
-    });
+  RegRes({
+    required this.status,
+    required this.message,
+    this.additionalInfo,
+  });
 
-    factory RegRes.fromJson(Map<String, dynamic> json) => RegRes(
+  factory RegRes.fromJson(Map<String, dynamic> json) => RegRes(
         status: json["status"],
         message: json["message"],
         additionalInfo: json["additionalInfo"],
-    );
+      );
 
-    Map<String, dynamic> toJson() {
-      if(status==200){return {"status": status,
-        "message": message};}
-      else{
-        return {
-          "status": status,
-          "message": message,
-        " additionalInfo": additionalInfo    
-        };
-      }
+  Map<String, dynamic> toJson() {
+    if (status == 200) {
+      return {"status": status, "message": message};
+    } else {
+      return {
+        "status": status,
+        "message": message,
+        " additionalInfo": additionalInfo
+      };
     }
+  }
 }

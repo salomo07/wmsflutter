@@ -6,10 +6,14 @@ class ReuseDropdownWidget extends StatelessWidget {
       {super.key,
       this.datas = const [],
       this.isExpanded = true,
-      this.hint = "Select"});
+      this.hint = "Select",
+      this.onChanged});
   List datas;
   String hint;
   bool isExpanded;
+  void Function(dynamic)? onChanged = (val) {
+    print(val);
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +40,7 @@ class ReuseDropdownWidget extends StatelessWidget {
             ),
           );
         }).toList(),
-        onChanged: (value) {},
+        onChanged: onChanged,
       ),
     );
   }

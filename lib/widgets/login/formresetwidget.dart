@@ -53,6 +53,7 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
       create: (context) => loginBloc,
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
+          if (state is ReqResLoading) {}
           if (state is ReqResNotFound) {
             setState(() {
               emailIsExist =

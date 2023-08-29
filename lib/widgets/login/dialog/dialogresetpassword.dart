@@ -7,6 +7,8 @@ import 'package:wmsflutter/widgets/reuseable/ReuseLabel.dart';
 import 'package:wmsflutter/widgets/reuseable/ReuseTextFormField.dart';
 import 'package:wmsflutter/bloc/Login/login_bloc.dart';
 
+import '../../reuseable/ReuseDialog.dart';
+
 final LoginBloc loginBloc = LoginBloc();
 
 class DialogResetPasswordWidget extends StatefulWidget {
@@ -23,6 +25,22 @@ class _DialogResetPasswordWidgetState extends State<DialogResetPasswordWidget> {
   bool hide = true;
   bool hide2 = true;
   String errorText = "";
+  Widget notifsuccessreset = ReuseDialogWidget(
+    title: "Password Berhasil Diupdate!",
+    desc: "Selanjutnya, silahkan login dengan password terbaru",
+    isUrl: false,
+    txtButton: "Oke",
+    url: 'images/dialog/successreg.svg',
+  );
+  Future<void> _showMyDialog(context, Widget widget) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return widget;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +81,24 @@ class _DialogResetPasswordWidgetState extends State<DialogResetPasswordWidget> {
       create: (context) => loginBloc,
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
-          if(state is ResetSuccess){
+          if (state is ResetPassExpired) {
+            const snackBar = SnackBar(
+              content: Text("Link anda sudah expired / rusak"),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
+          if (state is ResetPassSuccess) {
             Navigator.pop(context);
+            const snackBar = SnackBar(
+              content: Text("Password berhasil diubah"),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            _showMyDialog(context, notifsuccessreset);
+          } else {
+            const snackBar = SnackBar(
+              content: Text("Link anda sudah expired / rusak"),
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
         child: Dialog(

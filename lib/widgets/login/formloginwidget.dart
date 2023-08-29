@@ -20,7 +20,8 @@ class FormLogin extends StatefulWidget {
   @override
   State<FormLogin> createState() => _FormLoginState();
 }
-Future<void> _showMyDialog(context, Widget widget) async {
+
+Future<void> _showMyDialog(BuildContext context, Widget widget) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -29,6 +30,35 @@ Future<void> _showMyDialog(context, Widget widget) async {
     },
   );
 }
+
+Future<void> _showMyDialogCtx(
+    contextx, Widget Function(BuildContext) widget) async {
+  showDialog(
+    // barrierColor: Colors.transparent,
+    context: contextx,
+    builder: (ctxx) {
+      return ScaffoldMessenger(
+        child: Builder(
+          builder: (ctx) {
+            return AlertDialog(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16))),
+              content: widget(ctx),
+            );
+          },
+        ),
+      );
+    },
+  );
+  // return showDialog<void>(
+  //   context: contextx,
+  //   barrierDismissible: false, // user must tap button!
+  //   builder: (BuildContext context) {
+  //     return widget(context);
+  //   },
+  // );
+}
+
 class _FormLoginState extends State<FormLogin> {
   bool hide = true;
   TextEditingController ted1 = TextEditingController();
@@ -36,22 +66,17 @@ class _FormLoginState extends State<FormLogin> {
   String errorSuff1 = "";
   String errorSuff2 = "";
 
-  
-
   @override
-  void initState() {   
-    super.initState(); 
+  void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (widget.token! != "") {
+      if (widget.token! != "") {
         // print("Ini token : "+widget.token!);
         // setState(() {
-          _showMyDialog(context, DialogResetPasswordWidget(token:widget.token));
+        _showMyDialog(context, DialogResetPasswordWidget(token: widget.token));
         // });
-        
       }
     });
-    
-    
   }
 
   Widget notifsuccessreg = ReuseDialogWidget(
@@ -61,6 +86,7 @@ class _FormLoginState extends State<FormLogin> {
     txtButton: "Oke",
     url: 'images/dialog/successreg.svg',
   );
+
   Widget notiffailsreg = ReuseDialogWidget(
     title: "Maaf, Terjadi Kesalahan",
     desc:
@@ -252,26 +278,15 @@ class _FormLoginState extends State<FormLogin> {
                         colorBorder: 0xFF53B1FD,
                         colorButton: 0xFFFCFCFD,
                         onPressed: () {
-                          _showMyDialog(context, DialogRegWidget());
+                          _showMyDialogCtx(
+                            context,
+                            (BuildContext context) => DialogRegWidget(
+                              ctx: context,
+                            ),
+                          );
                           // _showMyDialog(context, notifsuccessreg);
                           // _showMyDialog(context, notifpassexpired);
                           // _showMyDialog(context, notiffailsreg);
-                        },
-                      ),
-                      ReuseButtonWidget(
-                        colorTxt: 0xFF53B1FD,
-                        text: "Contoh reset pass",
-                        colorBorder: 0xFF53B1FD,
-                        colorButton: 0xFFFCFCFD,
-                        onPressed: () {
-                          // _showMyDialog(context, DialogRegWidget());
-                          // _showMyDialog(context, notifsuccessreg);
-                          // _showMyDialog(context, notifpassexpired);
-                          // _showMyDialog(context, notiffailsreg);
-                          print("xxx");
-
-                          _showMyDialog(context, notifpassexpired);
-                          // _showMyDialog(context, DialogRegWidget());
                         },
                       ),
                       // SizedBox(

@@ -43,21 +43,28 @@ final class ReqResError extends LoginState {
   ReqResError(this.errorObject);
 }
 
-final class ResetLoading extends LoginState {}
-final class ResetSuccess extends LoginState {
-  ReqReset reqReset;
-  ResetSuccess(this.reqReset);
-}
-final class ResetNotFound extends LoginState {}
-final class ResetError extends LoginState {
-  String errorObject;
-  ResetError(this.errorObject);
+final class ResetPassLoading extends LoginState {}
+
+final class ResetPassSuccess extends LoginState {
+  ResetModel resetModel;
+  ResetPassSuccess(this.resetModel);
 }
 
+final class ResetPassExpired extends LoginState {}
+
+final class ResetPassError extends LoginState {
+  String errorObject;
+  ResetPassError(this.errorObject);
+}
 
 final class RegisterInitial extends LoginState {}
 
 final class RegisterLoading extends LoginState {}
+
+final class RegisterInvalid extends LoginState {
+  String? info;
+  RegisterInvalid(this.info);
+}
 
 final class RegisterSuccess extends LoginState {
   RegRes r;

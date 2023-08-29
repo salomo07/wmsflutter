@@ -15,6 +15,9 @@ class UserService {
         'Content-Type': 'application/json; charset=UTF-8',
       });
       LoginRes r = loginResFromJson(response.body);
+      if (r.status == 500) {
+        throw ("Internal server error");
+      }
       if (r.data != null) {
         GlobalService().saveHive('credlogin', r.data!.token);
       }
@@ -26,7 +29,8 @@ class UserService {
   }
 
   Future<ReqReset> requestResetPass(String body) async {
-    Uri u =Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/reset-password/request');
+    Uri u =
+        Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/reset-password/request');
     // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqrestpass');
     try {
       final response = await http.post(u, body: body, headers: <String, String>{
@@ -38,22 +42,27 @@ class UserService {
       throw (e);
     }
   }
-  Future<ReqReset> resetPass(String body) async {
-    Uri u =Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/reset-password/');
+
+  Future<ResetModel> resetPass(String body) async {
+    Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/reset-password/');
     // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqrestpass');
     try {
       final response = await http.post(u, body: body, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       });
-      ReqReset r = reqResetFromJson(response.body);
+      ResetModel r = resetModelFromJson(response.body);
+      if (r.status == 500) {
+        throw ("Internal server error");
+      }
       return r;
     } catch (e) {
       throw (e);
     }
   }
+
   Future<RegRes> requestRegister(String body) async {
-    // Uri u =Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/register');
-    Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
+    Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/register');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
     try {
       final response = await http.post(u, body: body, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
