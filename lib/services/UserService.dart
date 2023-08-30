@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../services/GlobalService.dart';
 import '../models/Login/LoginRes.dart';
+import '../models/Karyawan/Karyawan.dart';
 import '../config/ConfigApp.dart';
 
 class UserService {
@@ -68,6 +69,48 @@ class UserService {
         'Content-Type': 'application/json; charset=UTF-8',
       });
       RegRes r = regResFromJson(response.body);
+      return r;
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  Future<JabatanModel> getJabatan() async {
+    Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/jabatan');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
+    try {
+      final response = await http.get(u, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+      JabatanModel r = jabatanModelFromJson(response.body);
+      return r;
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  Future<DepartmentModel> getDepartment() async {
+    Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/departemen');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
+    try {
+      final response = await http.get(u, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+      DepartmentModel r = departmentModelFromJson(response.body);
+      return r;
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  Future<StatusModel> getStatus() async {
+    Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/status-karyawan');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
+    try {
+      final response = await http.get(u, headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      });
+      StatusModel r = statusModelFromJson(response.body);
       return r;
     } catch (e) {
       throw (e);

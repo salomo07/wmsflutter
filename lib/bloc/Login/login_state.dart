@@ -75,6 +75,39 @@ final class RegisterError extends LoginState {
   final String message;
   RegisterError(this.message);
 }
-// final class LoginUnprocessable extends LoginState {}
 
-// final class LoginBadRequest extends LoginState {}
+final class GetJabatanLoading extends LoginState {}
+
+final class GetJabatanSuccess extends LoginState {
+  JabatanModel res;
+  GetJabatanSuccess(this.res);
+}
+
+final class GetJabatanError extends LoginState {
+  String r;
+  GetJabatanError(this.r);
+}
+
+final class GetDepartmentLoading extends LoginState {}
+
+final class GetDepartmentSuccess extends LoginState {
+  DepartmentModel res;
+  GetDepartmentSuccess(this.res);
+}
+
+final class GetDepartmentError extends LoginState {
+  String r;
+  GetDepartmentError(this.r);
+}
+
+final class GetStatusLoading extends LoginState {}
+
+final class GetStatusSuccess extends LoginState {
+  StatusModel res;
+  GetStatusSuccess(this.res);
+}
+
+final class GetStatusError extends LoginState {
+  String r;
+  GetStatusError(this.r);
+}

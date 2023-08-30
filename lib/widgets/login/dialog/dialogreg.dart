@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:signature/signature.dart';
 import 'package:wmsflutter/bloc/Login/login_bloc.dart';
@@ -80,6 +81,15 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
   }
 
   LoginBloc loginBloc = LoginBloc();
+
+  @override
+  void initState() {
+    loginBloc.add(GetJabatan());
+    loginBloc.add(GetDepartment());
+    loginBloc.add(GetStatus());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     void Function() tryRegister = () {
@@ -119,41 +129,239 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
         'statusKaryawan': "Magang",
       })));
     };
-    return Container(
-      width: double.infinity,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 55,
-                  child: titleDialog(),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                //************************* */
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: Container(
-                      height: 315,
-                      child: SingleChildScrollView(
-                          child: SizedBox(
-                        width: 792,
-                        height: 416,
-                        child: Wrap(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 10),
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    width: 386,
-                                    height: 416,
-                                    child: SingleChildScrollView(
+    return BlocProvider(
+      create: (context) => loginBloc,
+      child: Container(
+        width: double.infinity,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(32),
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    height: 55,
+                    child: titleDialog(),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  //************************* */
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Container(
+                        height: 315,
+                        child: SingleChildScrollView(
+                            child: SizedBox(
+                          width: 792,
+                          height: 416,
+                          child: Wrap(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      width: 386,
+                                      height: 416,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Wrap(
+                                              runSpacing: 5,
+                                              children: [
+                                                SizedBox(
+                                                  height: 18,
+                                                  child: ReuseLabelWidget(
+                                                    isMandatory: true,
+                                                    fontSize: 12,
+                                                    text: "NIK",
+                                                  ),
+                                                ),
+                                                ReuseTextFormFieldWidget(
+                                                  onChanged: (p0) {
+                                                    setState(() {
+                                                      isValid = true;
+                                                      strNik = p0;
+                                                    });
+                                                  },
+                                                  inputType:
+                                                      TextInputType.number,
+                                                  hint: "NIK",
+                                                  fontSize: 14,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 25,
+                                            ),
+                                            Wrap(
+                                              runSpacing: 5,
+                                              children: [
+                                                ReuseLabelWidget(
+                                                  isMandatory: true,
+                                                  fontSize: 12,
+                                                  text: "Nama",
+                                                ),
+                                                ReuseTextFormFieldWidget(
+                                                  onChanged: (p0) {
+                                                    setState(() {
+                                                      isValid = true;
+                                                      strNama = p0;
+                                                    });
+                                                  },
+                                                  heightField: 44,
+                                                  hint: "Nama",
+                                                  fontSize: 14,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 25,
+                                            ),
+                                            Wrap(
+                                              runSpacing: 5,
+                                              children: [
+                                                ReuseLabelWidget(
+                                                  text: "Email",
+                                                  isMandatory: true,
+                                                ),
+                                                ReuseTextFormFieldWidget(
+                                                  onChanged: (p0) {
+                                                    setState(() {
+                                                      isValid = true;
+                                                      strEmail = p0;
+                                                    });
+                                                  },
+                                                  hint: "Email",
+                                                  inputType: TextInputType
+                                                      .emailAddress,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 25,
+                                            ),
+                                            Wrap(
+                                              runSpacing: 5,
+                                              children: [
+                                                ReuseLabelWidget(
+                                                  text: "Jabatan",
+                                                  isMandatory: true,
+                                                  fontSize: 12,
+                                                ),
+                                                BlocBuilder<LoginBloc,
+                                                    LoginState>(
+                                                  builder: (context, state) {
+                                                    if (state
+                                                        is GetJabatanLoading) {
+                                                      return ReuseDropdownWidget(
+                                                        hint: "Loading...",
+                                                      );
+                                                    }
+                                                    if (state
+                                                        is GetJabatanSuccess) {
+                                                      print(
+                                                          "sdffffffffffffffffff");
+                                                      List datas = [];
+                                                      state.res.data
+                                                          .forEach((element) {
+                                                        datas.add(element.nama);
+                                                      });
+                                                      print(datas);
+                                                      return ReuseDropdownWidget(
+                                                        onChanged: (val) {
+                                                          setState(() {
+                                                            isValid = true;
+                                                            strJabatan = state
+                                                                .res.data
+                                                                .where((o) =>
+                                                                    o.nama ==
+                                                                    val)
+                                                                .first
+                                                                .kode;
+                                                          });
+                                                        },
+                                                        datas: datas,
+                                                        hint: "Jabatan",
+                                                      );
+                                                    } else {
+                                                      return ReuseDropdownWidget(
+                                                        hint:
+                                                            "Gagal memuat Jabatan",
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              height: 15,
+                                            ),
+                                            Wrap(
+                                              runSpacing: 5,
+                                              children: [
+                                                ReuseLabelWidget(
+                                                  text: "Department",
+                                                  isMandatory: true,
+                                                ),
+                                                BlocBuilder<LoginBloc,
+                                                    LoginState>(
+                                                  builder: (context, state) {
+                                                    if (state
+                                                        is GetDepartmentLoading) {
+                                                      return ReuseDropdownWidget(
+                                                        hint: "Loading...",
+                                                      );
+                                                    } else if (state
+                                                        is GetDepartmentSuccess) {
+                                                      List datas = [];
+                                                      state.res.data
+                                                          .forEach((element) {
+                                                        datas.add(element.nama);
+                                                      });
+                                                      return ReuseDropdownWidget(
+                                                        onChanged: (val) {
+                                                          setState(() {
+                                                            isValid = true;
+                                                            strDepartment = state
+                                                                .res.data
+                                                                .where((o) =>
+                                                                    o.nama ==
+                                                                    val)
+                                                                .first
+                                                                .kode;
+                                                          });
+                                                        },
+                                                        datas: datas,
+                                                        hint: "Department",
+                                                      );
+                                                    } else {
+                                                      return ReuseDropdownWidget(
+                                                        hint:
+                                                            "Gagal memuat Department",
+                                                      );
+                                                    }
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      width: 386,
+                                      height: 425,
+                                      color: Colors.white30,
                                       child: Column(
                                         children: [
                                           Wrap(
@@ -162,273 +370,134 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                                               SizedBox(
                                                 height: 18,
                                                 child: ReuseLabelWidget(
+                                                  text: "Tanggal Masuk",
                                                   isMandatory: true,
-                                                  fontSize: 12,
-                                                  text: "NIK",
                                                 ),
                                               ),
                                               ReuseTextFormFieldWidget(
-                                                onChanged: (p0) {
-                                                  setState(() {
-                                                    isValid = true;
-                                                    strNik = p0;
-                                                  });
-                                                },
-                                                inputType: TextInputType.number,
-                                                hint: "NIK",
-                                                fontSize: 14,
+                                                controller: _dateController,
+                                                onTap: () =>
+                                                    _selectDate(context),
+                                                hint: "Tanggal Masuk",
+                                                suffixIcon: Icons
+                                                    .calendar_today_outlined,
                                               ),
                                             ],
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             height: 25,
                                           ),
                                           Wrap(
                                             runSpacing: 5,
                                             children: [
                                               ReuseLabelWidget(
-                                                isMandatory: true,
-                                                fontSize: 12,
-                                                text: "Nama",
-                                              ),
-                                              ReuseTextFormFieldWidget(
-                                                onChanged: (p0) {
-                                                  setState(() {
-                                                    isValid = true;
-                                                    strNama = p0;
-                                                  });
-                                                },
-                                                heightField: 44,
-                                                hint: "Nama",
-                                                fontSize: 14,
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 25,
-                                          ),
-                                          Wrap(
-                                            runSpacing: 5,
-                                            children: [
-                                              ReuseLabelWidget(
-                                                text: "Email",
-                                                isMandatory: true,
-                                              ),
-                                              ReuseTextFormFieldWidget(
-                                                onChanged: (p0) {
-                                                  setState(() {
-                                                    isValid = true;
-                                                    strEmail = p0;
-                                                  });
-                                                },
-                                                hint: "Email",
-                                                inputType:
-                                                    TextInputType.emailAddress,
-                                              ),
-                                            ],
-                                          ),
-                                          const SizedBox(
-                                            height: 25,
-                                          ),
-                                          Wrap(
-                                            runSpacing: 5,
-                                            children: [
-                                              ReuseLabelWidget(
-                                                text: "Jabatan",
-                                                isMandatory: true,
-                                                fontSize: 12,
-                                              ),
+                                                  text:
+                                                      "Status (Permanent / Outsource)"),
                                               ReuseDropdownWidget(
-                                                onChanged: (p0) {
-                                                  setState(() {
-                                                    isValid = true;
-                                                    strJabatan = p0;
-                                                  });
-                                                },
-                                                datas: [
-                                                  "Kurir",
-                                                  "Sales",
-                                                  "Sekuriti"
-                                                ],
-                                                hint: "Jabatan",
-                                              ),
+                                                  onChanged: (p0) {
+                                                    setState(() {
+                                                      strStatus = p0;
+                                                    });
+                                                  },
+                                                  datas: const [
+                                                    "Permanent",
+                                                    "Outsource",
+                                                    "Magang"
+                                                  ],
+                                                  hint:
+                                                      'Status (Permanent / Outsource)'),
                                             ],
                                           ),
-                                          const SizedBox(
-                                            height: 15,
+                                          SizedBox(
+                                            height: 30,
                                           ),
                                           Wrap(
                                             runSpacing: 5,
                                             children: [
                                               ReuseLabelWidget(
-                                                text: "Department",
                                                 isMandatory: true,
+                                                text: "Tanda Tangan",
                                               ),
-                                              ReuseDropdownWidget(
-                                                datas: [
-                                                  "Kurir",
-                                                  "Sales",
-                                                  "Sekuriti"
-                                                ],
-                                                hint: "Department",
-                                                onChanged: (p0) {
-                                                  setState(() {
-                                                    isValid = true;
-                                                    strDepartment = p0;
-                                                  });
-                                                },
-                                              ),
+                                              TabSignatureWidget(),
                                             ],
                                           ),
                                         ],
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    width: 386,
-                                    height: 425,
-                                    color: Colors.white30,
-                                    child: Column(
-                                      children: [
-                                        Wrap(
-                                          runSpacing: 5,
-                                          children: [
-                                            SizedBox(
-                                              height: 18,
-                                              child: ReuseLabelWidget(
-                                                text: "Tanggal Masuk",
-                                                isMandatory: true,
-                                              ),
-                                            ),
-                                            ReuseTextFormFieldWidget(
-                                              controller: _dateController,
-                                              onTap: () => _selectDate(context),
-                                              hint: "Tanggal Masuk",
-                                              suffixIcon:
-                                                  Icons.calendar_today_outlined,
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 25,
-                                        ),
-                                        Wrap(
-                                          runSpacing: 5,
-                                          children: [
-                                            ReuseLabelWidget(
-                                                text:
-                                                    "Status (Permanent / Outsource)"),
-                                            ReuseDropdownWidget(
-                                                onChanged: (p0) {
-                                                  setState(() {
-                                                    strStatus = p0;
-                                                  });
-                                                },
-                                                datas: const [
-                                                  "Permanent",
-                                                  "Outsource",
-                                                  "Magang"
-                                                ],
-                                                hint:
-                                                    'Status (Permanent / Outsource)'),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        Wrap(
-                                          runSpacing: 5,
-                                          children: [
-                                            ReuseLabelWidget(
-                                              isMandatory: true,
-                                              text: "Tanda Tangan",
-                                            ),
-                                            TabSignatureWidget(),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ))),
-                ),
-                SizedBox(
-                  height: 13,
-                ),
-                Divider(
-                  color: Color(0xFF98A2B3),
-                ),
-                SizedBox(
-                  height: 13,
-                ),
-                Container(
-                    height: 40,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 5,
-                          child: ReuseButtonWidget(
-                            colorButton: 0xFFFFFFFF,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            colorBorder: 0xFFF97066,
-                            colorTxt: 0xFFF97066,
-                            text: "Batal",
-                          ),
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Expanded(
-                          flex: 5,
-                          child: !isValid
-                              ? ReuseButtonWidget(
-                                  onPressed: () {},
-                                  colorTxt: 0xFF98A2B3,
-                                  colorButton: 0xFFF2F4F7,
-                                  colorBorder: 0xFF98A2B3,
-                                  text: "Daftar Sekarangx",
-                                )
-                              : ReuseButtonWidget(
-                                  onPressed: tryRegister,
-                                  colorTxt: 0xFF344054,
-                                  colorButton: 0xFFFFDD00,
-                                  text: "Daftar Sekarangz",
+                                    )
+                                  ],
                                 ),
-                        )
-                      ],
-                    ))
-              ],
-            ),
-          ),
-          Positioned(
-            right: 14,
-            top: 10,
-            child: IconButton(
-              onPressed: () {
-                _signatureController.dispose();
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.highlight_off_outlined,
-                size: 30,
+                              )
+                            ],
+                          ),
+                        ))),
+                  ),
+                  SizedBox(
+                    height: 13,
+                  ),
+                  Divider(
+                    color: Color(0xFF98A2B3),
+                  ),
+                  SizedBox(
+                    height: 13,
+                  ),
+                  Container(
+                      height: 40,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: ReuseButtonWidget(
+                              colorButton: 0xFFFFFFFF,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              colorBorder: 0xFFF97066,
+                              colorTxt: 0xFFF97066,
+                              text: "Batal",
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                            flex: 5,
+                            child: !isValid
+                                ? ReuseButtonWidget(
+                                    onPressed: () {},
+                                    colorTxt: 0xFF98A2B3,
+                                    colorButton: 0xFFF2F4F7,
+                                    colorBorder: 0xFF98A2B3,
+                                    text: "Daftar Sekarangx",
+                                  )
+                                : ReuseButtonWidget(
+                                    onPressed: tryRegister,
+                                    colorTxt: 0xFF344054,
+                                    colorButton: 0xFFFFDD00,
+                                    text: "Daftar Sekarangz",
+                                  ),
+                          )
+                        ],
+                      ))
+                ],
               ),
-              color: const Color(0xFF98A2B3),
             ),
-          ),
-        ],
+            Positioned(
+              right: 14,
+              top: 10,
+              child: IconButton(
+                onPressed: () {
+                  _signatureController.dispose();
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.highlight_off_outlined,
+                  size: 30,
+                ),
+                color: const Color(0xFF98A2B3),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
