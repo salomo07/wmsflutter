@@ -27,8 +27,4 @@ class ResetPass extends LoginEvent {
   ResetPass(this.body);
 }
 
-class GetJabatan extends LoginEvent {}
-
-class GetDepartment extends LoginEvent {}
-
-class GetStatus extends LoginEvent {}
+class GetDataForRegistrasi extends LoginEvent {}

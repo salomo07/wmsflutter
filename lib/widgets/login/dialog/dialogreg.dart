@@ -84,9 +84,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
 
   @override
   void initState() {
-    loginBloc.add(GetJabatan());
-    loginBloc.add(GetDepartment());
-    loginBloc.add(GetStatus());
+    loginBloc.add(GetDataForRegistrasi());
     super.initState();
   }
 
@@ -120,13 +118,13 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
       // }
       print("xxxx");
       loginBloc.add(TryRegister(jsonEncode(<String, String>{
-        'nik': "1234",
-        'nama': "Ganteng",
-        'email': "qwe@gmail.com",
-        'jabatan': "Sales",
-        'departemen': "Marketing",
-        'tanggalMasuk': "09/12/23",
-        'statusKaryawan': "Magang",
+        'nik': strNik!,
+        'nama': strNama!,
+        'email': strEmail!,
+        'jabatan': strJabatan!,
+        'departemen': strDepartment!,
+        'tanggalMasuk': strTanggalMasuk!,
+        'statusKaryawan': strStatus!,
       })));
     };
     return BlocProvider(
@@ -254,28 +252,28 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                                                 BlocBuilder<LoginBloc,
                                                     LoginState>(
                                                   builder: (context, state) {
+                                                    print(
+                                                        "State Jabatan: ${state}");
+
                                                     if (state
-                                                        is GetJabatanLoading) {
+                                                        is GetDataForRegistrasiLoading) {
                                                       return ReuseDropdownWidget(
                                                         hint: "Loading...",
                                                       );
                                                     }
                                                     if (state
-                                                        is GetJabatanSuccess) {
-                                                      print(
-                                                          "sdffffffffffffffffff");
+                                                        is GetDataForRegistrasiSuccess) {
                                                       List datas = [];
-                                                      state.res.data
+                                                      state.j.data
                                                           .forEach((element) {
                                                         datas.add(element.nama);
                                                       });
-                                                      print(datas);
                                                       return ReuseDropdownWidget(
                                                         onChanged: (val) {
                                                           setState(() {
                                                             isValid = true;
                                                             strJabatan = state
-                                                                .res.data
+                                                                .j.data
                                                                 .where((o) =>
                                                                     o.nama ==
                                                                     val)
@@ -310,14 +308,14 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                                                     LoginState>(
                                                   builder: (context, state) {
                                                     if (state
-                                                        is GetDepartmentLoading) {
+                                                        is GetDataForRegistrasiLoading) {
                                                       return ReuseDropdownWidget(
                                                         hint: "Loading...",
                                                       );
                                                     } else if (state
-                                                        is GetDepartmentSuccess) {
+                                                        is GetDataForRegistrasiSuccess) {
                                                       List datas = [];
-                                                      state.res.data
+                                                      state.d.data
                                                           .forEach((element) {
                                                         datas.add(element.nama);
                                                       });
@@ -326,7 +324,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                                                           setState(() {
                                                             isValid = true;
                                                             strDepartment = state
-                                                                .res.data
+                                                                .d.data
                                                                 .where((o) =>
                                                                     o.nama ==
                                                                     val)
@@ -393,19 +391,45 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                                               ReuseLabelWidget(
                                                   text:
                                                       "Status (Permanent / Outsource)"),
-                                              ReuseDropdownWidget(
-                                                  onChanged: (p0) {
-                                                    setState(() {
-                                                      strStatus = p0;
+                                              BlocBuilder<LoginBloc,
+                                                  LoginState>(
+                                                builder: (context, state) {
+                                                  if (state
+                                                      is GetDataForRegistrasiLoading) {
+                                                    return ReuseDropdownWidget(
+                                                      hint: "Loading",
+                                                    );
+                                                  } else if (state
+                                                      is GetDataForRegistrasiSuccess) {
+                                                    List datas = [];
+                                                    state.s.data
+                                                        .forEach((element) {
+                                                      datas.add(element.nama);
                                                     });
-                                                  },
-                                                  datas: const [
-                                                    "Permanent",
-                                                    "Outsource",
-                                                    "Magang"
-                                                  ],
-                                                  hint:
-                                                      'Status (Permanent / Outsource)'),
+                                                    return ReuseDropdownWidget(
+                                                      datas: datas,
+                                                      hint:
+                                                          "Status (Permanent / Outsource)",
+                                                      onChanged: (val) {
+                                                        setState(() {
+                                                          isValid = true;
+                                                          strDepartment = state
+                                                              .d.data
+                                                              .where((o) =>
+                                                                  o.nama == val)
+                                                              .first
+                                                              .kode;
+                                                        });
+                                                      },
+                                                    );
+                                                  } else {
+                                                    return ReuseDropdownWidget(
+                                                      hint:
+                                                          "Gagal memuat Status",
+                                                    );
+                                                  }
+                                                },
+                                              ),
                                             ],
                                           ),
                                           SizedBox(
@@ -467,13 +491,13 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
                                     colorTxt: 0xFF98A2B3,
                                     colorButton: 0xFFF2F4F7,
                                     colorBorder: 0xFF98A2B3,
-                                    text: "Daftar Sekarangx",
+                                    text: "Daftar Sekarang",
                                   )
                                 : ReuseButtonWidget(
                                     onPressed: tryRegister,
                                     colorTxt: 0xFF344054,
                                     colorButton: 0xFFFFDD00,
-                                    text: "Daftar Sekarangz",
+                                    text: "Daftar Sekarang",
                                   ),
                           )
                         ],

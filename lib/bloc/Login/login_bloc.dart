@@ -99,58 +99,38 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
     });
 
-    on<GetJabatan>((event, emit) async {
+    on<GetDataForRegistrasi>((event, emit) async {
       UserService service = UserService();
       try {
-        emit(GetJabatanLoading());
+        emit(GetDataForRegistrasiLoading());
         JabatanModel? responseJabatanModel;
         responseJabatanModel = await service.getJabatan().timeout(
           Duration(seconds: 30),
           onTimeout: () {
-            emit(GetJabatanError("Bang temot..."));
+            emit(GetDataForRegistrasiError("Timeout : getJabatan"));
             return responseJabatanModel!;
           },
         );
-        emit(GetJabatanSuccess(responseJabatanModel));
-      } catch (e) {
-        print('Error GetJabatanError : $e');
-        emit(GetJabatanError(e.toString()));
-      }
-    });
-    on<GetDepartment>((event, emit) async {
-      UserService service = UserService();
-      try {
-        emit(GetDepartmentLoading());
         DepartmentModel? responseDepartmentModel;
         responseDepartmentModel = await service.getDepartment().timeout(
           Duration(seconds: 30),
           onTimeout: () {
-            emit(GetDepartmentError("Bang temot..."));
+            emit(GetDataForRegistrasiError("Timeout : getDepartment"));
             return responseDepartmentModel!;
           },
         );
-        emit(GetDepartmentSuccess(responseDepartmentModel));
-      } catch (e) {
-        print('Error GetDepartmentError : $e');
-        emit(GetDepartmentError(e.toString()));
-      }
-    });
-    on<GetStatus>((event, emit) async {
-      UserService service = UserService();
-      try {
-        emit(GetStatusLoading());
         StatusModel? responseStatusModel;
         responseStatusModel = await service.getStatus().timeout(
           Duration(seconds: 30),
           onTimeout: () {
-            emit(GetStatusError("Bang temot..."));
+            emit(GetDataForRegistrasiError("Timeout : getStatus"));
             return responseStatusModel!;
           },
         );
-        emit(GetStatusSuccess(responseStatusModel));
+        emit(GetDataForRegistrasiSuccess(responseJabatanModel,
+            responseDepartmentModel, responseStatusModel));
       } catch (e) {
-        print('Error GetStatusError : $e');
-        emit(GetStatusError(e.toString()));
+        emit(GetDataForRegistrasiError(e.toString()));
       }
     });
   }
