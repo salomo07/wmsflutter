@@ -47,24 +47,35 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
       url: 'images/dialog/successreg.svg',
       onPressed: () => {Navigator.pop(context)},
     );
-
+    bool isButtonDisable = false;
     final tabsRouter = AutoTabsRouter.of(context);
     return BlocProvider(
       create: (context) => loginBloc,
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) {
-          if (state is ReqResLoading) {}
+          if (state is ReqResLoading) {
+            setState(() {
+              isButtonDisable = true;
+            });
+          }
           if (state is ReqResNotFound) {
             setState(() {
               emailIsExist =
                   "Email yang kamu masukan tidak terdaftar pada sistem";
+              isButtonDisable = false;
             });
           } else if (state is ReqResSuccess) {
             _showMyDialog(context, successsendlink);
+            setState(() {
+              isButtonDisable = false;
+            });
           } else if (state is ReqResError) {
             SnackBar snackBar = SnackBar(
                 content: Text("Error happened : " + state.errorObject));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            setState(() {
+              isButtonDisable = false;
+            });
           }
         },
         builder: (context, state) {
@@ -131,29 +142,41 @@ class _FormResetPasswordWidgetState extends State<FormResetPasswordWidget> {
                       SizedBox(
                         height: 40,
                       ),
-                      ReuseButtonWidget(
-                        text: "Atur Ulang Kata Sandi",
-                        colorButton: 0xFFFFDD00,
-                        colorTxt: 0xFF344054,
-                        colorBorder: 0xFFFFDD00,
-                        onPressed: () {
-                          if (ted.text == "") {
-                            setState(() {
-                              emailIsExist =
-                                  "Silahkan lengkapi email anda terlebih dahulu";
-                            });
-                          } else {
-                            setState(() {
-                              email = ted.text;
-                              emailIsExist = "";
-                            });
+                      isButtonDisable == true
+                          ? ReuseButtonWidget(
+                              text: "Atur Ulang Kata Sandi",
+                              colorButton: 0xFFFFFFFF,
+                              colorTxt: 0xFF344054,
+                              colorBorder: 0xFFFFDD00,
+                            )
+                          : ReuseButtonWidget(
+                              text: "Atur Ulang Kata Sandi",
+                              colorButton: 0xFFFFDD00,
+                              colorTxt: 0xFF344054,
+                              colorBorder: 0xFFFFDD00,
+                              onPressed: () {
+                                setState(() {
+                                  print("Disable guys");
+                                  isButtonDisable = true;
+                                });
+                                if (ted.text == "") {
+                                  setState(() {
+                                    emailIsExist =
+                                        "Silahkan lengkapi email anda terlebih dahulu";
+                                  });
+                                } else {
+                                  setState(() {
+                                    email = ted.text;
+                                    emailIsExist = "";
+                                  });
 
-                            context.read<LoginBloc>().add(ReqResetPass(
-                                jsonEncode(
-                                    <String, String>{'email': ted.text})));
-                          }
-                        },
-                      ),
+                                  context.read<LoginBloc>().add(ReqResetPass(
+                                          jsonEncode(<String, String>{
+                                        'email': ted.text
+                                      })));
+                                }
+                              },
+                            ),
                       SizedBox(
                         height: 150,
                       ),

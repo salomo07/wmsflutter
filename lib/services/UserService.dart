@@ -77,7 +77,7 @@ class UserService {
 
   Future<JabatanModel> getJabatan() async {
     Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/jabatan');
-    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/jabatansucc');
     try {
       final response = await http.get(u, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -91,7 +91,8 @@ class UserService {
 
   Future<DepartmentModel> getDepartment() async {
     Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/departemen');
-    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/departmentsucc');
+
     try {
       final response = await http.get(u, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
@@ -105,7 +106,7 @@ class UserService {
 
   Future<StatusModel> getStatus() async {
     Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/status-karyawan');
-    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/reqregs');
+    // Uri u = Uri.parse('http://localhost:7771/' + 'interlinear/statussucc');
     try {
       final response = await http.get(u, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',

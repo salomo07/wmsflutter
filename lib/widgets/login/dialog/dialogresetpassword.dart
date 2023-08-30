@@ -161,7 +161,6 @@ class _DialogResetPasswordWidgetState extends State<DialogResetPasswordWidget> {
                                     : Icons.visibility,
                                 suffixOnTap: () {
                                   setState(() {
-                                    print(hide);
                                     hide = !hide;
                                   });
                                 },

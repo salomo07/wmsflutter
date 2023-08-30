@@ -83,12 +83,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(RegisterLoading());
         RegRes r = await service.requestRegister(event.body);
 
-        // print(r.status.toString());
-        if (r.status == 200) {
+        if (r.status == 201) {
           emit(RegisterSuccess(r));
         } else if (r.status == 400) {
           emit(RegisterInvalid(r.additionalInfo));
         } else if (r.status == 404) {
+          emit(RegisterInvalid(r.additionalInfo));
+        } else if (r.status == 422) {
           emit(RegisterInvalid(r.additionalInfo));
         } else {
           emit(RegisterError(r.additionalInfo.toString()));
