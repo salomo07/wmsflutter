@@ -79,14 +79,6 @@ class _FormLoginState extends State<FormLogin> {
     });
   }
 
-  Widget notifsuccessreg = ReuseDialogWidget(
-    title: "Data Berhasil Terkirim!",
-    desc: "Selanjutnya data kamu akan diverifikasi oleh admin",
-    isUrl: false,
-    txtButton: "Oke",
-    url: 'images/dialog/successreg.svg',
-  );
-
   Widget notiffailsreg = ReuseDialogWidget(
     title: "Maaf, Terjadi Kesalahan",
     desc:

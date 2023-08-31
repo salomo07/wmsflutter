@@ -9,6 +9,7 @@ import 'package:wmsflutter/widgets/login/tabsignature.dart';
 import 'package:intl/intl.dart';
 
 import '../../reuseable/ReuseButton.dart';
+import '../../reuseable/ReuseDialog.dart';
 import '../../reuseable/ReuseDropdown.dart';
 import '../../reuseable/ReuseLabel.dart';
 import '../../reuseable/ReuseTextFormField.dart';
@@ -19,6 +20,16 @@ class DialogRegWidget extends StatefulWidget {
 
   @override
   State<DialogRegWidget> createState() => _DialogRegWidgetState();
+}
+
+Future<void> _showMyDialog(context, Widget widget) async {
+  return showDialog<void>(
+    context: context,
+    barrierDismissible: false, // user must tap button!
+    builder: (BuildContext context) {
+      return widget;
+    },
+  );
 }
 
 class _DialogRegWidgetState extends State<DialogRegWidget> {
@@ -120,13 +131,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
       setState(() {
         isValid = false;
       });
-      // print(strNik!);
-      // print(strNama!);
-      // print(strEmail!);
-      // print(strJabatan!);
-      // print(strDepartment!);
-      // print(strTanggalMasuk!);
-      // print(strStatus!);
+
       loginBloc.add(TryRegister(jsonEncode(<String, String>{
         'nik': strNik!,
         'nama': strNama!,
@@ -137,20 +142,28 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
         'statusKaryawan': strStatus!,
       })));
     };
+
+    Widget notifsuccessreg = ReuseDialogWidget(
+      title: "Data Berhasil Terkirim!",
+      desc: "Selanjutnya data kamu akan diverifikasi oleh admin",
+      isUrl: false,
+      txtButton: "Oke",
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      url: 'images/dialog/successreg.svg',
+    );
     return BlocProvider(
       create: (context) => loginBloc,
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is RegisterSuccess) {
             Navigator.pop(context);
+            _showMyDialog(context, notifsuccessreg);
           } else {
             setState(() {
               isValid = true;
             });
-            SnackBar snackBar = SnackBar(
-                content:
-                    const Text("Silahkan lengkapi data yang diperlukan..."));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
         },
         child: Container(

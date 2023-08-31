@@ -175,18 +175,39 @@ class RegRes {
   int status;
   String message;
   String? additionalInfo;
+  List<Error>? errors;
 
   RegRes({
     required this.status,
     required this.message,
     this.additionalInfo,
+    this.errors,
   });
 
-  factory RegRes.fromJson(Map<String, dynamic> json) => RegRes(
+  factory RegRes.fromJson(Map<String, dynamic> json) {
+    if (json["status"] == 201) {
+      return RegRes(status: json["status"], message: json["message"]);
+    } else if (json["status"] == 400 || json["status"] == 404) {
+      return RegRes(
         status: json["status"],
         message: json["message"],
         additionalInfo: json["additionalInfo"],
       );
+    } else if (json["status"] == 422) {
+      return RegRes(
+        status: json["status"],
+        message: json["message"],
+        additionalInfo: json["additionalInfo"],
+        errors: List<Error>.from(json["errors"].map((x) => Error.fromJson(x))),
+      );
+    } else {
+      return RegRes(
+        status: json["status"],
+        message: json["message"],
+        additionalInfo: json["additionalInfo"],
+      );
+    }
+  }
 
   Map<String, dynamic> toJson() {
     if (status == 200) {
@@ -199,4 +220,24 @@ class RegRes {
       };
     }
   }
+}
+
+class Error {
+  String message;
+  String field;
+
+  Error({
+    required this.message,
+    required this.field,
+  });
+
+  factory Error.fromJson(Map<String, dynamic> json) => Error(
+        message: json["message"],
+        field: json["field"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "message": message,
+        "field": field,
+      };
 }

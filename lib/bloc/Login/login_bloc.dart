@@ -82,7 +82,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         //Loading
         emit(RegisterLoading());
         RegRes r = await service.requestRegister(event.body);
-
+        print(r.status.toString() + "," + r.message);
         if (r.status == 201) {
           emit(RegisterSuccess(r));
         } else if (r.status == 400) {
@@ -95,8 +95,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           emit(RegisterError(r.additionalInfo.toString()));
         }
       } catch (e) {
-        print('Error: $e');
-        emit(LoginError(e.toString()));
+        print('Errorx: $e');
+        emit(RegisterError(e.toString()));
       }
     });
 
@@ -106,7 +106,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(GetDataForRegistrasiLoading());
         JabatanModel? responseJabatanModel;
         responseJabatanModel = await service.getJabatan().timeout(
-          Duration(seconds: 30),
+          const Duration(seconds: 30),
           onTimeout: () {
             emit(GetDataForRegistrasiError("Timeout : getJabatan"));
             return responseJabatanModel!;
@@ -114,7 +114,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         );
         DepartmentModel? responseDepartmentModel;
         responseDepartmentModel = await service.getDepartment().timeout(
-          Duration(seconds: 30),
+          const Duration(seconds: 30),
           onTimeout: () {
             emit(GetDataForRegistrasiError("Timeout : getDepartment"));
             return responseDepartmentModel!;
@@ -122,7 +122,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         );
         StatusModel? responseStatusModel;
         responseStatusModel = await service.getStatus().timeout(
-          Duration(seconds: 30),
+          const Duration(seconds: 30),
           onTimeout: () {
             emit(GetDataForRegistrasiError("Timeout : getStatus"));
             return responseStatusModel!;
