@@ -63,12 +63,11 @@ class UserService {
 
   Future<RegRes> requestRegister(String body) async {
     // Uri u = Uri.parse(ConfigApp().baseUrl + 'api/v1/auth/register');
-    Uri u = Uri.parse('http://localhost:7771/interlinear/registersucc');
+    Uri u = Uri.parse('http://localhost:7771/interlinear/registererror');
     try {
       final response = await http.post(u, body: body, headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       });
-      print(response.body);
       RegRes r = regResFromJson(response.body);
       return r;
     } catch (e) {

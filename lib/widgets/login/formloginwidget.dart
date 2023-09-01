@@ -31,19 +31,19 @@ Future<void> _showMyDialog(BuildContext context, Widget widget) async {
   );
 }
 
-Future<void> _showMyDialogCtx(
-    contextx, Widget Function(BuildContext) widget) async {
+_showMyDialogCtx(contextx, Widget Function(BuildContext) widget) {
   showDialog(
-    // barrierColor: Colors.transparent,
+    barrierColor: Colors.transparent,
     context: contextx,
     builder: (ctxx) {
       return ScaffoldMessenger(
         child: Builder(
           builder: (ctx) {
             return AlertDialog(
+              // backgroundColor: Colors.transparent,
               shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(16))),
-              content: widget(ctx),
+              content: SizedBox(width: 930, child: Scaffold(body: widget(ctx))),
             );
           },
         ),
@@ -272,8 +272,8 @@ class _FormLoginState extends State<FormLogin> {
                         onPressed: () {
                           _showMyDialogCtx(
                             context,
-                            (BuildContext context) => DialogRegWidget(
-                              ctx: context,
+                            (BuildContext ctx) => DialogRegWidget(
+                              ctxcuy: ctx,
                             ),
                           );
                           // _showMyDialog(context, notifsuccessreg);

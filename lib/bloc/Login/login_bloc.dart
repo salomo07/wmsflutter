@@ -86,11 +86,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (r.status == 201) {
           emit(RegisterSuccess(r));
         } else if (r.status == 400) {
-          emit(RegisterInvalid(r.additionalInfo));
+          emit(RegisterInvalid(r));
         } else if (r.status == 404) {
-          emit(RegisterInvalid(r.additionalInfo));
+          emit(RegisterInvalid(r));
         } else if (r.status == 422) {
-          emit(RegisterInvalid(r.additionalInfo));
+          emit(RegisterInvalid(r));
         } else {
           emit(RegisterError(r.additionalInfo.toString()));
         }

@@ -15,19 +15,23 @@ import '../../reuseable/ReuseLabel.dart';
 import '../../reuseable/ReuseTextFormField.dart';
 
 class DialogRegWidget extends StatefulWidget {
-  final BuildContext ctx;
-  const DialogRegWidget({super.key, required this.ctx});
-
+  const DialogRegWidget({super.key, required this.ctxcuy});
+  final BuildContext ctxcuy;
   @override
   State<DialogRegWidget> createState() => _DialogRegWidgetState();
 }
 
-Future<void> _showMyDialog(context, Widget widget) async {
+_showMyDialog(context, Widget widget) {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
-      return widget;
+      return ScaffoldMessenger(child: Builder(
+        builder: (context) {
+          return widget;
+        },
+      ));
+      // return widget;
     },
   );
 }
@@ -40,6 +44,7 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
       strDepartment,
       strTanggalMasuk,
       strStatus;
+  String strRegistrasiNotif = "";
   DateTime selectedDate = DateTime.now();
   Wrap titleDialog() {
     return Wrap(
@@ -100,56 +105,52 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
     super.initState();
   }
 
+  void tryRegister() {
+    // if (strNik == null ||
+    //     strNama == null ||
+    //     strEmail == null ||
+    //     strJabatan == null ||
+    //     strDepartment == null ||
+    //     strTanggalMasuk == null) {
+    //   setState(() {
+    //     isValid = false;
+    //   });
+    //   print("Data belum lengkap");
+    //   // SnackBar snackBar = SnackBar(
+    //   //     content: const Text("Silahkan lengkapi data yang diperlukan..."));
+    //   // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    // } else {
+    //   print("Data dikirim");
+    //   loginBloc.add(TryRegister(jsonEncode(<String, String>{
+    //     'nik': strNik!,
+    //     'nama': strNama!,
+    //     'email': strEmail!,
+    //     'jabatan': strJabatan!,
+    //     'departemen': strDepartment!,
+    //     'tanggalMasuk': strTanggalMasuk!,
+    //     'statusKaryawan': strStatus!,
+    //   })));
+    // }
+    loginBloc.add(TryRegister(jsonEncode(<String, String>{
+      'nik': strNik!,
+      'nama': strNama!,
+      'email': strEmail!,
+      'jabatan': strJabatan!,
+      'departemen': strDepartment!,
+      'tanggalMasuk': strTanggalMasuk!,
+      'statusKaryawan': strStatus!,
+    })));
+  }
+
   @override
-  Widget build(BuildContext context) {
-    void Function() tryRegister = () {
-      // if (strNik == null ||
-      //     strNama == null ||
-      //     strEmail == null ||
-      //     strJabatan == null ||
-      //     strDepartment == null ||
-      //     strTanggalMasuk == null) {
-      //   setState(() {
-      //     isValid = false;
-      //   });
-      //   print("Data belum lengkap");
-      //   // SnackBar snackBar = SnackBar(
-      //   //     content: const Text("Silahkan lengkapi data yang diperlukan..."));
-      //   // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-      // } else {
-      //   print("Data dikirim");
-      //   loginBloc.add(TryRegister(jsonEncode(<String, String>{
-      //     'nik': strNik!,
-      //     'nama': strNama!,
-      //     'email': strEmail!,
-      //     'jabatan': strJabatan!,
-      //     'departemen': strDepartment!,
-      //     'tanggalMasuk': strTanggalMasuk!,
-      //     'statusKaryawan': strStatus!,
-      //   })));
-      // }
-      setState(() {
-        isValid = false;
-      });
-
-      loginBloc.add(TryRegister(jsonEncode(<String, String>{
-        'nik': strNik!,
-        'nama': strNama!,
-        'email': strEmail!,
-        'jabatan': strJabatan!,
-        'departemen': strDepartment!,
-        'tanggalMasuk': strTanggalMasuk!,
-        'statusKaryawan': strStatus!,
-      })));
-    };
-
+  Widget build(BuildContext ctxy) {
     Widget notifsuccessreg = ReuseDialogWidget(
       title: "Data Berhasil Terkirim!",
       desc: "Selanjutnya data kamu akan diverifikasi oleh admin",
       isUrl: false,
       txtButton: "Oke",
       onPressed: () {
-        Navigator.pop(context);
+        Navigator.pop(widget.ctxcuy);
       },
       url: 'images/dialog/successreg.svg',
     );
@@ -158,12 +159,20 @@ class _DialogRegWidgetState extends State<DialogRegWidget> {
       child: BlocListener<LoginBloc, LoginState>(
         listener: (context, state) {
           if (state is RegisterSuccess) {
+            print("RegisterSuccess");
             Navigator.pop(context);
             _showMyDialog(context, notifsuccessreg);
-          } else {
-            setState(() {
-              isValid = true;
-            });
+          } else if (state is RegisterInvalid) {
+            if (state.r.status == 400 || state.r.status == 404) {
+              print("Ini RegisterInvalid " + state.r.status.toString());
+              final snackBar = SnackBar(
+                  content:
+                      Text('Gagal registrasi : ' + state.r.additionalInfo!));
+              ScaffoldMessenger.of(widget.ctxcuy).showSnackBar(snackBar);
+              loginBloc.add(GetDataForRegistrasi());
+            }
+          } else if (state is RegisterError) {
+            loginBloc.add(GetDataForRegistrasi());
           }
         },
         child: Container(

@@ -62,8 +62,8 @@ final class RegisterInitial extends LoginState {}
 final class RegisterLoading extends LoginState {}
 
 final class RegisterInvalid extends LoginState {
-  String? info;
-  RegisterInvalid(this.info);
+  RegRes r;
+  RegisterInvalid(this.r);
 }
 
 final class RegisterSuccess extends LoginState {
